@@ -1,7 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { createUser } from '../../actions/users'
 import { Form, Modal, Button } from 'semantic-ui-react'
-import { NavLink } from 'react-router-dom'
-import api from '../../api/adapter'
+import { Redirect } from 'react-router'
 
 class SignupForm extends React.Component {
   state = {
@@ -27,10 +28,6 @@ class SignupForm extends React.Component {
 
   onFormSubmit = (e) => {
     e.preventDefault()
-    this.saveUser()
-  }
-
-  saveUser = () => {
     const user = {
       name: this.state.name,
       email: this.state.email,
@@ -39,16 +36,12 @@ class SignupForm extends React.Component {
       zip_code: this.state.zipCode,
       location: this.state.location
     }
-
-    api.postUser(user).then(res => {
-      console.log(res)
-      this.setState({modalOpen: false})
-    })
-
+    this.props.createUser(user)
+    this.setState({modalOpen: false})
   }
 
   render() {
-    return (
+    return !this.props.loggedIn ? (
       <Modal
         trigger={<Button to="#" className="item" onClick={this.handleOpen}>Sign Up</Button>}
         open={this.state.modalOpen}
@@ -68,8 +61,14 @@ class SignupForm extends React.Component {
         </Modal.Content>
       </Modal>
     )
+    :
+    <Redirect to="/" />
   }
 }
 
+const mapStateToProps = (state) => {
+  return { loggedIn: state.loggedIn }
+}
 
-export default SignupForm
+
+export default connect(mapStateToProps, { createUser })(SignupForm)

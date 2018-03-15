@@ -19,8 +19,7 @@ const api = {
     }).then(r => r.json())
   },
 
-  postUser: (user) => {
-    console.log(user)
+  createUser: (user) => {
     return fetch('http://localhost:3000/users', {
       method: 'POST',
       headers: {
@@ -30,6 +29,13 @@ const api = {
       body: JSON.stringify({user})
     }).then(res => res.json())
   },
+
+  findUser: (token) => {
+    return fetch('http://localhost:3000/current_user', {
+      method: "POST",
+      headers: { "Authorization": token }
+    }).then(res => res.json())
+  }
 
 }
 

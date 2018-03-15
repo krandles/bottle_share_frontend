@@ -1,67 +1,46 @@
 import React, { Component } from 'react';
+// import { connect } from 'react-redux'
 import './css/App.css';
+import { Route, Switch } from 'react-router-dom'
+// import { findUser } from './actions/users'
+
 import LoginForm from './components/login/LoginForm'
 import SignupForm from './components/signup/SignupForm'
-import api from './api/adapter'
+import DashboardContainer from './components/dashboard/DashboardContainer'
+// import api from './api/adapter'
 
 class App extends Component {
 
-  state = {
-    auth: {
-      loggedIn: false
-    }
-  }
-
-  componentDidMount() {
-
-    const token = localStorage.getItem('token')
-    if (token) {
-      this.setState({
-        auth: {
-          loggedIn: true,
-          token: token
-        }
-      })
-    }
-  }
-
-  login = (email, password) => {
-    api.login(email, password).then(j => {
-      if(j.error) {
-        alert(j.error)
-      } else {
-        localStorage.setItem('token', j.token)
-        this.setState({
-          auth: {
-            loggedIn: true,
-            token: j.token
-          }
-        })
-      }
-    })
-  }
-
-  logout = () => {
-    localStorage.removeItem('token')
-    this.setState({
-      auth: {
-        loggedIn: false,
-        token: undefined
-      }
-    })
-  }
-
-  
-
-
   render() {
     return (
-      <div className="App">
-        <LoginForm loginFn={this.login} logoutFn={this.logout} auth={this.state.auth}/>
-        <SignupForm />
-      </div>
+      <Switch>
+        <Route exact path="/"
+          render={(routerProps) => {
+            return <div className="App">
+              <DashboardContainer {...routerProps}/>
+            </div>}
+          }
+        />
+        <Route exact path="/login"
+          render={(routerProps) => {
+            return <div className="login">
+              <LoginForm {...routerProps}/>
+              <SignupForm {...routerProps}/>
+            </div>}
+          }
+        />
+      </Switch>
+      // <div className="App">
+      //   <LoginForm logoutFn={this.logout}/>
+      //   <SignupForm />
+      // </div>
     );
   }
 }
 
-export default App;
+// const mapStateToProps = (state) => {
+//   return { loggedIn: state.loggedIn}
+// }
+
+// export default connect(mapStateToProps, { findUser })(App)
+export default App

@@ -1,4 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { login } from '../../actions/users'
+import { Redirect } from 'react-router'
 import { Form, Modal, Button } from 'semantic-ui-react'
 
 class LoginForm extends React.Component {
@@ -16,14 +19,13 @@ class LoginForm extends React.Component {
   }
 
   onFormSubmit = (e) => {
-    console.log(this.props)
     e.preventDefault()
-    this.props.loginFn(this.state.email, this.state.password)
+    this.props.login(this.state.email, this.state.password)
   }
 
 
   render() {
-    return (
+    return !this.props.loggedIn ? (
       <Modal
         trigger={<Button to="#" className="item" onClick={this.handleOpen}>Log In</Button>}
         open={this.state.modalOpen}
@@ -32,14 +34,20 @@ class LoginForm extends React.Component {
         <Modal.Header>Login</Modal.Header>
         <Modal.Content>
           <Form onSubmit={(event) => {this.onFormSubmit(event)}}>
-            <Form.Input fluid label='Email:' name="email" value={this.state.email} onChange={this.onInputChange}/>
-            <Form.Input fluid label='Password:' type="password" name="password" value={this.state.password} onChange={this.onInputChange} />
+            <Form.Input label='Email:' name="email" value={this.state.email} onChange={this.onInputChange}/>
+            <Form.Input label='Password:' type="password" name="password" value={this.state.password} onChange={this.onInputChange} />
             <Form.Button type="submit">Login</Form.Button>
           </Form>
         </Modal.Content>
       </Modal>
     )
+    :
+    <Redirect to="/" />
   }
 }
 
-export default LoginForm
+const mapStateToProps = (state) => {
+  return { loggedIn: state.loggedIn }
+}
+
+export default connect(mapStateToProps, { login })(LoginForm)
