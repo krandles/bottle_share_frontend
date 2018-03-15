@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './css/App.css';
 import LoginForm from './components/login/LoginForm'
+import SignupForm from './components/signup/SignupForm'
 import api from './api/adapter'
 
 class App extends Component {
@@ -57,6 +58,7 @@ class App extends Component {
     return (
       <div className="App">
         <LoginForm loginFn={this.login} logoutFn={this.logout} auth={this.state.auth}/>
+        <SignupForm />
       </div>
     );
   }

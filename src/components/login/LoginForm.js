@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import { Form, Modal, Button } from 'semantic-ui-react'
 
 class LoginForm extends React.Component {
