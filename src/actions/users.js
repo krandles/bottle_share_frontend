@@ -4,6 +4,7 @@ export const LOGIN = "LOGIN"
 export const CREATE_USER = "CREATE_USER"
 export const FIND_USER = "FIND_USER"
 export const LOGOUT = "LOGOUT"
+export const GET_USERS = "GET_USERS"
 
 export const login = (email, password) => {
   return function(dispatch) {
@@ -36,6 +37,17 @@ export const findUser = (token) => {
     return api.findUser(token)
       .then(json => dispatch({
         type: FIND_USER,
+        payload: json
+      })
+    )
+  }
+}
+
+export const getAllUsers = () => {
+  return function(dispatch) {
+    return api.getAllUsers()
+      .then(json => dispatch({
+        type: GET_USERS,
         payload: json
       })
     )

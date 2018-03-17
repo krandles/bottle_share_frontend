@@ -1,0 +1,106 @@
+import React from 'react'
+import { connect } from 'react-redux'
+import { Form } from 'semantic-ui-react'
+import { stateOptions } from './stateOptions'
+import api from '../../api/adapter'
+
+class NewEventForm extends React.Component {
+  state = {
+    eventDetails: {
+      title: '',
+      location: '',
+      date: '',
+      address: '',
+      address2: '',
+      city: '',
+      stateAbbr: '',
+      zipCode: '',
+      description: '',
+      isPrivate: true,
+      invitees: []
+    }
+  }
+
+  // makeUsersList = () => this.setState({
+  //   usersArray:
+  //     this.props.users.map(user => {
+  //       return { key: user.id, text: user.name, value: user.id }
+  //   })
+  // })
+
+  onInputChange = (name, value) => {
+    // console.log(e, value)
+    this.setState({
+      ...this.state,
+      eventDetails: {
+        ...this.state.eventDetails,
+        [name]: value
+      }
+    })
+  }
+
+  onFormSubmit = (e) => {
+    e.preventDefault()
+    const details = this.state.eventDetails
+    const eventDetails = {
+      organizer_id: this.props.organizer,
+      title: details.title,
+      location: details.location,
+      date: details.date,
+      address: details.address,
+      address2: details.address2,
+      city: details.city,
+      state: details.stateAbbr,
+      zip: details.zipCode,
+      description: details.description,
+      private: details.isPrivate
+    }
+    api.postNewEvent(eventDetails)
+      .then(res => console.log(res))
+  }
+
+  // componentDidMount() {
+  //   this.makeUsersList()
+  // }
+  
+  render() {
+    const eventDetails = this.state.eventDetails
+    return (
+      <div className='main-content'>
+        <Form onSubmit={this.onFormSubmit}>
+          <Form.Input name='title' label='Title' value={eventDetails.title} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+          <Form.TextArea rows={4} name='description' label='Description' value={eventDetails.description} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+          <Form.Group widths='equal'>
+            <Form.Input fluid name='location' label='Location' value={eventDetails.location} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+            <Form.Input fluid name='date' label='Date' type='date' value={eventDetails.date} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+          </Form.Group>
+          <Form.Group widths='equal'>
+            <Form.Input fluid name='address' label='Address' value={eventDetails.address} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+            <Form.Input fluid name='address2' label='Apt./Suite #' value={eventDetails.address2} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+          </Form.Group>
+          <Form.Group widths='equal'>
+            <Form.Input fluid name='city' label='City' value={eventDetails.city} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+            <Form.Select fluid selection options={stateOptions} name='stateAbbr' label='State' onChange={(event, {value}) => {this.onInputChange("stateAbbr", value)}} />
+          </Form.Group>
+          <Form.Group widths='equal'>
+            <Form.Input fluid name='zipCode' label='ZIP Code' value={eventDetails.zipCode} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+            <Form.Select fluid options={[{key: 'private', value: true, text: 'Private'}, {key: 'public', value: false, text: 'Public'}]} name='isPrivate' label='Event Type' onChange={(event, {value}) => {this.onInputChange("eventType", value)}} />
+          </Form.Group>
+          <Form.Select fluid multiple search selection options={this.props.usersArray} label="Who's Invited?" value={eventDetails.invitees} onChange={(event, {value}) => {this.onInputChange("invitees", value)}} />
+          <Form.Button type='submit'>Submit</Form.Button>
+        </Form>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return { 
+    organizer: state.userID,
+    usersArray: state.users.map(user => {
+      return { key: user.id, text: user.name, value: user.id }
+    })
+  }
+}
+
+export default connect(mapStateToProps)(NewEventForm)

@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import './css/App.css';
 import { Route, Switch } from 'react-router-dom'
-// import { findUser } from './actions/users'
+import { findUser, getAllUsers } from './actions/users'
 
 import LoginForm from './components/login/LoginForm'
 import SignupForm from './components/signup/SignupForm'
+import NewEventForm from './components/events/NewEventForm'
 import DashboardContainer from './components/dashboard/DashboardContainer'
 // import api from './api/adapter'
 
 class App extends Component {
+
+  componentDidMount() {
+
+    if (localStorage.getItem("token")) {
+      this.props.findUser(localStorage.getItem("token"))
+      this.props.getAllUsers()
+      // .then(()=>this.props.history.push("/"))
+    }
+  }
 
   render() {
     return (
@@ -29,6 +39,7 @@ class App extends Component {
             </div>}
           }
         />
+        <Route exact path="/events/new" render={(routerProps) => <NewEventForm />} />
       </Switch>
       // <div className="App">
       //   <LoginForm logoutFn={this.logout}/>
@@ -38,9 +49,9 @@ class App extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return { loggedIn: state.loggedIn}
-// }
+const mapStateToProps = (state) => {
+  return { loggedIn: state.loggedIn, users: state.users }
+}
 
-// export default connect(mapStateToProps, { findUser })(App)
-export default App
+export default connect(mapStateToProps, { findUser, getAllUsers })(App)
+// export default App

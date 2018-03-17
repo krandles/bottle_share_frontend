@@ -1,6 +1,6 @@
 import React from 'react'
 import Dashboard from './Dashboard'
-import { findUser } from '../../actions/users'
+import { findUser, getAllUsers } from '../../actions/users'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 
@@ -10,6 +10,7 @@ class DashboardContainer extends React.Component {
 
     if (localStorage.getItem("token")) {
       this.props.findUser(localStorage.getItem("token"))
+      this.props.getAllUsers()
       // .then(()=>this.props.history.push("/"))
     }
   }
@@ -31,4 +32,4 @@ const mapStateToProps = (state) => {
   return {loggedIn: state.loggedIn}
 }
 
-export default connect(mapStateToProps, {findUser})(DashboardContainer)
+export default connect(mapStateToProps, {findUser, getAllUsers})(DashboardContainer)
