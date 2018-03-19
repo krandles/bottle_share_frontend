@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import { findUser, getAllUsers } from './actions/users'
 import { getEvents } from  './actions/events'
 
+import Navigation from './components/Navigation'
 import LoginForm from './components/login/LoginForm'
 import SignupForm from './components/signup/SignupForm'
 import NewEventForm from './components/events/NewEventForm'
@@ -26,29 +27,28 @@ class App extends Component {
 
   render() {
     return (
-      <Switch>
-        <Route exact path="/"
-          render={(routerProps) => {
-            return <div className="App">
-              <DashboardContainer {...routerProps}/>
-            </div>}
-          }
-        />
-        <Route exact path="/login"
-          render={(routerProps) => {
-            return <div className="login">
-              <LoginForm {...routerProps}/>
-              <SignupForm {...routerProps}/>
-            </div>}
-          }
-        />
-        <Route exact path="/events/new" render={(routerProps) => <NewEventForm />} />
-        <Route exact path="/events" render={(routerProps) => <EventListContainer />} />
-      </Switch>
-      // <div className="App">
-      //   <LoginForm logoutFn={this.logout}/>
-      //   <SignupForm />
-      // </div>
+      <div>
+        <Navigation />
+        <Switch>
+          <Route exact path="/"
+            render={(routerProps) => {
+              return <div className="App">
+                <DashboardContainer {...routerProps}/>
+              </div>}
+            }
+          />
+          <Route exact path="/login"
+            render={(routerProps) => {
+              return <div className="login">
+                <LoginForm {...routerProps}/>
+                <SignupForm {...routerProps}/>
+              </div>}
+            }
+          />
+          <Route exact path="/events/new" render={(routerProps) => <NewEventForm />} />
+          <Route exact path="/events" render={(routerProps) => <EventListContainer />} />
+        </Switch>
+      </div>
     );
   }
 }
@@ -58,4 +58,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, { findUser, getAllUsers, getEvents })(App)
-// export default App
