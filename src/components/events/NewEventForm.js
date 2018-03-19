@@ -56,7 +56,11 @@ class NewEventForm extends React.Component {
       private: details.isPrivate
     }
     api.postNewEvent(eventDetails)
-      .then(res => console.log(res))
+      .then(res => {
+        details.invitees.forEach(invitee => {
+          api.postNewInvitation({user_id: invitee, event_id: res.id, status: 'pending'})
+        })
+      })
   }
 
   // componentDidMount() {
@@ -80,7 +84,7 @@ class NewEventForm extends React.Component {
           </Form.Group>
           <Form.Group widths='equal'>
             <Form.Input fluid name='city' label='City' value={eventDetails.city} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-            <Form.Select fluid selection options={stateOptions} name='stateAbbr' label='State' onChange={(event, {value}) => {this.onInputChange("stateAbbr", value)}} />
+            <Form.Select fluid search selection options={stateOptions} name='stateAbbr' label='State' onChange={(event, {value}) => {this.onInputChange("stateAbbr", value)}} />
           </Form.Group>
           <Form.Group widths='equal'>
             <Form.Input fluid name='zipCode' label='ZIP Code' value={eventDetails.zipCode} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />

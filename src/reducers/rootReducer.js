@@ -1,4 +1,5 @@
 import { LOGIN, LOGOUT, CREATE_USER, FIND_USER, GET_USERS } from '../actions/users'
+import { GET_EVENTS } from '../actions/events'
 
 const initialState = {
   loggedIn: false,
@@ -43,9 +44,13 @@ function rootReducer(state=initialState, action) {
         userID: action.payload.user.id
       }
     case GET_USERS:
-      console.log(action.payload)
       return {...state,
         users: action.payload
+      }
+    case GET_EVENTS:
+      console.log(action.payload)
+      return {...state,
+        events: action.payload
       }
     default:
       return state
