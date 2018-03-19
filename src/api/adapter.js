@@ -77,6 +77,27 @@ const api = {
       },
       body: JSON.stringify({invitation})
     }).then(res => res.json())
+  },
+
+  postNewPost: (post) => {
+    return fetch('http://localhost:3000/posts', {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({post})
+    }).then(res => res.json())
+  },
+
+  getAllPosts: () => {
+    return fetch('http://localhost:3000/posts', {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
   }
 
 }

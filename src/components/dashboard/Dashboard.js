@@ -7,8 +7,9 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='main-content'>
         Dashboard Goes Here
+        {/* <Button onClick={} /> */}
         <Button onClick={this.props.logout} >Logout</Button>
       </div>
     )

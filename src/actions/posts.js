@@ -1,12 +1,12 @@
 import api from '../api/adapter'
 
-export const GET_EVENTS = 'GET_EVENTS'
+export const GET_POSTS = "GET_POSTS"
 
-export const getEvents = () => {
+export const getAllPosts = () => {
   return function(dispatch) {
-    return api.getAllEvents()
+    return api.getAllPosts()
       .then(json => dispatch({
-        type: GET_EVENTS,
+        type: GET_POSTS,
         payload: json
       })
     )
