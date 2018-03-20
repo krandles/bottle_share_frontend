@@ -2,15 +2,21 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Form } from 'semantic-ui-react'
 import api from '../../api/adapter'
+import ReactFilestack from 'filestack-react';
+import keys from '../../keys'
 
 class NewPostForm extends React.Component {
-  state = { body: '' }
+  state = {
+    body: '',
+    url: ''
+  }
 
   handleSubmit = () => {
     const newPost = {
       event_id: this.props.eventID,
       user_id: this.props.currentUser,
-      body: this.state.body
+      body: this.state.body,
+      image_url: this.state.url
     }
     api.postNewPost(newPost)
       .then(res => console.log(res))
@@ -22,7 +28,25 @@ class NewPostForm extends React.Component {
     })
   }
 
+  onSuccess = (result) => {
+    this.setState({
+      url: result.filesUploaded[0].url
+    })
+  }
+
+  onError = (error) => {
+    console.error('error', error);
+  }
+
   render() {
+
+    const basicOptions = {
+      accept: 'image/*',
+      fromSources: ['local_file_system'],
+      maxSize: 1024 * 1024,
+      maxFiles: 1,
+    };
+
     return (
       <Form onSubmit={this.handleSubmit} >
         <Form.TextArea
@@ -31,6 +55,14 @@ class NewPostForm extends React.Component {
           label="Join the conversation"
           value={this.state.body}
           onChange={(event, {value}) => {this.onInputChange(event, value)}}
+        />
+        <ReactFilestack
+          apikey={keys.filestackKey}
+          buttonText="Upload Photo"
+          buttonClass="ui medium button gray"
+          options={basicOptions}
+          onSuccess={this.onSuccess}
+          onError={this.onError}
         />
         <Form.Button type='submit'>Submit</Form.Button>
       </Form>
