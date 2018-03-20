@@ -1,6 +1,7 @@
 import { LOGIN, LOGOUT, CREATE_USER, FIND_USER, GET_USERS } from '../actions/users'
 import { GET_EVENTS } from '../actions/events'
 import { GET_POSTS } from '../actions/posts'
+import { GET_INVITATIONS } from '../actions/invitations'
 
 const initialState = {
   loggedIn: false,
@@ -8,7 +9,8 @@ const initialState = {
   userID: '',
   users: [],
   events: [],
-  posts: []
+  posts: [],
+  invitations: []
 }
 
 function rootReducer(state=initialState, action) {
@@ -56,6 +58,10 @@ function rootReducer(state=initialState, action) {
     case GET_POSTS:
       return {...state,
         posts: action.payload
+      }
+    case GET_INVITATIONS:
+      return { ...state,
+        invitations: action.payload
       }
     default:
       return state

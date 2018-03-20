@@ -9,8 +9,6 @@ class Dashboard extends React.Component {
     return (
       <div className='main-content'>
         Dashboard Goes Here
-        {/* <Button onClick={} /> */}
-        <Button onClick={this.props.logout} >Logout</Button>
       </div>
     )
   }
@@ -20,4 +18,4 @@ const mapStateToProps = (state) => {
   return { loggedIn: state.loggedIn }
 }
 
-export default connect(mapStateToProps, { logout })(Dashboard)
+export default connect(mapStateToProps)(Dashboard)

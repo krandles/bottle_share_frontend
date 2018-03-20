@@ -68,6 +68,16 @@ const api = {
     }).then(res => res.json())
   },
 
+  getAllInvitations: () => {
+    return fetch('http://localhost:3000/invitations', {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+  },
+
   postNewInvitation: (invitation) => {
     return fetch('http://localhost:3000/invitations', {
       method: "POST",
