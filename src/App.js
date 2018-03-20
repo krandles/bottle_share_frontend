@@ -5,6 +5,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import { findUser, getAllUsers } from './actions/users'
 import { getEvents } from  './actions/events'
 import { getAllPosts } from  './actions/posts'
+import { getAllInvitations } from  './actions/invitations'
 
 import Navigation from './components/Navigation'
 import LoginForm from './components/login/LoginForm'
@@ -13,6 +14,7 @@ import NewEventForm from './components/events/NewEventForm'
 import DashboardContainer from './components/dashboard/DashboardContainer'
 import EventListContainer from './components/events/EventListContainer'
 import EventPage from './components/events/EventPage'
+import InvitationListContainer from './components/invitations/InvitationListContainer'
 // import api from './api/adapter'
 
 class App extends Component {
@@ -24,7 +26,10 @@ class App extends Component {
       this.props.getAllUsers()
       this.props.getEvents()
       this.props.getAllPosts()
-      // .then(()=>this.props.history.push("/"))
+      this.props.getAllInvitations()
+        // .then(()=>this.props.history.push("/"))
+    } else {
+      this.props.history.push("/login")
     }
   }
 
@@ -52,12 +57,13 @@ class App extends Component {
           <Route exact path="/events" render={(routerProps) => <EventListContainer {...routerProps} />} />
           {/* <Route path="/events/:id" render={(routerProps) =>  <EventPage {...routerProps} />} /> */}
           <Route path="/events/:id" render={(routerProps) => {
-            if (this.props.events.length){
+            if (this.props.events.length) {
              return <EventPage {...routerProps} event={this.props.events.find(event => event.id === parseInt(routerProps.match.params.id,10))} />
             } else {
               return <h1>Loading</h1>
             }}}
             />
+          <Route exact path="/invitations" render={(routerProps) => <InvitationListContainer {...routerProps} />} />
         </Switch>
       </div>
     );
@@ -68,4 +74,4 @@ const mapStateToProps = (state) => {
   return { loggedIn: state.loggedIn, users: state.users, events: state.events }
 }
 
-export default withRouter(connect(mapStateToProps, { findUser, getAllUsers, getEvents, getAllPosts })(App))
+export default withRouter(connect(mapStateToProps, { findUser, getAllUsers, getEvents, getAllPosts, getAllInvitations })(App))

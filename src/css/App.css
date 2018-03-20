@@ -10,3 +10,10 @@
   margin-bottom: 100px;
   transform: translate(-50%);
 }
+
+.user {
+  position: relative;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
