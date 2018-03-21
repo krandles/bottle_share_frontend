@@ -30,7 +30,7 @@ function rootReducer(state=initialState, action) {
     case LOGOUT:
       localStorage.removeItem('token')
       return {
-        initialState
+        ...initialState
       }
     case CREATE_USER:
       localStorage.setItem("token", action.payload.token)

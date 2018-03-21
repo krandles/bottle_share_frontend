@@ -17,7 +17,8 @@ export const login = (email, password) => {
   }
 }
 
-export const logout = () => {
+export const logout = (history) => {
+  history.push("/login")
   return { type: LOGOUT }
 }
 

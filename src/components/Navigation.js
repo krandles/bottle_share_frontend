@@ -19,7 +19,7 @@ const Navigation = (props) => {
           <Popup 
             trigger={<Icon name="user circle" size="big"/>}
             content={<div>
-                       <Button onClick={props.logout} >Logout</Button>
+                       <Button onClick={() => props.logout(props.history)} >Logout</Button>
                        <Button><NavLink to="/account" /></Button>
                      </div>
                     }

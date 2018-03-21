@@ -23,20 +23,21 @@ class App extends Component {
 
     if (localStorage.getItem("token")) {
       this.props.findUser(localStorage.getItem("token"))
-      this.props.getAllUsers()
-      this.props.getEvents()
-      this.props.getAllPosts()
-      this.props.getAllInvitations()
+      // this.props.getEvents()
+      // this.props.getAllUsers()
+      // this.props.getAllPosts()
+      // this.props.getAllInvitations()
         // .then(()=>this.props.history.push("/"))
-    } else {
-      this.props.history.push("/login")
-    }
+    } 
+    // else {
+    //   this.props.history.push("/login")
+    // }
   }
 
   render() {
     return (
       <div>
-        <Navigation />
+        <Navigation history={this.props.history} />
         <Switch>
           <Route exact path="/"
             render={(routerProps) => {
