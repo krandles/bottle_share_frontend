@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
   return {
     loggedIn: state.loggedIn,
     userID: state.userID,
-    invitations: state.invitations.filter(i => i.user_id === state.userID)
+    invitations: state.invitations.filter(i => i.user.id === state.userID)
   }
 }
 
