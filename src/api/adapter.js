@@ -89,6 +89,17 @@ const api = {
     }).then(res => res.json())
   },
 
+  patchInvitation: (invitation) => {
+    return fetch(`http://localhost:3000/invitations/${invitation.id}`, {
+      method: "PATCH",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(invitation)
+    })
+  },
+
   postNewPost: (post) => {
     return fetch('http://localhost:3000/posts', {
       method: "POST",

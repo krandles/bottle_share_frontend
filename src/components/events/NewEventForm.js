@@ -29,7 +29,6 @@ class NewEventForm extends React.Component {
   // })
 
   onInputChange = (name, value) => {
-    // console.log(e, value)
     this.setState({
       ...this.state,
       eventDetails: {
