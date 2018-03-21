@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { Button, Icon, Popup } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { logout } from '../actions/users'
@@ -19,8 +19,10 @@ const Navigation = (props) => {
           <Popup 
             trigger={<Icon name="user circle" size="big"/>}
             content={<div>
-                       <Button onClick={() => props.logout(props.history)} >Logout</Button>
-                       <Button><NavLink to="/account" /></Button>
+                       <Button.Group vertical>
+                        <Button onClick={() => props.logout(props.history)} >Logout</Button>
+                        <Button><Link to="/account" >My Account</Link></Button>
+                       </Button.Group>
                      </div>
                     }
             on="click"

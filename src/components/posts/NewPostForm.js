@@ -58,13 +58,13 @@ class NewPostForm extends React.Component {
         />
         <ReactFilestack
           apikey={keys.filestackKey}
-          buttonText="Upload Photo"
-          buttonClass="ui medium button gray"
+          buttonText="Add A Photo"
+          buttonClass="ui fluid medium button gray"
           options={basicOptions}
           onSuccess={this.onSuccess}
           onError={this.onError}
         />
-        <Form.Button type='submit'>Submit</Form.Button>
+        <Form.Button floated='right' type='submit'>Submit</Form.Button>
       </Form>
     )
   }
