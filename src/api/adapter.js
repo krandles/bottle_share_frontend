@@ -57,6 +57,16 @@ const api = {
     }).then(res => res.json())
   },
 
+  getEvent: (id) => {
+    return fetch(`http://localhost:3000/events/${id}`, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+  },
+
   postNewEvent: (event) => {
     return fetch('http://localhost:3000/events', {
       method: "POST",

@@ -52,7 +52,7 @@ class NewPostForm extends React.Component {
         <Form.TextArea
           rows={4}
           name="body"
-          label="Join the conversation"
+          placeholder="Join the conversation..."
           value={this.state.body}
           onChange={(event, {value}) => {this.onInputChange(event, value)}}
         />

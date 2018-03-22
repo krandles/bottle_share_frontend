@@ -11,6 +11,7 @@ import Navigation from './components/Navigation'
 import LoginForm from './components/login/LoginForm'
 import SignupForm from './components/signup/SignupForm'
 import NewEventForm from './components/events/NewEventForm'
+import EditEventForm from './components/events/EditEventForm'
 import DashboardContainer from './components/dashboard/DashboardContainer'
 import EventListContainer from './components/events/EventListContainer'
 import EventPage from './components/events/EventPage'
@@ -57,13 +58,14 @@ class App extends Component {
           <Route exact path="/events/new" render={(routerProps) => <NewEventForm {...routerProps} />} />
           <Route exact path="/events" render={(routerProps) => <EventListContainer {...routerProps} />} />
           {/* <Route path="/events/:id" render={(routerProps) =>  <EventPage {...routerProps} />} /> */}
-          <Route path="/events/:id" render={(routerProps) => {
+          <Route exact path="/events/:id" render={(routerProps) => {
             if (this.props.events.length) {
              return <EventPage {...routerProps} event={this.props.events.find(event => event.id === parseInt(routerProps.match.params.id,10))} />
             } else {
               return <h1>Loading</h1>
             }}}
             />
+          <Route path="/events/:id/edit" render={(routerProps) => <EditEventForm {...routerProps} event={this.props.currentEvent}/>} />
           <Route exact path="/invitations" render={(routerProps) => <InvitationListContainer {...routerProps} />} />
         </Switch>
       </div>
@@ -72,7 +74,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { loggedIn: state.loggedIn, users: state.users, events: state.events }
+  return { loggedIn: state.loggedIn, users: state.users, events: state.events, currentEvent: state.currentEvent }
 }
 
 export default withRouter(connect(mapStateToProps, { findUser, getAllUsers, getEvents, getAllPosts, getAllInvitations })(App))
