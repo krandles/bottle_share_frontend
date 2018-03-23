@@ -20,8 +20,8 @@ const Navigation = (props) => {
             trigger={<Icon name="user circle" size="big"/>}
             content={<div>
                        <Button.Group vertical>
-                        <Button onClick={() => props.logout(props.history)} >Logout</Button>
                         <Button><Link to="/account" >My Account</Link></Button>
+                        <Button onClick={() => props.logout(props.history)} >Logout</Button>
                        </Button.Group>
                      </div>
                     }

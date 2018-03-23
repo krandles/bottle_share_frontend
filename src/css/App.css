@@ -17,3 +17,8 @@
   right: 50%;
   transform: translate(30%, -50%);
 }
+
+.button {
+  /* padding-top: 10px!important; */
+  margin-bottom: 5px!important;
+}
