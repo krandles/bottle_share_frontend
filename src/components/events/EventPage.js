@@ -11,50 +11,75 @@ import { Link } from 'react-router-dom'
 
 class EventPage extends React.Component {
 
-  state = { discussion: true }
+  state = {
+    discussion: true,
+    currentEvent: {}
+   }
 
   setDiscussion = (content) => {
-    this.setState({discussion: content})
+    this.setState({...this.state, discussion: content})
   }
 
   componentDidMount() {
-    this.props.getEvent(this.props.match.params.id)
+    if (localStorage.getItem("token")) {
+      console.log("mounting")
+      // this.props.findUser(localStorage.getItem("token"))
+      this.props.getEvent(this.props.match.params.id)
+      // .then(res => {
+      //   this.setState({
+      //   ...this.state,
+      //   currentEvent: {
+      //     title: this.props.currentEvent.title,
+      //     location: this.props.currentEvent.location,
+      //     date: this.props.currentEvent.date,
+      //     address: this.props.currentEvent.address,
+      //     address2: this.props.currentEvent.address2,
+      //     city: this.props.currentEvent.city,
+      //     stateAbbr: this.props.currentEvent.state,
+      //     zipCode: this.props.currentEvent.zip,
+      //     description: this.props.currentEvent.description,
+      //     isPrivate: this.props.currentEvent.private,
+      //     // currentInvitees: this.props.currentEvent.invitations.map(i => i.user_id)
+      //   } })})
+    }
   }
   
   render() {
-
-    const discussion = this.state.discussion
-
-    const contentPane = discussion ? (
-      <div>
-        <NewPostForm eventID={this.props.event.id} />
-        <PostList allPosts={this.props.allPosts} allUsers={this.props.allUsers} />
-      </div>
-    )
-    :
-    (
-      <AttendeesList invitations={this.props.invitations.filter(i => i.event.id === this.props.event.id)} />
-    )
-
-    return (
-      // <div className="main-content">Event Page</div>
-      <div className="main-content">
-        <EventItem event={this.props.event} />
-        <Link to={`/events/${this.props.match.params.id}/edit`}>Edit</Link>
-        <Button.Group widths="2">
-          <Button onClick={() => this.setDiscussion(true)}>Discussion</Button>
-          <Button onClick={() => this.setDiscussion(false)}>See Who's Going</Button>
-        </Button.Group>
-        { contentPane }
-      </div>
-    )
-  }
+    if (this.props.currentEvent) {
+      const discussion = this.state.discussion
+  
+      const contentPane = discussion ? (
+        <div>
+          <NewPostForm eventID={this.props.currentEvent.id} />
+          <PostList allPosts={this.props.currentEvent.posts} />
+        </div>
+      )
+      :
+      (
+        <AttendeesList invitations={this.props.currentEvent.invitations} />
+      )
+  
+      return (
+        // <div className="main-content">Event Page</div>
+        <div className="main-content">
+          <EventItem event={this.props.currentEvent} />
+          <Link to={`/events/${this.props.match.params.id}/edit`}>Edit</Link>
+          <Button.Group widths="2">
+            <Button onClick={() => this.setDiscussion(true)}>Discussion</Button>
+            <Button onClick={() => this.setDiscussion(false)}>See Who's Going</Button>
+          </Button.Group>
+          { contentPane }
+        </div>
+      )
+    } else {
+      return <h1>Loading</h1>
+    }
+      
+    }
 }
 
 const mapStateToProps = (state) => {
-  return { allPosts: state.posts,
-    allUsers: state.users,
-    invitations: state.invitations,
+  return {
     currentEvent: state.currentEvent
   }
 }

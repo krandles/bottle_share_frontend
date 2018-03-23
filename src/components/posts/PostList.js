@@ -7,7 +7,7 @@ const PostList = (props) => {
   return (
     <Item.Group>
       {props.allPosts.map(p => {
-        return <PostItem key={p.id} post={p} user={props.allUsers.find(user => user.id === p.user_id)} />
+        return <PostItem key={p.id} post={p} author={p.author} />
       })}
     </Item.Group>
   )

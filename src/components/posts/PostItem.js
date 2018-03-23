@@ -5,8 +5,13 @@ const PostItem = (props) => {
   console.log(props)
   return (
     <Item>
+      {props.post.image_url ?
+        <Item.Image size="small" src={props.post.image_url} />
+        :
+        null
+      }
       <Item.Content>
-        <Item.Header>{props.user.name}</Item.Header>
+        <Item.Header>{props.author}</Item.Header>
         <Item.Description>{props.post.body}</Item.Description>
       </Item.Content>
     </Item>

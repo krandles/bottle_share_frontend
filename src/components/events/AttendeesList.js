@@ -1,8 +1,12 @@
 import React from 'react'
-import { List } from 'semantic-ui-react'
+import { Button, List } from 'semantic-ui-react'
 
 class AttendeesList extends React.Component {
-  state = {  }
+  state = { content: "confirmed" }
+
+  setContent = (content) => {
+    this.setState({...this.state, content: content})
+  }
   
   render() {
     const invitations = this.props.invitations
@@ -12,22 +16,17 @@ class AttendeesList extends React.Component {
     const pending = invitations.filter(i => i.status === "pending")
     return (
       <div>
-        AttendeesList
+        <Button.Group widths="4">
+          <Button onClick={() => this.setContent("confirmed")}>Confirmed</Button>
+          <Button onClick={() => this.setContent("declined")}>Declined</Button>
+          <Button onClick={() => this.setContent("maybe")}>Maybe</Button>
+          <Button onClick={() => this.setContent("pending")}>Awaiting Response</Button>
+        </Button.Group>
         <List>
-          <List.Header>Confirmed</List.Header>
-          {confirmed.map(i => <List.Item>{i.user.name}</List.Item>)}
-        </List>
-        <List>
-          <List.Header>Declined</List.Header>
-          {declined.map(i => <List.Item>{i.user.name}</List.Item>)}
-        </List>
-        <List>
-          <List.Header>Maybe</List.Header>
-          {maybe.map(i => <List.Item>{i.user.name}</List.Item>)}
-        </List>
-        <List>
-          <List.Header>Pending</List.Header>
-          {pending.map(i => <List.Item>{i.user.name}</List.Item>)}
+          {this.state.content === "confirmed" ? confirmed.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
+          {this.state.content === "declined" ? declined.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
+          {this.state.content === "maybe" ? maybe.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
+          {this.state.content === "pending" ? pending.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
         </List>
       </div>
     )

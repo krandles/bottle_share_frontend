@@ -70,7 +70,6 @@ class EditEventForm extends React.Component {
       // this.props.findUser(localStorage.getItem("token"))
       this.props.getEvent(this.props.match.params.id)
         .then(res => {
-          console.log(this.props.currentEvent.invitations.map(i => i.user_id))
           this.setState({
           ...this.state,
           currentEvent: {

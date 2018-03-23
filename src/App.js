@@ -58,13 +58,13 @@ class App extends Component {
           <Route exact path="/events/new" render={(routerProps) => <NewEventForm {...routerProps} />} />
           <Route exact path="/events" render={(routerProps) => <EventListContainer {...routerProps} />} />
           {/* <Route path="/events/:id" render={(routerProps) =>  <EventPage {...routerProps} />} /> */}
-          <Route exact path="/events/:id" render={(routerProps) => {
-            if (this.props.events.length) {
-             return <EventPage {...routerProps} event={this.props.events.find(event => event.id === parseInt(routerProps.match.params.id,10))} />
-            } else {
-              return <h1>Loading</h1>
-            }}}
-            />
+          <Route exact path="/events/:id" render={(routerProps) => <EventPage {...routerProps} event={this.props.currentEvent} />} />
+            {/* if (this.props.currentEvent) 
+             return <EventPage {...routerProps} event={this.props.currentEvent} />
+             } else {
+               return <h1>Loading</h1>
+             }}}
+             /> */}
           <Route path="/events/:id/edit" render={(routerProps) => <EditEventForm {...routerProps} event={this.props.currentEvent}/>} />
           <Route exact path="/invitations" render={(routerProps) => <InvitationListContainer {...routerProps} />} />
         </Switch>

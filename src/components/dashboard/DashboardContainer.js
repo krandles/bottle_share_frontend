@@ -15,7 +15,7 @@ class DashboardContainer extends React.Component {
       this.props.findUser(localStorage.getItem("token"))
       this.props.getEvents()
       this.props.getAllUsers()
-      this.props.getAllPosts()
+      // this.props.getAllPosts()
       this.props.getAllInvitations()
       // .then(()=>this.props.history.push("/"))
     }
