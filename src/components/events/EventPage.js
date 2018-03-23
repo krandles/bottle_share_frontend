@@ -47,7 +47,7 @@ class EventPage extends React.Component {
         <div className="main-content">
           <EventItem event={this.props.currentEvent} />
           <Link to={`/events/${this.props.match.params.id}/edit`}>Edit</Link>
-          <iframe width="100%" height="300" frameBorder="0" style={{border:0}} src={`${this.props.currentEvent.map_url + keys.googleMapsKey}`} allowFullScreen></iframe>
+          <iframe title="map" width="100%" height="300" frameBorder="0" style={{border:0}} src={`${this.props.currentEvent.map_url + keys.googleMapsKey}`} allowFullScreen></iframe>
           <Button.Group widths="2">
             <Button onClick={() => this.setDiscussion(true)}>Discussion</Button>
             <Button onClick={() => this.setDiscussion(false)}>See Who's Going</Button>

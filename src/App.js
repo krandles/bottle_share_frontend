@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import './css/App.css';
 import { Route, Switch, withRouter } from 'react-router-dom'
-import { findUser, getAllUsers } from './actions/users'
+import { findUser, getCurrentUser } from './actions/users'
 import { getEvents } from  './actions/events'
-import { getAllPosts } from  './actions/posts'
-import { getAllInvitations } from  './actions/invitations'
 
 import Navigation from './components/Navigation'
 import LoginForm from './components/login/LoginForm'
@@ -24,15 +22,12 @@ class App extends Component {
 
     if (localStorage.getItem("token")) {
       this.props.findUser(localStorage.getItem("token"))
-      // this.props.getEvents()
-      // this.props.getAllUsers()
-      // this.props.getAllPosts()
-      // this.props.getAllInvitations()
-        // .then(()=>this.props.history.push("/"))
-    } 
-    // else {
-    //   this.props.history.push("/login")
-    // }
+        .then(res => {
+          this.props.getCurrentUser(res.payload.user.id)
+          this.props.getEvents()
+        }
+      )
+    }
   }
 
   render() {
@@ -57,14 +52,7 @@ class App extends Component {
           />
           <Route exact path="/events/new" render={(routerProps) => <NewEventForm {...routerProps} />} />
           <Route exact path="/events" render={(routerProps) => <EventListContainer {...routerProps} />} />
-          {/* <Route path="/events/:id" render={(routerProps) =>  <EventPage {...routerProps} />} /> */}
           <Route exact path="/events/:id" render={(routerProps) => <EventPage {...routerProps} event={this.props.currentEvent} />} />
-            {/* if (this.props.currentEvent) 
-             return <EventPage {...routerProps} event={this.props.currentEvent} />
-             } else {
-               return <h1>Loading</h1>
-             }}}
-             /> */}
           <Route path="/events/:id/edit" render={(routerProps) => <EditEventForm {...routerProps} event={this.props.currentEvent}/>} />
           <Route exact path="/invitations" render={(routerProps) => <InvitationListContainer {...routerProps} />} />
         </Switch>
@@ -74,7 +62,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { loggedIn: state.loggedIn, users: state.users, events: state.events, currentEvent: state.currentEvent }
+  return { loggedIn: state.loggedIn, userID: state.userID, events: state.events, currentEvent: state.currentEvent, currentUser: state.currentUser }
 }
 
-export default withRouter(connect(mapStateToProps, { findUser, getAllUsers, getEvents, getAllPosts, getAllInvitations })(App))
+export default withRouter(connect(mapStateToProps, { findUser, getCurrentUser, getEvents })(App))

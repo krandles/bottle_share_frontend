@@ -5,6 +5,7 @@ export const CREATE_USER = "CREATE_USER"
 export const FIND_USER = "FIND_USER"
 export const LOGOUT = "LOGOUT"
 export const GET_USERS = "GET_USERS"
+export const GET_CURRENT_USER = "GET_CURRENT_USER"
 
 export const login = (email, password) => {
   return function(dispatch) {
@@ -49,6 +50,17 @@ export const getAllUsers = () => {
     return api.getAllUsers()
       .then(json => dispatch({
         type: GET_USERS,
+        payload: json
+      })
+    )
+  }
+}
+
+export const getCurrentUser = (id) => {
+  return function(dispatch) {
+    return api.getCurrentUser(id)
+      .then(json => dispatch({
+        type: GET_CURRENT_USER,
         payload: json
       })
     )

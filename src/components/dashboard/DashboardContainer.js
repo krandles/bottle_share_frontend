@@ -1,6 +1,6 @@
 import React from 'react'
 import Dashboard from './Dashboard'
-import { findUser, getAllUsers } from '../../actions/users'
+import { findUser, getCurrentUser } from '../../actions/users'
 import { getEvents } from  '../../actions/events'
 import { getAllPosts } from  '../../actions/posts'
 import { getAllInvitations } from  '../../actions/invitations'
@@ -14,9 +14,10 @@ class DashboardContainer extends React.Component {
     if (localStorage.getItem("token")) {
       this.props.findUser(localStorage.getItem("token"))
       this.props.getEvents()
-      this.props.getAllUsers()
+      //move to
+      // this.props.getCurrentUser(this.props.userID)
       // this.props.getAllPosts()
-      this.props.getAllInvitations()
+      // this.props.getAllInvitations()
       // .then(()=>this.props.history.push("/"))
     }
   }
@@ -35,7 +36,10 @@ class DashboardContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {loggedIn: state.loggedIn}
+  return {
+    loggedIn: state.loggedIn,
+    userID: state.userID
+  }
 }
 
-export default connect(mapStateToProps, { findUser, getAllUsers, getEvents, getAllPosts, getAllInvitations })(DashboardContainer)
+export default connect(mapStateToProps, { findUser, getEvents, getCurrentUser })(DashboardContainer)

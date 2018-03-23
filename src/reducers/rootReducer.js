@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, CREATE_USER, FIND_USER, GET_USERS } from '../actions/users'
+import { LOGIN, LOGOUT, CREATE_USER, FIND_USER, GET_USERS, GET_CURRENT_USER } from '../actions/users'
 import { GET_EVENTS, GET_EVENT } from '../actions/events'
 import { GET_POSTS } from '../actions/posts'
 import { GET_INVITATIONS } from '../actions/invitations'
@@ -48,8 +48,10 @@ function rootReducer(state=initialState, action) {
       }
     case LOGOUT:
       localStorage.removeItem('token')
-      return {
-        ...initialState
+      return {...state,
+        loggedIn: false,
+        userName: '',
+        userID: ''
       }
     case CREATE_USER:
       localStorage.setItem("token", action.payload.token)
@@ -67,6 +69,10 @@ function rootReducer(state=initialState, action) {
     case GET_USERS:
       return {...state,
         users: action.payload
+      }
+    case GET_CURRENT_USER:
+      return {...state,
+        currentUser: action.payload
       }
     case GET_EVENTS:
       return {...state,

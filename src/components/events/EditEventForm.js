@@ -82,8 +82,7 @@ class EditEventForm extends React.Component {
             stateAbbr: this.props.currentEvent.state,
             zipCode: this.props.currentEvent.zip,
             description: this.props.currentEvent.description,
-            isPrivate: this.props.currentEvent.private,
-            // currentInvitees: this.props.currentEvent.invitations.map(i => i.user_id)
+            isPrivate: this.props.currentEvent.private
           } })})
       // this.props.getAllUsers()
       // .then(()=>this.props.history.push("/"))
