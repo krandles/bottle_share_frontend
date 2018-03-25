@@ -6,7 +6,7 @@ const EventItem = (props) => {
   return (
     <Item className="ui">
       <Item.Content>
-        <Item.Header><Link to={`/events/${props.event.id}`}>{props.event.title}</Link></Item.Header>
+        <Item.Header className='event-title'><Link to={`/events/${props.event.id}`}>{props.event.title.toUpperCase()}</Link></Item.Header>
         <Item.Meta>
           at {props.event.location} on {props.event.date}
         </Item.Meta>
