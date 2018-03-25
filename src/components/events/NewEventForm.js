@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Form } from 'semantic-ui-react'
 import { stateOptions } from './stateOptions'
+import { getAllUsers } from '../../actions/users'
 import api from '../../api/adapter'
 
 class NewEventForm extends React.Component {
@@ -62,9 +63,9 @@ class NewEventForm extends React.Component {
       })
   }
 
-  // componentDidMount() {
-  //   this.makeUsersList()
-  // }
+  componentDidMount() {
+    this.props.getAllUsers()
+  }
   
   render() {
     const eventDetails = this.state.eventDetails
@@ -106,4 +107,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(NewEventForm)
+export default connect(mapStateToProps, { getAllUsers })(NewEventForm)
