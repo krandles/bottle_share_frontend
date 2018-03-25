@@ -58,16 +58,11 @@ class EditEventForm extends React.Component {
       private: details.isPrivate
     }
     api.patchEvent(eventDetails)
-      .then(res => {
-        details.invitees.forEach(invitee => {
-          api.postNewInvitation({user_id: invitee, event_id: res.id, status: 'pending'})
-        })
-      })
   }
 
   componentDidMount() {
     if (localStorage.getItem("token")) {
-      // this.props.findUser(localStorage.getItem("token"))
+      // this.props.getAllUsers()
       this.props.getEvent(this.props.match.params.id)
         .then(res => {
           this.setState({

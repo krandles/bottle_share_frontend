@@ -28,8 +28,6 @@ class InvitationListContainer extends React.Component {
           }
         </div>
       )
-      
-      
     }
   }
 }
