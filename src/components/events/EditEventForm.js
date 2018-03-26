@@ -45,6 +45,7 @@ class EditEventForm extends React.Component {
     e.preventDefault()
     const details = this.state.currentEvent
     const eventDetails = {
+      id: details.id,
       organizer_id: details.organizer_id,
       title: details.title,
       location: details.location,
@@ -64,10 +65,11 @@ class EditEventForm extends React.Component {
     if (localStorage.getItem("token")) {
       // this.props.getAllUsers()
       this.props.getEvent(this.props.match.params.id)
-        .then(res => {
-          this.setState({
+      .then(res => {
+        this.setState({
           ...this.state,
           currentEvent: {
+            id: this.props.currentEvent.id,
             title: this.props.currentEvent.title,
             location: this.props.currentEvent.location,
             date: this.props.currentEvent.date,
@@ -78,11 +80,12 @@ class EditEventForm extends React.Component {
             zipCode: this.props.currentEvent.zip,
             description: this.props.currentEvent.description,
             isPrivate: this.props.currentEvent.private
-          } })})
+          }
+        })
+      })
       // this.props.getAllUsers()
       // .then(()=>this.props.history.push("/"))
     }
-    
   }
   
   render() {
@@ -107,7 +110,7 @@ class EditEventForm extends React.Component {
           </Form.Group>
           <Form.Group widths='equal'>
             <Form.Input fluid name='zipCode' label='ZIP Code' value={eventDetails.zipCode} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-            <Form.Select fluid value={eventDetails.isPrivate} options={[{key: 'private', value: true, text: 'Private'}, {key: 'public', value: false, text: 'Public'}]} name='isPrivate' label='Event Type' onChange={(event, {value}) => {this.onInputChange("eventType", value)}} />
+            <Form.Select fluid value={eventDetails.isPrivate} options={[{key: 'private', value: true, text: 'Private'}, {key: 'public', value: false, text: 'Public'}]} name='isPrivate' label='Event Type' onChange={(event, {value}) => {this.onInputChange("isPrivate", value)}} />
           </Form.Group>
           <Form.Button type='submit'>Submit</Form.Button>
         </Form>

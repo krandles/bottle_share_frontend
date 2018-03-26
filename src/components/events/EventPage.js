@@ -29,9 +29,8 @@ class EventPage extends React.Component {
   
   render() {
     if (this.props.currentEvent) {
-      const discussion = this.state.discussion
   
-      const contentPane = discussion ? (
+      const contentPane = this.state.discussion ? (
         <div>
           <NewPostForm eventID={this.props.currentEvent.id} />
           <PostList allPosts={this.props.currentEvent.posts} />
@@ -41,12 +40,18 @@ class EventPage extends React.Component {
       (
         <AttendeesList invitations={this.props.currentEvent.invitations} />
       )
-  
+
       return (
-        // <div className="main-content">Event Page</div>
         <div className="main-content">
           <EventItem event={this.props.currentEvent} />
-          <Link to={`/events/${this.props.match.params.id}/edit`}>Edit</Link>
+          {this.props.userID === this.props.currentEvent.organizer_id ? 
+            <Button.Group widths="2">
+              <Button as={Link} to={`/events/${this.props.match.params.id}/edit`}>Edit Event Details</Button>
+              <Button>Invite More Friends</Button>
+            </Button.Group>
+            :
+            null
+          }
           <iframe title="map" width="100%" height="300" frameBorder="0" style={{border:0}} src={`${this.props.currentEvent.map_url + keys.googleMapsKey}`} allowFullScreen></iframe>
           <Button.Group widths="2">
             <Button onClick={() => this.setDiscussion(true)}>Discussion</Button>
@@ -64,6 +69,7 @@ class EventPage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    userID: state.userID,
     currentEvent: state.currentEvent
   }
 }

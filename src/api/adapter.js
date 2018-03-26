@@ -88,6 +88,17 @@ const api = {
     }).then(res => res.json())
   },
 
+  patchEvent: (event) => {
+    return fetch(`http://localhost:3000/events/${event.id}`, {
+      method: "PATCH",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(event)
+    })
+  },
+
   getAllInvitations: () => {
     return fetch('http://localhost:3000/invitations', {
       method: "GET",

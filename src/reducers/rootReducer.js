@@ -51,7 +51,8 @@ function rootReducer(state=initialState, action) {
       return {...state,
         loggedIn: false,
         userName: '',
-        userID: ''
+        userID: '',
+        currentUser: {}
       }
     case CREATE_USER:
       localStorage.setItem("token", action.payload.token)

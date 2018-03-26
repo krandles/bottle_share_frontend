@@ -64,7 +64,7 @@ class NewPostForm extends React.Component {
           onSuccess={this.onSuccess}
           onError={this.onError}
         />
-        <Form.Button floated='right' type='submit'>Submit</Form.Button>
+        <Form.Button floated='right' type='submit'>Submit Post</Form.Button>
       </Form>
     )
   }

@@ -5,7 +5,7 @@ import InvitationItem from './InvitationItem'
 const InvitationList = (props) => {
   return <Item.Group>
     {props.invitations.map(i => {
-      return <InvitationItem invitation={i} />
+      return <InvitationItem key={i.id} invitation={i} />
     })}
     </Item.Group>
 }
