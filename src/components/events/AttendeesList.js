@@ -17,10 +17,10 @@ class AttendeesList extends React.Component {
     return (
       <div>
         <Button.Group widths="4">
-          <Button onClick={() => this.setContent("confirmed")}>Confirmed</Button>
-          <Button onClick={() => this.setContent("declined")}>Declined</Button>
-          <Button onClick={() => this.setContent("maybe")}>Maybe</Button>
-          <Button onClick={() => this.setContent("pending")}>Awaiting Response</Button>
+          <Button className={this.state.content === "confirmed" ? 'active' : '' } onClick={() => this.setContent("confirmed")}>Confirmed</Button>
+          <Button className={this.state.content === "declined" ? 'active' : '' } onClick={() => this.setContent("declined")}>Declined</Button>
+          <Button className={this.state.content === "maybe" ? 'active' : '' } onClick={() => this.setContent("maybe")}>Maybe</Button>
+          <Button className={this.state.content === "pending" ? 'active' : '' } onClick={() => this.setContent("pending")}>Awaiting Response</Button>
         </Button.Group>
         <List>
           {this.state.content === "confirmed" ? confirmed.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}

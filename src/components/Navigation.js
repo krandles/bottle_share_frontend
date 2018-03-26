@@ -1,6 +1,6 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import { Button, Icon, Popup } from 'semantic-ui-react'
+import { NavLink, Link, withRouter } from 'react-router-dom'
+import { Button, Icon, Menu, Popup } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { logout, getCurrentUser } from '../actions/users'
 // import AuthAction from './AuthAction'
@@ -16,12 +16,10 @@ class Navigation extends React.Component {
 
   render() {
       return (
-        <div className="ui top fixed menu">
-          <div className="item">
-            <NavLink to="/" exact>Home</NavLink>
-          </div>
-          <NavLink to="/events" exact className="item">Events</NavLink>
-          <NavLink to="/invitations" exact className="item">Invitations</NavLink>
+        <Menu className="fixed top">
+          <Menu.Item name="home" as={NavLink} exact to="/" >Home</Menu.Item>
+          <Menu.Item name="events" as={NavLink} exact to="/events" >Events</Menu.Item>
+          <Menu.Item name="invitations" as={NavLink} exact to="/invitations" >Invitations</Menu.Item>
           <div className="top right menu avatar">
             {this.props.loggedIn ?
               <Popup 
@@ -38,7 +36,7 @@ class Navigation extends React.Component {
             : null
             }
           </div>
-        </div>
+        </Menu>
       )
   }
 }
@@ -47,4 +45,4 @@ const mapStateToProps = (state) => {
   return { loggedIn: state.loggedIn, userID: state.userID, currentUser: state.currentUser }
 }
 
-export default connect(mapStateToProps, { logout, getCurrentUser })(Navigation)
+export default withRouter(connect(mapStateToProps, { logout, getCurrentUser })(Navigation))

@@ -64,7 +64,9 @@ class NewEventForm extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getAllUsers()
+    if (localStorage.getItem("token")) {
+      this.props.getAllUsers()
+    }
   }
   
   render() {

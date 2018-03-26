@@ -36,9 +36,9 @@ class EventListContainer extends React.Component {
     return (
       <div className='main-content'>
         <Button.Group widths='3'>
-          <Button onClick={() => this.setEvents("mine")}>Show My Events</Button>
-          <Button onClick={() => this.setEvents("public")}>Browse Public Events</Button>
-          <Button onClick={() => this.setEvents("past")}>Past Events</Button>
+          <Button className={this.state.eventsToShow === "mine" ? 'active' : ''} onClick={() => this.setEvents("mine")}>Upcoming Events</Button>
+          <Button className={this.state.eventsToShow === "public" ? 'active' : ''} onClick={() => this.setEvents("public")}>Browse Public Events</Button>
+          <Button className={this.state.eventsToShow === "past" ? 'active' : ''} onClick={() => this.setEvents("past")}>Past Events</Button>
         </Button.Group>
         {this.state.eventsToShow === "mine" ? <EventList allEvents={this.props.allEvents.filter(e => (e.organizer_id === this.props.userID || e.invitations.map(i => i.userID ).includes(this.props.userID)) && this.isFutureDate(e.date))} /> : null }
         {this.state.eventsToShow === "public" ? <EventList allEvents={this.props.allEvents.filter(e => e.private === false)} /> : null }
