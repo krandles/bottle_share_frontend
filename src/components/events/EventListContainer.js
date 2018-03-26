@@ -2,11 +2,12 @@ import React from 'react';
 import EventList from './EventList'
 import { connect } from 'react-redux'
 import { Button } from 'semantic-ui-react'
+import moment from 'moment'
 
 class EventListContainer extends React.Component {
 
   state = {
-    showPrivate: true
+    eventsToShow: "mine"
   }
 
   // componentDidMount() {
@@ -18,8 +19,14 @@ class EventListContainer extends React.Component {
   //   }  
   // }
 
-  setPrivate = (value) => {
-    this.setState({...this.state, showPrivate: value})
+  setEvents = (value) => {
+    this.setState({...this.state, eventsToShow: value})
+  }
+
+  isFutureDate = (date) => {
+    const momentToday = moment()
+    const momentEvent = moment(date).endOf('day')
+    return momentEvent >= momentToday
   }
   
   render() {
@@ -28,15 +35,14 @@ class EventListContainer extends React.Component {
     // debugger
     return (
       <div className='main-content'>
-      <Button.Group widths='2'>
-        <Button onClick={() => this.setPrivate(true)}>Show My Events</Button>
-        <Button onClick={() => this.setPrivate(false)}>Browse Public Events</Button>
-      </Button.Group>
-      {this.state.showPrivate ?
-        <EventList allEvents={this.props.allEvents.filter(e => e.organizer_id === this.props.userID || e.invitations.map(i => i.userID ).includes(this.props.userID))} />
-        :
-        <EventList allEvents={this.props.allEvents.filter(e => e.private === false)} />
-      }
+        <Button.Group widths='3'>
+          <Button onClick={() => this.setEvents("mine")}>Show My Events</Button>
+          <Button onClick={() => this.setEvents("public")}>Browse Public Events</Button>
+          <Button onClick={() => this.setEvents("past")}>Past Events</Button>
+        </Button.Group>
+        {this.state.eventsToShow === "mine" ? <EventList allEvents={this.props.allEvents.filter(e => (e.organizer_id === this.props.userID || e.invitations.map(i => i.userID ).includes(this.props.userID)) && this.isFutureDate(e.date))} /> : null }
+        {this.state.eventsToShow === "public" ? <EventList allEvents={this.props.allEvents.filter(e => e.private === false)} /> : null }
+        {this.state.eventsToShow === "past" ? <EventList allEvents={this.props.allEvents.filter(e => (e.organizer_id === this.props.userID || e.invitations.map(i => i.userID ).includes(this.props.userID)) && !this.isFutureDate(e.date) )} /> : null }
       </div>
     )
   }
