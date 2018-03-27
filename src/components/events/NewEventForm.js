@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Form } from 'semantic-ui-react'
 import { stateOptions } from './stateOptions'
 import { getAllUsers } from '../../actions/users'
+import { addEvent } from '../../actions/events'
 import api from '../../api/adapter'
 
 class NewEventForm extends React.Component {
@@ -21,13 +22,6 @@ class NewEventForm extends React.Component {
       invitees: []
     }
   }
-
-  // makeUsersList = () => this.setState({
-  //   usersArray:
-  //     this.props.users.map(user => {
-  //       return { key: user.id, text: user.name, value: user.id }
-  //   })
-  // })
 
   onInputChange = (name, value) => {
     this.setState({
@@ -55,11 +49,13 @@ class NewEventForm extends React.Component {
       description: details.description,
       private: details.isPrivate
     }
-    api.postNewEvent(eventDetails)
+    this.props.addEvent(eventDetails)
       .then(res => {
+        // console.log(res)
         details.invitees.forEach(invitee => {
-          api.postNewInvitation({user_id: invitee, event_id: res.id, status: 'pending'})
+          api.postNewInvitation({user_id: invitee, event_id: res.payload.id, status: 'pending'})
         })
+        this.props.history.push(`/events/${res.payload.id}`)
       })
   }
 
@@ -90,9 +86,9 @@ class NewEventForm extends React.Component {
           </Form.Group>
           <Form.Group widths='equal'>
             <Form.Input fluid name='zipCode' label='ZIP Code' value={eventDetails.zipCode} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-            <Form.Select fluid options={[{key: 'private', value: true, text: 'Private'}, {key: 'public', value: false, text: 'Public'}]} name='isPrivate' label='Event Type' onChange={(event, {value}) => {this.onInputChange("eventType", value)}} />
+            <Form.Select fluid options={[{key: 'private', value: true, text: 'Private'}, {key: 'public', value: false, text: 'Public'}]} name='isPrivate' label='Event Type' onChange={(event, {value}) => {this.onInputChange("isPrivate", value)}} />
           </Form.Group>
-          <Form.Select fluid multiple search selection options={this.props.usersArray} label="Who's Invited?" value={eventDetails.invitees} onChange={(event, {value}) => {this.onInputChange("invitees", value)}} />
+          <Form.Select fluid multiple search selection options={this.props.usersArray.filter(u => u.value !== this.props.organizer)} label="Who's Invited?" value={eventDetails.invitees} onChange={(event, {value}) => {this.onInputChange("invitees", value)}} />
           <Form.Button type='submit'>Submit</Form.Button>
         </Form>
       </div>
@@ -109,4 +105,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getAllUsers })(NewEventForm)
+export default connect(mapStateToProps, { getAllUsers, addEvent })(NewEventForm)

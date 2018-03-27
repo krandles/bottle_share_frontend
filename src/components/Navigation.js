@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Link, withRouter } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import { Button, Icon, Menu, Popup } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { logout, getCurrentUser } from '../actions/users'
@@ -25,10 +25,10 @@ class Navigation extends React.Component {
               <Popup 
                 trigger={<Icon name="user circle" size="big"/>}
                 content={<div>
-                           <Button.Group vertical>
-                            <Button><Link to="/account" >My Account</Link></Button>
+                           {/* <Button.Group vertical>
+                            <Button><Link to="/account" >My Account</Link></Button> */}
                             <Button onClick={() => this.props.logout(this.props.history)} >Logout</Button>
-                           </Button.Group>
+                           {/* </Button.Group> */}
                          </div>
                         }
                 on="click"

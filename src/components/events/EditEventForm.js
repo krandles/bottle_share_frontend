@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getEvent } from  '../../actions/events'
-import { getAllUsers } from  '../../actions/users'
+import { getEvent, patchEvent } from  '../../actions/events'
 import { Form } from 'semantic-ui-react'
 import { stateOptions } from './stateOptions'
 import api from '../../api/adapter'
@@ -58,12 +57,12 @@ class EditEventForm extends React.Component {
       description: details.description,
       private: details.isPrivate
     }
-    api.patchEvent(eventDetails)
+    this.props.patchEvent(eventDetails)
+    .then(this.props.history.push(`/events/${eventDetails.id}`))  
   }
 
   componentDidMount() {
     if (localStorage.getItem("token")) {
-      // this.props.getAllUsers()
       this.props.getEvent(this.props.match.params.id)
       .then(res => {
         this.setState({
@@ -83,8 +82,6 @@ class EditEventForm extends React.Component {
           }
         })
       })
-      // this.props.getAllUsers()
-      // .then(()=>this.props.history.push("/"))
     }
   }
   
@@ -122,11 +119,8 @@ class EditEventForm extends React.Component {
 const mapStateToProps = (state) => {
   return { 
     organizer: state.userID,
-    currentEvent: state.currentEvent,
-    usersArray: state.users.map(user => {
-      return { key: user.id, text: user.name, value: user.id }
-    })
+    currentEvent: state.currentEvent
   }
 }
 
-export default connect(mapStateToProps, { getEvent, getAllUsers })(EditEventForm)
+export default connect(mapStateToProps, { getEvent, patchEvent })(EditEventForm)

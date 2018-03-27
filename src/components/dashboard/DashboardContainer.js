@@ -2,8 +2,6 @@ import React from 'react'
 import Dashboard from './Dashboard'
 import { findUser, getCurrentUser } from '../../actions/users'
 import { getEvents } from  '../../actions/events'
-import { getAllPosts } from  '../../actions/posts'
-import { getAllInvitations } from  '../../actions/invitations'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 

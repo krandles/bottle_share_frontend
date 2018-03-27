@@ -18,6 +18,11 @@
   transform: translate(30%, -50%);
 }
 
+body {
+  font-family: 'Istok Web', sans-serif;
+  font-size: 16px;
+}
+
 .button {
   /* padding-top: 10px!important; */
   margin-bottom: 5px!important;
@@ -25,6 +30,42 @@
 
 .event-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 40px;
+  font-weight: bold;
+  font-size: 35px;
   margin-bottom: 5px;
+}
+
+.ui.form .field>label {
+  font-family: 'Istok Web', sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.ui.button {
+  font-family: 'Istok Web', sans-serif;
+}
+
+.ui.items>.item>.content>.description {
+  font-size: 16px;
+}
+
+.ui.menu {
+  font-family: 'Istok Web', sans-serif;
+}
+
+.ui.items>.item>.content>.header {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+}
+
+div.meta {
+  font-size: 14px;
+}
+
+/* div.content.invitation {
+  padding: 10% 0;
+} */
+
+.ui.items>.item>.content>.header.invitation {
+  font-weight: 400;
 }

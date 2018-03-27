@@ -4,6 +4,7 @@ import { Form } from 'semantic-ui-react'
 import api from '../../api/adapter'
 import ReactFilestack from 'filestack-react';
 import keys from '../../keys'
+import { addPost } from '../../actions/posts'
 
 class NewPostForm extends React.Component {
   state = {
@@ -18,8 +19,7 @@ class NewPostForm extends React.Component {
       body: this.state.body,
       image_url: this.state.url
     }
-    api.postNewPost(newPost)
-      .then(res => console.log(res))
+    this.props.addPost(newPost)
   }
 
   onInputChange = (e, value) => {
@@ -74,4 +74,4 @@ const mapStateToProps = (state) => {
   return { currentUser: state.userID }
 }
 
-export default connect(mapStateToProps)(NewPostForm)
+export default connect(mapStateToProps, { addPost })(NewPostForm)

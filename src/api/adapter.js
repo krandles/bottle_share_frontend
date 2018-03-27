@@ -96,7 +96,7 @@ const api = {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(event)
-    })
+    }).then(res => res.json())
   },
 
   getAllInvitations: () => {
@@ -128,7 +128,7 @@ const api = {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(invitation)
-    })
+    }).then(res => res.json())
   },
 
   postNewPost: (post) => {

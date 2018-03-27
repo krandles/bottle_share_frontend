@@ -45,7 +45,7 @@ class InvitationItem extends React.Component {
     const i = this.props.invitation
     return (
       <Item>
-        <Item.Content>
+        <Item.Content className='invitation'>
           <Item.Header>{i.organizer} invited you to <Link to={`/events/${i.event_id}`}>{i.event}</Link> on {i.date}</Item.Header>
           <Button floated='right' onClick={this.handleEdit} >
             {this.state.status === 'pending' ? 'Respond' : 'Edit Response'}
@@ -67,7 +67,7 @@ class InvitationItem extends React.Component {
               />
               <Form.Input fluid name='comment' label='Comment' value={this.state.comment} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
               <Form.Input fluid name='contribution' label='What Are You Bringing To Share?' value={this.state.contribution} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-              <Form.Button type='submit'>Save Response</Form.Button>
+              <Form.Button floated='right' type='submit'>Save Response</Form.Button>
             </Form>
             :
             ''
