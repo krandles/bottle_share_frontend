@@ -8,11 +8,11 @@ import { logout, getCurrentUser } from '../actions/users'
 
 class Navigation extends React.Component {
 
-  // componentDidMount() {
-  //   if (localStorage.getItem("token")) {
-  //     this.props.getCurrentUser(this.props.userID)
-  //   }
-  // }
+  componentDidMount() {
+    if (localStorage.getItem("token")) {
+      this.props.getCurrentUser(this.props.userID)
+    }
+  }
 
   render() {
       return (
@@ -27,6 +27,7 @@ class Navigation extends React.Component {
                 content={<div>
                            {/* <Button.Group vertical>
                             <Button><Link to="/account" >My Account</Link></Button> */}
+                            <h4>{this.props.currentUser.name}</h4>
                             <Button onClick={() => this.props.logout(this.props.history)} >Logout</Button>
                            {/* </Button.Group> */}
                          </div>

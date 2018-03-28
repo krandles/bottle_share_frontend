@@ -7,6 +7,12 @@ const initialState = {
   loggedIn: false,
   userName: '',
   userID: '',
+  currentUser : {
+    id: null,
+    name: "",
+    invitations: [],
+    events: []
+  },
   users: [],
   events: []
 }
@@ -15,7 +21,7 @@ const refactored = {
   loggedIn: false,
   currentUser : {
     id: null,
-    userName: "",
+    name: "",
     invitations: [],
     events: []
   },
