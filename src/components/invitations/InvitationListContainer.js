@@ -3,12 +3,13 @@ import InvitationList from './InvitationList'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import { getCurrentUser } from '../../actions/users'
+import { Dimmer, Loader } from 'semantic-ui-react'
 
 class InvitationListContainer extends React.Component {
   
   render() {
 
-    if (this.props.currentUser) {
+    if (localStorage.getItem("token")) {
       return (
         <div className="main-content">
           {this.props.loggedIn ?
@@ -18,17 +19,20 @@ class InvitationListContainer extends React.Component {
           }
         </div>
       )
-    } else {
-      return (
-        <div>
-          {this.props.loggedIn ?
-            <h1>Loading</h1>
-            :
-            <Redirect to="/login" />
-          }
-        </div>
-      )
-    }
+    } 
+    // else {
+    //   return (
+    //     <div>
+    //       {this.props.loggedIn ?
+    //         <Dimmer active inverted>
+    //           <Loader inverted>Loading</Loader>
+    //         </Dimmer>
+    //         :
+    //         <Redirect to="/login" />
+    //       }
+    //     </div>
+    //   )
+    // }
   }
 }
 

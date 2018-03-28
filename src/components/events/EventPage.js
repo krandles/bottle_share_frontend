@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Divider, Dimmer, Form, Icon, Loader } from 'semantic-ui-react'
 import EventItem from './EventItem'
 import NewPostForm from '../posts/NewPostForm'
 import PostList from '../posts/PostList'
@@ -68,6 +68,7 @@ class EventPage extends React.Component {
       const contentPane = this.state.discussion ? (
         <div>
           <NewPostForm eventID={this.props.currentEvent.id} />
+          <Divider clearing hidden/>
           <PostList allPosts={this.props.currentEvent.posts} />
         </div>
       )
@@ -79,11 +80,15 @@ class EventPage extends React.Component {
       return (
         <div className="main-content">
           <EventItem event={this.props.currentEvent} />
+          <Divider section hidden />
           {this.props.userID === this.props.currentEvent.organizer_id ?
-            <Button.Group widths="2">
-              <Button as={Link} to={`/events/${this.props.match.params.id}/edit`}>Edit Event Details</Button>
-              <Button onClick={this.showInviteForm} >Invite More Friends</Button>
-            </Button.Group>
+            <div>
+              <Button.Group widths="2">
+                <Button basic color='blue' as={Link} to={`/events/${this.props.match.params.id}/edit`}><Icon name='edit'/>Edit Event Details</Button>
+                <Button basic color='blue' onClick={this.showInviteForm} ><Icon name='add user'/>Invite More Friends</Button>
+              </Button.Group>
+              <Divider hidden />
+            </div>
             :
             null
           }
@@ -96,15 +101,19 @@ class EventPage extends React.Component {
             null
           }
           <iframe title="map" width="100%" height="300" frameBorder="0" style={{border:0}} src={`${this.props.currentEvent.map_url + keys.googleMapsKey}`} allowFullScreen></iframe>
+          <Divider hidden />
           <Button.Group widths="2">
-            <Button className={this.state.discussion ? 'active' : ''} onClick={() => this.setDiscussion(true)}>Discussion</Button>
-            <Button className={this.state.discussion ? '' : 'active'} onClick={() => this.setDiscussion(false)}>See Who's Going</Button>
+            <Button color='blue' className={this.state.discussion ? 'active' : 'basic'} onClick={() => this.setDiscussion(true)}><Icon name='talk outline'/>DISCUSSION</Button>
+            <Button color='blue' className={this.state.discussion ? 'basic' : 'active'} onClick={() => this.setDiscussion(false)}><Icon name='users'/>SEE WHO'S GOING</Button>
           </Button.Group>
+          <Divider hidden />
           { contentPane }
         </div>
       )
     } else {
-      return <h1>Loading</h1>
+      return <Dimmer active inverted>
+               <Loader inverted>Loading</Loader>
+             </Dimmer>
     }    
   }
 }

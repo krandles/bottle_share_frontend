@@ -17,10 +17,10 @@ class AttendeesList extends React.Component {
     return (
       <div>
         <Button.Group widths="4">
-          <Button className={this.state.content === "confirmed" ? 'active' : '' } onClick={() => this.setContent("confirmed")}>Confirmed</Button>
-          <Button className={this.state.content === "declined" ? 'active' : '' } onClick={() => this.setContent("declined")}>Declined</Button>
-          <Button className={this.state.content === "maybe" ? 'active' : '' } onClick={() => this.setContent("maybe")}>Maybe</Button>
-          <Button className={this.state.content === "pending" ? 'active' : '' } onClick={() => this.setContent("pending")}>Awaiting Response</Button>
+          <Button color='green' className={this.state.content === "confirmed" ? 'active' : 'basic' } onClick={() => this.setContent("confirmed")}>Confirmed</Button>
+          <Button color='yellow' className={this.state.content === "maybe" ? 'active' : 'basic' } onClick={() => this.setContent("maybe")}>Maybe</Button>
+          <Button color='red' className={this.state.content === "declined" ? 'active' : 'basic' } onClick={() => this.setContent("declined")}>Declined</Button>
+          <Button color='blue' className={this.state.content === "pending" ? 'active' : 'basic' } onClick={() => this.setContent("pending")}>Awaiting Response</Button>
         </Button.Group>
         <List>
           {this.state.content === "confirmed" ? confirmed.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}

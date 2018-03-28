@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  
 }
 
 .main-content {
@@ -9,13 +10,15 @@
   left: 50%;
   margin-bottom: 100px;
   transform: translate(-50%);
+  
 }
 
-.user {
+.avatar {
   position: relative;
   top: 50%;
   right: 50%;
   transform: translate(30%, -50%);
+  color: white;
 }
 
 body {
@@ -69,3 +72,4 @@ div.meta {
 .ui.items>.item>.content>.header.invitation {
   font-weight: 400;
 }
+

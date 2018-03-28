@@ -16,14 +16,14 @@ class Navigation extends React.Component {
 
   render() {
       return (
-        <Menu className="fixed top">
+        <Menu inverted color='blue' className="fixed top">
           <Menu.Item name="home" as={NavLink} exact to="/" >Home</Menu.Item>
           <Menu.Item name="events" as={NavLink} exact to="/events" >Events</Menu.Item>
           <Menu.Item name="invitations" as={NavLink} exact to="/invitations" >Invitations</Menu.Item>
-          <div className="top right menu avatar">
+          <div className="top right menu">
             {this.props.loggedIn ?
               <Popup 
-                trigger={<Icon name="user circle" size="big"/>}
+                trigger={<Icon className='avatar' name="user circle" size="big"/>}
                 content={<div>
                            {/* <Button.Group vertical>
                             <Button><Link to="/account" >My Account</Link></Button> */}

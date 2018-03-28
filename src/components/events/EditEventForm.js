@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { getEvent, patchEvent } from  '../../actions/events'
 import { Form } from 'semantic-ui-react'
 import { stateOptions } from './stateOptions'
-import api from '../../api/adapter'
 
 class EditEventForm extends React.Component {
   state = { currentEvent: {}}
