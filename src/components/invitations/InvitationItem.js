@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Item } from 'semantic-ui-react'
+import { Button, Divider, Form, Item } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import api from '../../api/adapter'
 
@@ -43,10 +43,13 @@ class InvitationItem extends React.Component {
   
   render() {
     const i = this.props.invitation
+    const eventDate = new Date(i.date)
+    const dateOptions = { timeZone: 'UTC', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+
     return (
       <Item>
         <Item.Content className='invitation'>
-          <Item.Header>{i.organizer} invited you to <Link to={`/events/${i.event_id}`}>{i.event}</Link> on {i.date}</Item.Header>
+          <Item.Header>{i.organizer} invited you to <Link to={`/events/${i.event_id}`}>{i.event}</Link><br/> on {eventDate.toLocaleDateString('en-US', dateOptions)}</Item.Header>
           <Button floated='right' onClick={this.handleEdit} >
             {this.state.status === 'pending' ? 'Respond' : 'Edit Response'}
           </Button>
@@ -72,6 +75,7 @@ class InvitationItem extends React.Component {
             :
             ''
           }
+          <Divider />
         </Item.Content>
       </Item>
     )

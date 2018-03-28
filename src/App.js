@@ -37,7 +37,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/"
             render={(routerProps) => {
-              return <div className="App">
+              return <div className="app">
                 <DashboardContainer {...routerProps}/>
               </div>}
             }
@@ -50,11 +50,21 @@ class App extends Component {
               </div>}
             }
           />
-          <Route exact path="/events/new" render={(routerProps) => <NewEventForm {...routerProps} />} />
-          <Route exact path="/events" render={(routerProps) => <EventListContainer {...routerProps} />} />
-          <Route exact path="/events/:id" render={(routerProps) => <EventPage {...routerProps} event={this.props.currentEvent} />} />
-          <Route path="/events/:id/edit" render={(routerProps) => <EditEventForm {...routerProps} event={this.props.currentEvent}/>} />
-          <Route exact path="/invitations" render={(routerProps) => <InvitationListContainer {...routerProps} />} />
+          <Route exact path="/events/new"
+            render={(routerProps) => <NewEventForm {...routerProps} />}
+          />
+          <Route exact path="/events" 
+            render={(routerProps) => <EventListContainer {...routerProps} />}
+          />
+          <Route exact path="/events/:id"
+            render={(routerProps) => <EventPage {...routerProps} event={this.props.currentEvent} />}
+          />
+          <Route path="/events/:id/edit"
+            render={(routerProps) => <EditEventForm {...routerProps} event={this.props.currentEvent}/>}
+          />
+          <Route exact path="/invitations"
+            render={(routerProps) => <InvitationListContainer {...routerProps} />}
+          />
         </Switch>
       </div>
     );
@@ -62,7 +72,13 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { loggedIn: state.loggedIn, userID: state.userID, events: state.events, currentEvent: state.currentEvent, currentUser: state.currentUser }
+  return {
+    loggedIn: state.loggedIn,
+    userID: state.userID,
+    events: state.events,
+    currentEvent: state.currentEvent,
+    currentUser: state.currentUser
+  }
 }
 
 export default withRouter(connect(mapStateToProps, { findUser, getCurrentUser, getEvents })(App))

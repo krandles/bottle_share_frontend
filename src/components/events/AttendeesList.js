@@ -14,6 +14,7 @@ class AttendeesList extends React.Component {
     const declined = invitations.filter(i => i.status === "declined")
     const maybe = invitations.filter(i => i.status === "maybe")
     const pending = invitations.filter(i => i.status === "pending")
+    
     return (
       <div>
         <Button.Group widths="4">

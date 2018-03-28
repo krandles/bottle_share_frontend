@@ -2,37 +2,40 @@ import React from 'react'
 import InvitationList from './InvitationList'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
-import { getCurrentUser } from '../../actions/users'
+import { findUser, getCurrentUser } from '../../actions/users'
 import { Dimmer, Loader } from 'semantic-ui-react'
 
 class InvitationListContainer extends React.Component {
   
+  componentDidMount() {
+    if (localStorage.getItem("token")) {
+      this.props.findUser(localStorage.getItem("token"))
+        .then(res => {
+          this.props.getCurrentUser(res.payload.user.id)
+          // this.props.getEvents()
+        }
+      )
+    }
+  }
+
   render() {
 
-    if (localStorage.getItem("token")) {
+    if (this.props.currentUser) {
       return (
         <div className="main-content">
-          {this.props.loggedIn ?
             <InvitationList invitations={this.props.currentUser.invitations} />
-            :
-            <Redirect to="/login" />
-          }
         </div>
       )
     } 
-    // else {
-    //   return (
-    //     <div>
-    //       {this.props.loggedIn ?
-    //         <Dimmer active inverted>
-    //           <Loader inverted>Loading</Loader>
-    //         </Dimmer>
-    //         :
-    //         <Redirect to="/login" />
-    //       }
-    //     </div>
-    //   )
-    // }
+    else {
+      return (
+        <div>
+          <Dimmer active inverted>
+            <Loader inverted>Loading</Loader>
+          </Dimmer>
+        </div>
+      )
+    }
   }
 }
 
@@ -44,4 +47,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getCurrentUser })(InvitationListContainer)
+export default connect(mapStateToProps, { getCurrentUser, findUser })(InvitationListContainer)
