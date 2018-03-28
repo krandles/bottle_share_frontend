@@ -85,7 +85,7 @@ class EventPage extends React.Component {
             <div>
               <Button.Group widths="2">
                 <Button basic color='blue' as={Link} to={`/events/${this.props.match.params.id}/edit`}><Icon name='edit'/>Edit Event Details</Button>
-                <Button basic color='blue' onClick={this.showInviteForm} ><Icon name='add user'/>Invite More Friends</Button>
+                <Button color='blue' className={this.state.addInvites ? 'active' : 'basic'} onClick={this.showInviteForm} ><Icon name='add user'/>Invite More Friends</Button>
               </Button.Group>
               <Divider hidden />
             </div>
@@ -95,7 +95,8 @@ class EventPage extends React.Component {
           {this.state.addInvites ?
             <Form onSubmit={this.postInvitations} >
               <Form.Select fluid multiple search selection options={uninvitedUsers} label="Who's Invited?" value={this.state.invitees} onChange={(event, {value}) => {this.handleInviteesChange(value)}} />
-              <Form.Button fluid type='submit'>Save Invitations</Form.Button>
+              <Form.Button color='blue' fluid type='submit'>Save Invitations</Form.Button>
+              <Divider hidden />
             </Form>
             :
             null

@@ -8,26 +8,20 @@ import { Dimmer, Loader } from 'semantic-ui-react'
 class InvitationListContainer extends React.Component {
   
   componentDidMount() {
-    if (localStorage.getItem("token")) {
-      this.props.findUser(localStorage.getItem("token"))
-        .then(res => {
-          this.props.getCurrentUser(res.payload.user.id)
-          // this.props.getEvents()
-        }
-      )
+    if (!localStorage.getItem("token")) {
+      this.props.history.push('/login')
     }
   }
 
   render() {
-
-    if (this.props.currentUser) {
+    
+    if (this.props.currentUser.invitations) {
       return (
         <div className="main-content">
             <InvitationList invitations={this.props.currentUser.invitations} />
         </div>
       )
-    } 
-    else {
+    } else {
       return (
         <div>
           <Dimmer active inverted>

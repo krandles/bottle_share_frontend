@@ -4,6 +4,7 @@ import './css/App.css';
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { findUser, getCurrentUser } from './actions/users'
 import { getEvents } from  './actions/events'
+import { Divider, Grid } from 'semantic-ui-react'
 
 import Navigation from './components/Navigation'
 import LoginForm from './components/login/LoginForm'
@@ -38,16 +39,28 @@ class App extends Component {
           <Route exact path="/"
             render={(routerProps) => {
               return <div className="app">
-                <DashboardContainer {...routerProps}/>
-              </div>}
+                       <DashboardContainer {...routerProps}/>
+                     </div>}
             }
           />
           <Route exact path="/login"
             render={(routerProps) => {
-              return <div className="login main-content">
-                <LoginForm {...routerProps}/>
-                <SignupForm {...routerProps}/>
-              </div>}
+              return (
+                <Grid   className='main-content'>
+                  <Grid.Column width={10} className="login-content">
+                    <h2 className='login-title' >Welcome to Tapped Events</h2>
+                    <p>The event manager for beer lovers.</p>
+                    <p>Plan and discuss your next bottle share, or explore public events to meet others who share your love for the only beverage that matters.</p>
+                  </Grid.Column>
+                  <Grid.Column width={6} textAlign="center" className="login-signup">
+                    <LoginForm {...routerProps}/>
+                    <Divider hidden />
+                    <p>or</p>
+                    <Divider hidden />
+                    <SignupForm {...routerProps}/>
+                  </Grid.Column>
+                </Grid>
+              )}
             }
           />
           <Route exact path="/events/new"

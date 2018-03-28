@@ -43,7 +43,7 @@ class SignupForm extends React.Component {
   render() {
     return !this.props.loggedIn ? (
       <Modal
-        trigger={<Button to="#" className="item" onClick={this.handleOpen}>Sign Up</Button>}
+        trigger={<Button fluid basic color="blue" to="#" className="item" onClick={this.handleOpen}>Sign Up</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
       >
@@ -56,7 +56,7 @@ class SignupForm extends React.Component {
             <Form.Input label='Confirm Password:' type="password" name="confirmPassword" value={this.state.confirmPassword} onChange={this.onInputChange} />
             <Form.Input label='Location:' name="location" value={this.state.location} onChange={this.onInputChange}/>
             <Form.Input label='ZIP Code:' name="zipCode" value={this.state.zipCode} onChange={this.onInputChange} />
-            <Form.Button type="submit">Create Account</Form.Button>
+            <Form.Button color='blue' fluid type="submit">Create Account</Form.Button>
           </Form>
         </Modal.Content>
       </Modal>

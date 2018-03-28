@@ -108,7 +108,7 @@ class EditEventForm extends React.Component {
             <Form.Input fluid name='zipCode' label='ZIP Code' value={eventDetails.zipCode} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
             <Form.Select fluid value={eventDetails.isPrivate} options={[{key: 'private', value: true, text: 'Private'}, {key: 'public', value: false, text: 'Public'}]} name='isPrivate' label='Event Type' onChange={(event, {value}) => {this.onInputChange("isPrivate", value)}} />
           </Form.Group>
-          <Form.Button type='submit'>Submit</Form.Button>
+          <Form.Button color='blue' floated='right' type='submit'>Save Changes</Form.Button>
         </Form>
       </div>
     )

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { login } from '../../actions/users'
 import { Redirect } from 'react-router'
-import { Form, Modal, Button } from 'semantic-ui-react'
+import { Form, Modal, Button, Divider } from 'semantic-ui-react'
 
 class LoginForm extends React.Component {
   state = {email: '', password: ''}
@@ -27,16 +27,16 @@ class LoginForm extends React.Component {
   render() {
     return !this.props.loggedIn ? (
       <Modal
-        trigger={<Button to="#" className="item" onClick={this.handleOpen}>Log In</Button>}
+        trigger={<Button fluid color="blue" to="#" className="item" onClick={this.handleOpen}>Log In</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
       >
-        <Modal.Header>Login</Modal.Header>
-        <Modal.Content>
+        <Modal.Header>Log In</Modal.Header>
+        <Modal.Content className='login-form'>
           <Form onSubmit={(event) => {this.onFormSubmit(event)}}>
             <Form.Input label='Email:' name="email" value={this.state.email} onChange={this.onInputChange}/>
             <Form.Input label='Password:' type="password" name="password" value={this.state.password} onChange={this.onInputChange} />
-            <Form.Button type="submit">Login</Form.Button>
+            <Form.Button color='blue' fluid type="submit">Submit</Form.Button>
           </Form>
         </Modal.Content>
       </Modal>

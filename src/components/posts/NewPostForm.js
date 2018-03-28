@@ -62,7 +62,7 @@ class NewPostForm extends React.Component {
           onSuccess={this.onSuccess}
           onError={this.onError}
         ><Icon name='photo'/>Add A Photo</ReactFilestack>
-        <Form.Button basic color='blue' floated='right' type='submit'>Submit Post</Form.Button>
+        <Form.Button color='blue' floated='right' type='submit'>Submit Post</Form.Button>
       </Form>
     )
   }

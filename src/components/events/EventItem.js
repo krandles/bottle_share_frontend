@@ -14,13 +14,13 @@ class EventItem extends React.Component {
       <Item className="ui">
         <Item.Content>
           <Item.Header className='event-title'><Link to={`/events/${this.props.event.id}`}>{this.props.event.title.toUpperCase()}</Link></Item.Header>
-          <Divider hidden />
+          <Divider />
           <Item.Meta>
-            at <strong>{this.props.event.location}</strong> on {eventDate.toLocaleDateString('en-US', dateOptions)}
+            at <span className="location-subheader">{this.props.event.location}</span> on {eventDate.toLocaleDateString('en-US', dateOptions)}
           </Item.Meta>
           <Divider hidden />
-          <Item.Description>{this.props.event.description}</Item.Description>
-          
+          <Item.Description width='10' >{this.props.event.description}</Item.Description>
+          <Divider hidden />
         </Item.Content>
       </Item>
     )

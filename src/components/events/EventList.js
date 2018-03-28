@@ -1,13 +1,21 @@
 import React from 'react';
-import { Item } from 'semantic-ui-react'
+import { Dimmer, Item, Loader } from 'semantic-ui-react'
 import EventItem from './EventItem'
 
 const EventList = (props) => {
-  return <Item.Group divided>
-    {props.allEvents.map(e => {
-      return <EventItem key={e.id} event={e} />
-    })}
-  </Item.Group>
+  if (props.allEvents) {
+    return <Item.Group >
+      {props.allEvents.map(e => {
+        return <EventItem key={e.id} event={e} />
+      })}
+    </Item.Group>
+  } else {
+    return (
+      <Dimmer active inverted>
+        <Loader inverted>Loading</Loader>
+      </Dimmer>
+    )
+  }
 }
 
 export default EventList

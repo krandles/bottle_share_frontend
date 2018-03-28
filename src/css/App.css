@@ -1,6 +1,30 @@
 .App {
-  text-align: center;
-  
+  text-align: center; 
+}
+
+.ui.menu .item>img:not(.ui) {
+  width: 80px;
+}
+.ui.inverted.blue.menu {
+  height: 60px;
+}
+
+.location-subheader {
+  color: #333;
+}
+
+.login-content {
+  position: relative;
+  top: 5vw;
+}
+
+.login-signup {
+  position: relative;
+  top: 5vw;
+}
+
+.login-form {
+  padding-bottom: 10px;
 }
 
 .main-content {
@@ -19,6 +43,18 @@
   right: 50%;
   transform: translate(30%, -50%);
   color: white;
+}
+
+h3.section-header {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+h2.login-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 body {
@@ -50,6 +86,11 @@ body {
 
 .ui.items>.item>.content>.description {
   font-size: 16px;
+  max-width: 75%
+}
+
+div.description {
+  max-width: 75%
 }
 
 .ui.menu {

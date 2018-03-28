@@ -17,18 +17,19 @@ class Navigation extends React.Component {
   render() {
       return (
         <Menu inverted color='blue' className="fixed top">
-          <Menu.Item name="home" as={NavLink} exact to="/" >Home</Menu.Item>
+          <Menu.Item name="home" as={NavLink} exact to="/" ><img className="nav-logo" src="../img/logo.svg" alt="logo"/></Menu.Item>
           <Menu.Item name="events" as={NavLink} exact to="/events" >Events</Menu.Item>
           <Menu.Item name="invitations" as={NavLink} exact to="/invitations" >Invitations</Menu.Item>
           <div className="top right menu">
             {this.props.loggedIn ?
-              <Popup 
+              <Popup
+                horizontalOffset={3}
                 trigger={<Icon className='avatar' name="user circle" size="big"/>}
-                content={<div>
+                content={<div className='user-popup'>
                            {/* <Button.Group vertical>
                             <Button><Link to="/account" >My Account</Link></Button> */}
                             <h4>{this.props.currentUser.name}</h4>
-                            <Button onClick={() => this.props.logout(this.props.history)} >Logout</Button>
+                            <Button basic fluid color='red' onClick={() => this.props.logout(this.props.history)} >Logout</Button>
                            {/* </Button.Group> */}
                          </div>
                         }

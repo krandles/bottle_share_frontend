@@ -50,7 +50,7 @@ class InvitationItem extends React.Component {
       <Item>
         <Item.Content className='invitation'>
           <Item.Header>{i.organizer} invited you to <Link to={`/events/${i.event_id}`}>{i.event}</Link><br/> on {eventDate.toLocaleDateString('en-US', dateOptions)}</Item.Header>
-          <Button floated='right' onClick={this.handleEdit} >
+          <Button color='blue' className={this.state.editing ? 'basic' : '' } floated='right' onClick={this.handleEdit} >
             {this.state.status === 'pending' ? 'Respond' : 'Edit Response'}
           </Button>
           {i.status === 'pending' ? null : <Item.Meta>Your Response: {i.status.charAt(0).toUpperCase() + i.status.slice(1)}</Item.Meta>}
@@ -70,12 +70,12 @@ class InvitationItem extends React.Component {
               />
               <Form.Input fluid name='comment' label='Comment' value={this.state.comment} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
               <Form.Input fluid name='contribution' label='What Are You Bringing To Share?' value={this.state.contribution} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-              <Form.Button floated='right' type='submit'>Save Response</Form.Button>
+              <Form.Button color='blue' floated='right' type='submit'>Save Response</Form.Button>
             </Form>
             :
             ''
           }
-          <Divider />
+          <Divider clearing />
         </Item.Content>
       </Item>
     )

@@ -1,7 +1,7 @@
 import React from 'react';
 import EventList from './EventList'
 import { connect } from 'react-redux'
-import { Button } from 'semantic-ui-react'
+import { Button, Dimmer, Loader } from 'semantic-ui-react'
 import moment from 'moment'
 
 class EventListContainer extends React.Component {
@@ -10,14 +10,11 @@ class EventListContainer extends React.Component {
     eventsToShow: "mine"
   }
 
-  // componentDidMount() {
-  //   if (this.props.allEvents) {
-  //     this.setState({
-  //       ...this.state,
-  //       publicEvents: this.props.allEvents.filter(e => e.private === false)
-  //     })
-  //   }  
-  // }
+  componentDidMount() {
+    if (!localStorage.getItem("token")) {
+      this.props.history.push('/login')
+    }
+  }
 
   setEvents = (value) => {
     this.setState({...this.state, eventsToShow: value})
@@ -28,23 +25,39 @@ class EventListContainer extends React.Component {
     const momentEvent = moment(date).endOf('day')
     return momentEvent >= momentToday
   }
+
+  invitationUsers = (e) => {
+    const users = e.invitations.map(i => i.user_id)
+    console.log(users)
+    return users
+  }
   
   render() {
 
-    // const publicEvents = this.props.allEvents.filter(e => e.private === false)
-    // debugger
-    return (
-      <div className='main-content'>
-        <Button.Group widths='3'>
-          <Button color='blue' className={this.state.eventsToShow === "mine" ? 'active' : 'basic'} onClick={() => this.setEvents("mine")}>Upcoming Events</Button>
-          <Button color='blue' className={this.state.eventsToShow === "public" ? 'active' : 'basic'} onClick={() => this.setEvents("public")}>Browse Public Events</Button>
-          <Button color='blue' className={this.state.eventsToShow === "past" ? 'active' : 'basic'} onClick={() => this.setEvents("past")}>Past Events</Button>
-        </Button.Group>
-        {this.state.eventsToShow === "mine" ? <EventList allEvents={this.props.allEvents.filter(e => (e.organizer_id === this.props.userID || e.invitations.map(i => i.userID ).includes(this.props.userID)) && this.isFutureDate(e.date))} /> : null }
-        {this.state.eventsToShow === "public" ? <EventList allEvents={this.props.allEvents.filter(e => e.private === false)} /> : null }
-        {this.state.eventsToShow === "past" ? <EventList allEvents={this.props.allEvents.filter(e => (e.organizer_id === this.props.userID || e.invitations.map(i => i.userID ).includes(this.props.userID)) && !this.isFutureDate(e.date) )} /> : null }
-      </div>
-    )
+    if (this.state.eventsToShow) {
+      return (
+        <div className='main-content'>
+          <Button.Group widths='3'>
+            <Button color='blue'
+              className={this.state.eventsToShow === "mine" ? 'active' : 'basic'}
+              onClick={() => this.setEvents("mine")}>
+                Upcoming Events
+              </Button>
+            <Button color='blue' className={this.state.eventsToShow === "public" ? 'active' : 'basic'} onClick={() => this.setEvents("public")}>Browse Public Events</Button>
+            <Button color='blue' className={this.state.eventsToShow === "past" ? 'active' : 'basic'} onClick={() => this.setEvents("past")}>Past Events</Button>
+          </Button.Group>
+          {this.state.eventsToShow === "mine" ? <EventList allEvents={this.props.allEvents.filter(e => (e.organizer_id === this.props.userID || this.invitationUsers(e).includes(this.props.userID)) && this.isFutureDate(e.date))} /> : null }
+          {this.state.eventsToShow === "public" ? <EventList allEvents={this.props.allEvents.filter(e => e.private === false && this.isFutureDate(e.date) )} /> : null }
+          {this.state.eventsToShow === "past" ? <EventList allEvents={this.props.allEvents.filter(e => (e.organizer_id === this.props.userID || this.invitationUsers(e).includes(this.props.userID)) && !this.isFutureDate(e.date) )} /> : null }
+        </div>
+      )
+    } else {
+      return (
+        <Dimmer active inverted>
+          <Loader inverted>Loading</Loader>
+        </Dimmer>
+      )
+    }
   }
 }
 

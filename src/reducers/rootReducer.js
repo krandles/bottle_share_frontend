@@ -11,7 +11,8 @@ const initialState = {
     id: null,
     name: "",
     invitations: [],
-    events: []
+    events: [],
+    hosted_events: []
   },
   users: [],
   events: []
