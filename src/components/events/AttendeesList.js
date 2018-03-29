@@ -33,6 +33,10 @@ class AttendeesList extends React.Component {
               return (
                 <List.Item key={i.id}>
                   <List.Header>{i.invitee}</List.Header>
+                    <List.List bulleted>
+                      {i.comment ? <List.Item>Replied {`"${i.comment}"`}</List.Item> : null }
+                      {i.contribution ? <List.Item>Is bringing {`${i.contribution}`}</List.Item> : null }
+                    </List.List>
                 </List.Item>
               )
             })
@@ -44,6 +48,10 @@ class AttendeesList extends React.Component {
               return (
                 <List.Item key={i.id}>
                   <List.Header>{i.invitee}</List.Header>
+                  <List.List bulleted>
+                    {i.comment ? <List.Item>Replied {`"${i.comment}"`}</List.Item> : null }
+                    {i.contribution ? <List.Item>Is bringing {`${i.contribution}`}</List.Item> : null }
+                  </List.List>
                 </List.Item>
               )
             })
@@ -55,6 +63,10 @@ class AttendeesList extends React.Component {
               return (
                 <List.Item key={i.id}>
                   <List.Header>{i.invitee}</List.Header>
+                  <List.List bulleted>
+                    {i.comment ? <List.Item>Replied {`"${i.comment}"`}</List.Item> : null }
+                    {i.contribution ? <List.Item>Is bringing {`${i.contribution}`}</List.Item> : null }
+                  </List.List>
                 </List.Item>
               )
             })
@@ -66,6 +78,10 @@ class AttendeesList extends React.Component {
               return (
                 <List.Item key={i.id}>
                   <List.Header>{i.invitee}</List.Header>
+                  <List.List bulleted>
+                    {i.comment ? <List.Item>Replied {`"${i.comment}"`}</List.Item> : null }
+                    {i.contribution ? <List.Item>Is bringing {`${i.contribution}`}</List.Item> : null }
+                  </List.List>
                 </List.Item>
               )
             })
