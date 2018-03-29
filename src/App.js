@@ -7,6 +7,7 @@ import { getEvents } from  './actions/events'
 import { Divider, Grid } from 'semantic-ui-react'
 
 import Navigation from './components/Navigation'
+import Footer from './components/Footer'
 import LoginForm from './components/login/LoginForm'
 import SignupForm from './components/signup/SignupForm'
 import NewEventForm from './components/events/NewEventForm'
@@ -79,6 +80,7 @@ class App extends Component {
             render={(routerProps) => <InvitationListContainer {...routerProps} />}
           />
         </Switch>
+        <Footer />
       </div>
     );
   }

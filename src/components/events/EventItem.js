@@ -16,10 +16,11 @@ class EventItem extends React.Component {
           <Item.Header className='event-title'><Link to={`/events/${this.props.event.id}`}>{this.props.event.title.toUpperCase()}</Link></Item.Header>
           <Divider />
           <Item.Meta>
+            Hosted by <span className="location-subheader">{this.props.event.host}</span><br/><br/>
             at <span className="location-subheader">{this.props.event.location}</span> on {eventDate.toLocaleDateString('en-US', dateOptions)}
           </Item.Meta>
           <Divider hidden />
-          <Item.Description width='10' >{this.props.event.description}</Item.Description>
+          <Item.Description>{this.props.event.description}</Item.Description>
           <Divider hidden />
         </Item.Content>
       </Item>
