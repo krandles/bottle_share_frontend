@@ -18,12 +18,11 @@ class Dashboard extends React.Component {
 
   invitationUsers = (e) => {
     const users = e.invitations.map(i => i.user_id)
-    console.log(users)
     return users
   }
 
   render() {
-    const featuredEvents = this.props.events.filter(e => this.isThisWeek(e.date) && this.invitationUsers(e).includes(this.props.userID) )
+    const featuredEvents = this.props.events.filter(e => this.isThisWeek(e.date) && (this.invitationUsers(e).includes(this.props.userID) || e.organizer_id === this.props.userID))
     const pendingInvites = this.props.currentUser.invitations ? this.props.currentUser.invitations.filter(i => i.status === 'pending') : []
     return (
       <div className='main-content'>

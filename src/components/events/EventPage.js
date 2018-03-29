@@ -17,6 +17,7 @@ class EventPage extends React.Component {
   state = {
     discussion: true,
     addInvites: false,
+    rsvpDisabled: false,
     invitees: [],
     notInvited: []
   }
@@ -51,9 +52,21 @@ class EventPage extends React.Component {
     })
   }
 
+  mapInvitedIDs = (e) => {
+    return e.invitations.map(i => i.user_id)
+  } 
+
   filterInvites = (users) => {
     const currentAttendees = this.props.currentEvent.invitations.map(i => i.user_id)
     return users.filter(u => !currentAttendees.includes(u.value) && !(u.value === this.props.userID))
+  }
+
+  createInvitation = () => {
+    api.postNewInvitation({user_id: this.props.userID, event_id: this.props.currentEvent.id, status: 'confirmed'})
+    this.setState({
+      ...this.state,
+      rsvpDisabled: true
+    })
   }
     
   
@@ -87,6 +100,14 @@ class EventPage extends React.Component {
                 <Button basic color='blue' as={Link} to={`/events/${this.props.match.params.id}/edit`}><Icon name='edit'/>Edit Event Details</Button>
                 <Button color='blue' className={this.state.addInvites ? 'active' : 'basic'} onClick={this.showInviteForm} ><Icon name='add user'/>Invite More Friends</Button>
               </Button.Group>
+              <Divider hidden />
+            </div>
+            :
+            null
+          }
+          {(!(this.mapInvitedIDs(this.props.currentEvent).includes(this.props.userID)) && !(this.props.currentEvent.organizer_id === this.props.userID)) ?
+            <div>
+              <Button fluid color='blue' disabled={this.state.rsvpDisabled} onClick={this.createInvitation} >RSVP</Button>
               <Divider hidden />
             </div>
             :
