@@ -28,7 +28,6 @@ class EventListContainer extends React.Component {
 
   invitationUsers = (e) => {
     const users = e.invitations.map(i => i.user_id)
-    console.log(users)
     return users
   }
   

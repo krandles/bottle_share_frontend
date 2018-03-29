@@ -24,10 +24,54 @@ class AttendeesList extends React.Component {
           <Button color='blue' className={this.state.content === "pending" ? 'active' : 'basic' } onClick={() => this.setContent("pending")}>Awaiting Response</Button>
         </Button.Group>
         <List>
-          {this.state.content === "confirmed" ? confirmed.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
+          {/* {this.state.content === "confirmed" ? confirmed.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
           {this.state.content === "declined" ? declined.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
           {this.state.content === "maybe" ? maybe.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
-          {this.state.content === "pending" ? pending.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
+          {this.state.content === "pending" ? pending.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null} */}
+          {this.state.content === "confirmed" ?
+            confirmed.map(i => {
+              return (
+                <List.Item key={i.id}>
+                  <List.Header>{i.invitee}</List.Header>
+                </List.Item>
+              )
+            })
+            :
+            null
+          }
+          {this.state.content === "declined" ?
+            declined.map(i => {
+              return (
+                <List.Item key={i.id}>
+                  <List.Header>{i.invitee}</List.Header>
+                </List.Item>
+              )
+            })
+            :
+            null
+          }
+          {this.state.content === "maybe" ?
+            maybe.map(i => {
+              return (
+                <List.Item key={i.id}>
+                  <List.Header>{i.invitee}</List.Header>
+                </List.Item>
+              )
+            })
+            :
+            null
+          }
+          {this.state.content === "pending" ?
+            pending.map(i => {
+              return (
+                <List.Item key={i.id}>
+                  <List.Header>{i.invitee}</List.Header>
+                </List.Item>
+              )
+            })
+            :
+            null
+          }
         </List>
       </div>
     )
