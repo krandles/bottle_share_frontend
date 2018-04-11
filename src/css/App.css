@@ -18,6 +18,10 @@
   top: 5vw;
 }
 
+.login-content p {
+  width: 80%;
+}
+
 .login-signup {
   position: relative;
   top: 5vw;
@@ -28,7 +32,7 @@
 }
 
 .main-content {
-  width: 70%;
+  width: 60%;
   position: absolute;
   top: 100px;
   left: 50%;
@@ -139,4 +143,19 @@ div.meta {
 .ui.footer.segment {
   margin: 5em 0em 0em;
   padding: 5em 0em;
+}
+
+html {
+  height: 100%;
+}
+
+.site {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.sticky-footer {
+  grid-row-start: 2;
+  grid-row-end: 3;
 }

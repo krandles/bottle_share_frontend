@@ -34,7 +34,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className='site'>
         <Navigation history={this.props.history} />
         <Switch>
           <Route exact path="/"
@@ -80,7 +80,7 @@ class App extends Component {
             render={(routerProps) => <InvitationListContainer {...routerProps} />}
           />
         </Switch>
-        <Footer />
+        <Footer className='sticky-footer' />
       </div>
     );
   }
