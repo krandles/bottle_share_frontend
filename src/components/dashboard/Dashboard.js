@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Divider, Item } from 'semantic-ui-react'
+import { Button, Divider } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import EventList from '../events/EventList'

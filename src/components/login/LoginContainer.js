@@ -1,5 +1,4 @@
 import React from 'react';
-// import router from 'react-router-dom'
 import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
 import { Grid, Divider } from 'semantic-ui-react'

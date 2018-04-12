@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { login } from '../../actions/users'
 import { Redirect } from 'react-router'
-import { Form, Modal, Button, Divider } from 'semantic-ui-react'
+import { Form, Modal, Button } from 'semantic-ui-react'
 
 class LoginForm extends React.Component {
   state = {email: '', password: ''}

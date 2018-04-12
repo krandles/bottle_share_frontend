@@ -1,7 +1,6 @@
 import React from 'react'
 import InvitationList from './InvitationList'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router'
 import { findUser, getCurrentUser } from '../../actions/users'
 import { Dimmer, Loader } from 'semantic-ui-react'
 
