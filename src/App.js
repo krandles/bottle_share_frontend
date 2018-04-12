@@ -4,12 +4,11 @@ import './css/App.css';
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { findUser, getCurrentUser } from './actions/users'
 import { getEvents } from  './actions/events'
-import { Divider, Grid } from 'semantic-ui-react'
+
 
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
-import LoginForm from './components/login/LoginForm'
-import SignupForm from './components/signup/SignupForm'
+import LoginContainer from './components/login/LoginContainer'
 import NewEventForm from './components/events/NewEventForm'
 import EditEventForm from './components/events/EditEventForm'
 import DashboardContainer from './components/dashboard/DashboardContainer'
@@ -38,31 +37,10 @@ class App extends Component {
         <Navigation history={this.props.history} />
         <Switch>
           <Route exact path="/"
-            render={(routerProps) => {
-              return <div className="app">
-                       <DashboardContainer {...routerProps}/>
-                     </div>}
-            }
+            render={(routerProps) => <DashboardContainer {...routerProps}/>}
           />
           <Route exact path="/login"
-            render={(routerProps) => {
-              return (
-                <Grid   className='main-content'>
-                  <Grid.Column width={10} className="login-content">
-                    <h2 className='login-title' >Welcome to Tapped Events</h2>
-                    <p>The event manager for beer lovers.</p>
-                    <p>Plan and discuss your next bottle share, or explore public events to meet others who share your love for the only beverage that matters.</p>
-                  </Grid.Column>
-                  <Grid.Column width={6} textAlign="center" className="login-signup">
-                    <LoginForm {...routerProps}/>
-                    <Divider hidden />
-                    <p>or</p>
-                    <Divider hidden />
-                    <SignupForm {...routerProps}/>
-                  </Grid.Column>
-                </Grid>
-              )}
-            }
+            render={(routerProps) => <LoginContainer {...routerProps}/>}
           />
           <Route exact path="/events/new"
             render={(routerProps) => <NewEventForm {...routerProps} />}

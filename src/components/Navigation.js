@@ -18,6 +18,9 @@ class Navigation extends React.Component {
       return (
         <Menu inverted color='blue' className="fixed top">
           <Menu.Item name="home" as={NavLink} exact to="/" ><img className="nav-logo" src="../img/logo.svg" alt="logo"/></Menu.Item>
+          <Menu.Item name="beers" as={NavLink} exact to="/beers" >Beers</Menu.Item>
+          <Menu.Item name="breweries" as={NavLink} exact to="/breweries" >Breweries</Menu.Item>
+          <Menu.Item name="reviews" as={NavLink} exact to="/reviews" >Reviews</Menu.Item>
           <Menu.Item name="events" as={NavLink} exact to="/events" >Events</Menu.Item>
           <Menu.Item name="invitations" as={NavLink} exact to="/invitations" >Invitations</Menu.Item>
           <div className="top right menu">

@@ -24,7 +24,7 @@ class DashboardContainer extends React.Component {
 
   render() {
     return  (
-      <div>
+      <div className='app'>
         {this.props.loggedIn ?
           <Dashboard />
           :
