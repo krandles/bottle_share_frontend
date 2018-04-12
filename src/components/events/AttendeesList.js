@@ -14,22 +14,59 @@ class AttendeesList extends React.Component {
     const declined = invitations.filter(i => i.status === "declined")
     const maybe = invitations.filter(i => i.status === "maybe")
     const pending = invitations.filter(i => i.status === "pending")
+    let content = []
+
+    switch (this.state.content) {
+      case 'confirmed':
+        content = confirmed
+        break
+      case 'declined':
+        content = declined
+        break
+      case 'maybe':
+        content = maybe
+        break
+      case 'pending':
+        content = pending
+        break
+      default:
+        content = confirmed
+    }
     
     return (
       <div>
         <Button.Group widths="4">
-          <Button color='green' className={this.state.content === "confirmed" ? 'active' : 'basic' } onClick={() => this.setContent("confirmed")}>Confirmed</Button>
-          <Button color='yellow' className={this.state.content === "maybe" ? 'active' : 'basic' } onClick={() => this.setContent("maybe")}>Maybe</Button>
-          <Button color='red' className={this.state.content === "declined" ? 'active' : 'basic' } onClick={() => this.setContent("declined")}>Declined</Button>
-          <Button color='blue' className={this.state.content === "pending" ? 'active' : 'basic' } onClick={() => this.setContent("pending")}>Awaiting Response</Button>
+          <Button
+            color='green'
+            className={this.state.content === "confirmed" ? 'active' : 'basic' }
+            onClick={() => this.setContent("confirmed")}
+          >
+            Confirmed
+          </Button>
+          <Button
+            color='yellow'
+            className={this.state.content === "maybe" ? 'active' : 'basic' }
+            onClick={() => this.setContent("maybe")}
+          >
+            Maybe
+          </Button>
+          <Button
+            color='red'
+            className={this.state.content === "declined" ? 'active' : 'basic' }
+            onClick={() => this.setContent("declined")}
+          >
+            Declined
+          </Button>
+          <Button
+            color='blue'
+            className={this.state.content === "pending" ? 'active' : 'basic' }
+            onClick={() => this.setContent("pending")}
+          >
+            Awaiting Response
+          </Button>
         </Button.Group>
         <List>
-          {/* {this.state.content === "confirmed" ? confirmed.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
-          {this.state.content === "declined" ? declined.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
-          {this.state.content === "maybe" ? maybe.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null}
-          {this.state.content === "pending" ? pending.map(i => <List.Item key={i.id}>{i.invitee}</List.Item>) : null} */}
-          {this.state.content === "confirmed" ?
-            confirmed.map(i => {
+          {content.map(i => {
               return (
                 <List.Item key={i.id}>
                   <List.Header>{i.invitee}</List.Header>
@@ -40,53 +77,6 @@ class AttendeesList extends React.Component {
                 </List.Item>
               )
             })
-            :
-            null
-          }
-          {this.state.content === "declined" ?
-            declined.map(i => {
-              return (
-                <List.Item key={i.id}>
-                  <List.Header>{i.invitee}</List.Header>
-                  <List.List bulleted>
-                    {i.comment ? <List.Item>Replied {`"${i.comment}"`}</List.Item> : null }
-                    {i.contribution ? <List.Item>Is bringing {`${i.contribution}`}</List.Item> : null }
-                  </List.List>
-                </List.Item>
-              )
-            })
-            :
-            null
-          }
-          {this.state.content === "maybe" ?
-            maybe.map(i => {
-              return (
-                <List.Item key={i.id}>
-                  <List.Header>{i.invitee}</List.Header>
-                  <List.List bulleted>
-                    {i.comment ? <List.Item>Replied {`"${i.comment}"`}</List.Item> : null }
-                    {i.contribution ? <List.Item>Is bringing {`${i.contribution}`}</List.Item> : null }
-                  </List.List>
-                </List.Item>
-              )
-            })
-            :
-            null
-          }
-          {this.state.content === "pending" ?
-            pending.map(i => {
-              return (
-                <List.Item key={i.id}>
-                  <List.Header>{i.invitee}</List.Header>
-                  <List.List bulleted>
-                    {i.comment ? <List.Item>Replied {`"${i.comment}"`}</List.Item> : null }
-                    {i.contribution ? <List.Item>Is bringing {`${i.contribution}`}</List.Item> : null }
-                  </List.List>
-                </List.Item>
-              )
-            })
-            :
-            null
           }
         </List>
       </div>
