@@ -23,7 +23,10 @@ class EventPage extends React.Component {
   }
 
   setDiscussion = (content) => {
-    this.setState({...this.state, discussion: content})
+    this.setState({
+      ...this.state,
+      discussion: content
+    })
   }
 
   componentDidMount() {
@@ -34,15 +37,24 @@ class EventPage extends React.Component {
   }
 
   showInviteForm = () => {
-    this.setState({...this.state, addInvites: !this.state.addInvites})
+    this.setState({
+      ...this.state,
+      addInvites: !this.state.addInvites})
   }
 
   postInvitations = (e) => {
     e.preventDefault()
     this.state.invitees.forEach(invitee => {
-      api.postNewInvitation({user_id: invitee, event_id: this.props.currentEvent.id, status: 'pending'})
+      api.postNewInvitation({
+        user_id: invitee,
+        event_id: this.props.currentEvent.id,
+        status: 'pending'
+      })
     })
-    this.setState({ ...this.state, addInvites: false })
+    this.setState({
+      ...this.state,
+      addInvites: false
+    })
   }
 
   handleInviteesChange = (value) => {
@@ -58,22 +70,26 @@ class EventPage extends React.Component {
 
   filterInvites = (users) => {
     const currentAttendees = this.props.currentEvent.invitations.map(i => i.user_id)
-    return users.filter(u => !currentAttendees.includes(u.value) && !(u.value === this.props.userID))
+    return users.filter(u => (
+      !currentAttendees.includes(u.value)
+      && !(u.value === this.props.userID)
+    ))
   }
 
   createInvitation = () => {
-    api.postNewInvitation({user_id: this.props.userID, event_id: this.props.currentEvent.id, status: 'confirmed'})
+    api.postNewInvitation({
+      user_id: this.props.userID,
+      event_id: this.props.currentEvent.id,
+      status: 'confirmed'
+    })
     this.setState({
       ...this.state,
       rsvpDisabled: true
     })
   }
-    
-  
-  
+
   render() {
 
-    
     if (this.props.currentEvent && this.props.usersArray) {
 
       const uninvitedUsers = this.filterInvites(this.props.usersArray)
@@ -97,17 +113,40 @@ class EventPage extends React.Component {
           {this.props.userID === this.props.currentEvent.organizer_id ?
             <div>
               <Button.Group widths="2">
-                <Button basic color='blue' as={Link} to={`/events/${this.props.match.params.id}/edit`}><Icon name='edit'/>Edit Event Details</Button>
-                <Button color='blue' className={this.state.addInvites ? 'active' : 'basic'} onClick={this.showInviteForm} ><Icon name='add user'/>Invite More Friends</Button>
+                <Button
+                  basic
+                  color='blue'
+                  as={Link}
+                  to={`/events/${this.props.match.params.id}/edit`}
+                >
+                  <Icon name='edit'/>
+                  Edit Event Details
+                </Button>
+                <Button
+                  color='blue'
+                  className={this.state.addInvites ? 'active' : 'basic'}
+                  onClick={this.showInviteForm}
+                >
+                  <Icon name='add user'/>
+                  Invite More Friends
+                </Button>
               </Button.Group>
               <Divider hidden />
             </div>
             :
             null
           }
-          {(!(this.mapInvitedIDs(this.props.currentEvent).includes(this.props.userID)) && !(this.props.currentEvent.organizer_id === this.props.userID)) ?
+          {(!(this.mapInvitedIDs(this.props.currentEvent).includes(this.props.userID))
+            && !(this.props.currentEvent.organizer_id === this.props.userID)) ?
             <div>
-              <Button fluid color='blue' disabled={this.state.rsvpDisabled} onClick={this.createInvitation} >RSVP</Button>
+              <Button
+                fluid
+                color='blue'
+                disabled={this.state.rsvpDisabled}
+                onClick={this.createInvitation}
+              >
+                RSVP
+              </Button>
               <Divider hidden />
             </div>
             :
@@ -115,18 +154,55 @@ class EventPage extends React.Component {
           }
           {this.state.addInvites ?
             <Form onSubmit={this.postInvitations} >
-              <Form.Select fluid multiple search selection options={uninvitedUsers} label="Who's Invited?" value={this.state.invitees} onChange={(event, {value}) => {this.handleInviteesChange(value)}} />
-              <Form.Button color='blue' fluid type='submit'>Save Invitations</Form.Button>
+              <Form.Select
+                fluid
+                multiple
+                search
+                selection
+                options={uninvitedUsers}
+                label="Who's Invited?"
+                value={this.state.invitees}
+                onChange={(event, {value}) => {this.handleInviteesChange(value)}}
+              />
+              <Form.Button
+                fluid
+                color='blue'
+                type='submit'
+              >
+                Save Invitations
+              </Form.Button>
               <Divider hidden />
             </Form>
             :
             null
           }
-          <iframe title="map" width="100%" height="300" frameBorder="0" style={{border:0}} src={`${this.props.currentEvent.map_url + keys.googleMapsKey}`} allowFullScreen></iframe>
+          <iframe
+            title="map"
+            width="100%"
+            height="300"
+            frameBorder="0"
+            style={{border:0}}
+            src={`${this.props.currentEvent.map_url + keys.googleMapsKey}`}
+            allowFullScreen
+          />
           <Divider hidden />
           <Button.Group widths="2">
-            <Button color='blue' className={this.state.discussion ? 'active' : 'basic'} onClick={() => this.setDiscussion(true)}><Icon name='talk outline'/>DISCUSSION</Button>
-            <Button color='blue' className={this.state.discussion ? 'basic' : 'active'} onClick={() => this.setDiscussion(false)}><Icon name='users'/>SEE WHO'S GOING</Button>
+            <Button
+              color='blue'
+              className={this.state.discussion ? 'active' : 'basic'}
+              onClick={() => this.setDiscussion(true)}
+            >
+              <Icon name='talk outline'/>
+              DISCUSSION
+            </Button>
+            <Button
+              color='blue'
+              className={this.state.discussion ? 'basic' : 'active'}
+              onClick={() => this.setDiscussion(false)}
+            >
+              <Icon name='users'/>
+              SEE WHO'S GOING
+            </Button>
           </Button.Group>
           <Divider hidden />
           { contentPane }

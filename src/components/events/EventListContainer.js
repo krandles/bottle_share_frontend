@@ -49,17 +49,66 @@ class EventListContainer extends React.Component {
       return (
         <div className='main-content'>
           <Button.Group widths='3'>
-            <Button color='blue'
+            <Button
+              color='blue'
               className={this.state.eventsToShow === "mine" ? 'active' : 'basic'}
-              onClick={() => this.setEvents("mine")}>
-                Upcoming Events
-              </Button>
-            <Button color='blue' className={this.state.eventsToShow === "public" ? 'active' : 'basic'} onClick={() => this.setEvents("public")}>Browse Public Events</Button>
-            <Button color='blue' className={this.state.eventsToShow === "past" ? 'active' : 'basic'} onClick={() => this.setEvents("past")}>Past Events</Button>
+              onClick={() => this.setEvents("mine")}
+            >
+              Upcoming Events
+            </Button>
+            <Button
+              color='blue'
+              className={this.state.eventsToShow === "public" ? 'active' : 'basic'}
+              onClick={() => this.setEvents("public")}
+            >
+              Browse Public Events
+            </Button>
+            <Button
+              color='blue'
+              className={this.state.eventsToShow === "past" ? 'active' : 'basic'}
+              onClick={() => this.setEvents("past")}
+            >
+              Past Events
+            </Button>
           </Button.Group>
-          {this.state.eventsToShow === "mine" ? <EventList allEvents={this.sortEvents(this.props.allEvents.filter(e => (e.organizer_id === this.props.userID || this.invitationUsers(e).includes(this.props.userID)) && this.isFutureDate(e.date)), 'ascending')} /> : null }
-          {this.state.eventsToShow === "public" ? <EventList allEvents={this.sortEvents(this.props.allEvents.filter(e => e.private === false && this.isFutureDate(e.date)), 'ascending')} /> : null }
-          {this.state.eventsToShow === "past" ? <EventList allEvents={this.sortEvents(this.props.allEvents.filter(e => (e.organizer_id === this.props.userID || this.invitationUsers(e).includes(this.props.userID)) && !this.isFutureDate(e.date)), 'descending')} /> : null }
+          {this.state.eventsToShow === "mine" ?
+            <EventList
+              allEvents={this.sortEvents(
+                this.props.allEvents.filter(e => (
+                  e.organizer_id === this.props.userID
+                  || this.invitationUsers(e).includes(this.props.userID))
+                  && this.isFutureDate(e.date)),
+                'ascending'
+              )}
+            />
+            : 
+            null
+          }
+          {this.state.eventsToShow === "public" ?
+            <EventList
+              allEvents={this.sortEvents(
+                this.props.allEvents.filter(e => (
+                  e.private === false
+                  && this.isFutureDate(e.date))),
+                'ascending'
+              )}
+            />
+            :
+            null
+          }
+          {this.state.eventsToShow === "past" ?
+            <EventList 
+              allEvents={this.sortEvents(
+                this.props.allEvents.filter(e => (
+                  e.organizer_id === this.props.userID
+                  || this.invitationUsers(e).includes(this.props.userID))
+                  && !this.isFutureDate(e.date)),
+                'descending'
+              )}
+            />
+            :
+            null
+          }
         </div>
       )
     } else {

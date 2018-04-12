@@ -53,7 +53,11 @@ class NewEventForm extends React.Component {
       .then(res => {
         // console.log(res)
         details.invitees.forEach(invitee => {
-          api.postNewInvitation({user_id: invitee, event_id: res.payload.id, status: 'pending'})
+          api.postNewInvitation({
+            user_id: invitee,
+            event_id: res.payload.id,
+            status: 'pending'
+          })
         })
         this.props.history.push(`/events/${res.payload.id}`)
       })
@@ -70,25 +74,105 @@ class NewEventForm extends React.Component {
     return (
       <div className='main-content'>
         <Form onSubmit={this.onFormSubmit}>
-          <Form.Input name='title' label='Title' value={eventDetails.title} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-          <Form.TextArea rows={4} name='description' label='Description' value={eventDetails.description} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+          <Form.Input
+            name='title'
+            label='Title'
+            value={eventDetails.title}
+            onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+          />
+          <Form.TextArea
+            rows={4}
+            name='description'
+            label='Description'
+            value={eventDetails.description}
+            onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+          />
           <Form.Group widths='equal'>
-            <Form.Input fluid name='location' label='Location' value={eventDetails.location} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-            <Form.Input fluid name='date' label='Date' type='date' value={eventDetails.date} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+            <Form.Input
+              fluid
+              name='location'
+              label='Location'
+              value={eventDetails.location}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
+            <Form.Input
+              fluid
+              name='date'
+              label='Date'
+              type='date'
+              value={eventDetails.date}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
           </Form.Group>
           <Form.Group widths='equal'>
-            <Form.Input fluid name='address' label='Address' value={eventDetails.address} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-            <Form.Input fluid name='address2' label='Apt./Suite #' value={eventDetails.address2} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+            <Form.Input
+              fluid
+              name='address'
+              label='Address'
+              value={eventDetails.address}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
+            <Form.Input
+              fluid
+              name='address2'
+              label='Apt./Suite #'
+              value={eventDetails.address2}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
           </Form.Group>
           <Form.Group widths='equal'>
-            <Form.Input fluid name='city' label='City' value={eventDetails.city} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-            <Form.Select fluid search selection options={stateOptions} name='stateAbbr' label='State' onChange={(event, {value}) => {this.onInputChange("stateAbbr", value)}} />
+            <Form.Input
+              fluid
+              name='city'
+              label='City'
+              value={eventDetails.city}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
+            <Form.Select
+              fluid
+              search
+              selection
+              options={stateOptions}
+              name='stateAbbr'
+              label='State'
+              onChange={(event, {value}) => {this.onInputChange("stateAbbr", value)}}
+            />
           </Form.Group>
           <Form.Group widths='equal'>
-            <Form.Input fluid name='zipCode' label='ZIP Code' value={eventDetails.zipCode} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-            <Form.Select fluid options={[{key: 'private', value: true, text: 'Private'}, {key: 'public', value: false, text: 'Public'}]} name='isPrivate' label='Event Type' onChange={(event, {value}) => {this.onInputChange("isPrivate", value)}} />
+            <Form.Input
+              fluid
+              name='zipCode'
+              label='ZIP Code'
+              value={eventDetails.zipCode}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
+            <Form.Select
+              fluid
+              options={[{
+                key: 'private',
+                value: true,
+                text: 'Private'
+                },
+              {
+                key: 'public',
+                value: false,
+                text: 'Public'
+              }]}
+              name='isPrivate'
+              label='Event Type'
+              onChange={(event, {value}) => {this.onInputChange("isPrivate", value)}}
+            />
           </Form.Group>
-          <Form.Select fluid multiple search selection options={this.props.usersArray.filter(u => u.value !== this.props.organizer)} label="Who's Invited?" value={eventDetails.invitees} onChange={(event, {value}) => {this.onInputChange("invitees", value)}} />
+          <Form.Select
+            fluid
+            multiple
+            search
+            selection
+            options={this.props.usersArray.filter(u => u.value !== this.props.organizer)}
+            label="Who's Invited?"
+            value={eventDetails.invitees}
+            onChange={(event, {value}) => {this.onInputChange("invitees", value)}}
+          />
           <Form.Button type='submit'>Submit</Form.Button>
         </Form>
       </div>

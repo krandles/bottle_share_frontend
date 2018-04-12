@@ -6,28 +6,6 @@ import { stateOptions } from './stateOptions'
 
 class EditEventForm extends React.Component {
   state = { currentEvent: {}}
-  // state = {
-  //   eventDetails: {
-  //     title: this.props.currentEvent.title,
-  //     location: this.props.currentEvent.location,
-  //     date: this.props.currentEvent.date,
-  //     address: this.props.currentEvent.address,
-  //     address2: this.props.currentEvent.address2,
-  //     city: this.props.currentEvent.city,
-  //     stateAbbr: this.props.currentEvent.state,
-  //     zipCode: this.props.currentEvent.zip,
-  //     description: this.props.currentEvent.description,
-  //     isPrivate: this.props.currentEvent.private,
-  //     invitees: this.props.currentEvent.invitees
-  //   }
-  // }
-
-  // makeUsersList = () => this.setState({
-  //   usersArray:
-  //     this.props.users.map(user => {
-  //       return { key: user.id, text: user.name, value: user.id }
-  //   })
-  // })
 
   onInputChange = (name, value) => {
     this.setState({
@@ -64,20 +42,21 @@ class EditEventForm extends React.Component {
     if (localStorage.getItem("token")) {
       this.props.getEvent(this.props.match.params.id)
       .then(res => {
+        const e = this.props.currentEvent
         this.setState({
           ...this.state,
           currentEvent: {
-            id: this.props.currentEvent.id,
-            title: this.props.currentEvent.title,
-            location: this.props.currentEvent.location,
-            date: this.props.currentEvent.date,
-            address: this.props.currentEvent.address,
-            address2: this.props.currentEvent.address2,
-            city: this.props.currentEvent.city,
-            stateAbbr: this.props.currentEvent.state,
-            zipCode: this.props.currentEvent.zip,
-            description: this.props.currentEvent.description,
-            isPrivate: this.props.currentEvent.private
+            id: e.id,
+            title: e.title,
+            location: e.location,
+            date: e.date,
+            address: e.address,
+            address2: e.address2,
+            city: e.city,
+            stateAbbr: e.state,
+            zipCode: e.zip,
+            description: e.description,
+            isPrivate: e.private
           }
         })
       })
@@ -90,25 +69,102 @@ class EditEventForm extends React.Component {
     return (
       <div className='main-content'>
         <Form onSubmit={this.onFormSubmit}>
-          <Form.Input name='title' label='Title' value={eventDetails.title} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-          <Form.TextArea rows={4} name='description' label='Description' value={eventDetails.description} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+          <Form.Input
+            name='title'
+            label='Title'
+            value={eventDetails.title}
+            onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+          />
+          <Form.TextArea
+            rows={4}
+            name='description'
+            label='Description'
+            value={eventDetails.description}
+            onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+          />
           <Form.Group widths='equal'>
-            <Form.Input fluid name='location' label='Location' value={eventDetails.location} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-            <Form.Input fluid name='date' label='Date' type='date' value={eventDetails.date} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+            <Form.Input
+              fluid
+              name='location'
+              label='Location'
+              value={eventDetails.location}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
+            <Form.Input
+              fluid
+              name='date'
+              label='Date'
+              type='date'
+              value={eventDetails.date}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
           </Form.Group>
           <Form.Group widths='equal'>
-            <Form.Input fluid name='address' label='Address' value={eventDetails.address} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-            <Form.Input fluid name='address2' label='Apt./Suite #' value={eventDetails.address2} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
+            <Form.Input
+              fluid
+              name='address'
+              label='Address'
+              value={eventDetails.address}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
+            <Form.Input
+              fluid
+              name='address2'
+              label='Apt./Suite #'
+              value={eventDetails.address2}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
           </Form.Group>
           <Form.Group widths='equal'>
-            <Form.Input fluid name='city' label='City' value={eventDetails.city} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-            <Form.Select fluid search selection options={stateOptions} name='stateAbbr' label='State' value={eventDetails.stateAbbr} onChange={(event, {value}) => {this.onInputChange("stateAbbr", value)}} />
+            <Form.Input
+              fluid
+              name='city'
+              label='City'
+              value={eventDetails.city}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
+            <Form.Select
+              fluid
+              search
+              selection
+              name='stateAbbr'
+              label='State'
+              options={stateOptions}
+              value={eventDetails.stateAbbr}
+              onChange={(event, {value}) => {this.onInputChange("stateAbbr", value)}}
+            />
           </Form.Group>
           <Form.Group widths='equal'>
-            <Form.Input fluid name='zipCode' label='ZIP Code' value={eventDetails.zipCode} onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}} />
-            <Form.Select fluid value={eventDetails.isPrivate} options={[{key: 'private', value: true, text: 'Private'}, {key: 'public', value: false, text: 'Public'}]} name='isPrivate' label='Event Type' onChange={(event, {value}) => {this.onInputChange("isPrivate", value)}} />
+            <Form.Input
+              fluid
+              name='zipCode'
+              label='ZIP Code'
+              value={eventDetails.zipCode}
+              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            />
+            <Form.Select
+              fluid
+              name='isPrivate'
+              label='Event Type'
+              options={[
+                {
+                  key: 'private',
+                  value: true,
+                  text: 'Private'
+                }, 
+                {
+                  key: 'public',
+                  value: false,
+                  text: 'Public'
+                }
+              ]}
+              value={eventDetails.isPrivate}
+              onChange={(event, {value}) => {this.onInputChange("isPrivate", value)}}
+            />
           </Form.Group>
-          <Form.Button color='blue' floated='right' type='submit'>Save Changes</Form.Button>
+          <Form.Button color='blue' floated='right' type='submit'>
+            Save Changes
+          </Form.Button>
         </Form>
       </div>
     )
