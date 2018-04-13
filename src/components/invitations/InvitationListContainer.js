@@ -9,6 +9,12 @@ class InvitationListContainer extends React.Component {
   componentDidMount() {
     if (!localStorage.getItem("token")) {
       this.props.history.push('/login')
+    } else if (!this.props.currentUser) {
+      // TODO: check if this is still needed
+      this.props.findUser(localStorage.getItem("token"))
+        .then(res => {
+          this.props.getCurrentUser(res.payload.user.id)
+      })
     }
   }
 

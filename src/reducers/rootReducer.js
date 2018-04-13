@@ -31,7 +31,8 @@ function rootReducer(state=initialState, action) {
     case LOGIN:
       if (action.payload.token) {
         localStorage.setItem("token", action.payload.token)
-        return {...state,
+        return {
+          ...state,
           loggedIn: true,
           userName: action.payload.user.name,
           userID: action.payload.user.id
@@ -42,7 +43,8 @@ function rootReducer(state=initialState, action) {
       }
     case LOGOUT:
       localStorage.removeItem('token')
-      return {...state,
+      return {
+        ...state,
         loggedIn: false,
         userName: '',
         userID: '',
@@ -50,35 +52,42 @@ function rootReducer(state=initialState, action) {
       }
     case CREATE_USER:
       localStorage.setItem("token", action.payload.token)
-      return { ...state,
+      return {
+        ...state,
         loggedIn: true,
         userName: action.payload.user.name,
         userID: action.payload.user.id
       }
     case FIND_USER:
-      return { ...state,
+      return {
+        ...state,
         loggedIn: true,
         userName: action.payload.user.name,
         userID: action.payload.user.id
       }
     case GET_USERS:
-      return { ...state,
+      return {
+        ...state,
         users: action.payload
       }
     case GET_CURRENT_USER:
-      return { ...state,
+      return {
+        ...state,
         currentUser: action.payload
       }
     case GET_EVENTS:
-      return { ...state,
+      return {
+        ...state,
         events: action.payload
       }
     case GET_EVENT:
-      return { ...state,
+      return {
+        ...state,
         currentEvent: action.payload
       }
     case ADD_EVENT:
-      return { ...state,
+      return {
+        ...state,
         events: [
           ...state.events,
           action.payload
@@ -86,22 +95,26 @@ function rootReducer(state=initialState, action) {
       }
     case PATCH_EVENT:
       const events = state.events.filter(event => event.id !== action.payload.id)
-      return { ...state,
+      return {
+        ...state,
         events: [
           ...events,
           action.payload
         ]
       }
     case GET_BEERS:
-      return { ...state,
+      return {
+        ...state,
         beers: action.payload
       }
     case GET_BEER:
-      return { ...state,
+      return {
+        ...state,
         currentBeer: action.payload
       }
     case ADD_BEER:
-      return { ...state,
+      return {
+        ...state,
         beers: [
           ...state.beers,
           action.payload
@@ -109,22 +122,26 @@ function rootReducer(state=initialState, action) {
       }
     case PATCH_BEER:
       const beers = state.beers.filter(beer => beer.id !== action.payload.id)
-      return { ...state,
+      return {
+        ...state,
         beers: [
           ...beers,
           action.payload
         ]
       }
     case GET_BREWERIES:
-      return { ...state,
+      return {
+        ...state,
         breweries: action.payload
       }
     case GET_BREWERY:
-      return { ...state,
+      return {
+        ...state,
         currentBrewery: action.payload
       }
     case ADD_BREWERY:
-      return { ...state,
+      return {
+        ...state,
         breweries: [
           ...state.breweries,
           action.payload
@@ -132,18 +149,21 @@ function rootReducer(state=initialState, action) {
       }
     case PATCH_BREWERY:
       const breweries = state.breweries.filter(brewery => brewery.id !== action.payload.id)
-      return { ...state,
+      return {
+        ...state,
         breweries: [
           ...breweries,
           action.payload
         ]
       }
     case GET_POSTS:
-      return { ...state,
+      return {
+        ...state,
         posts: action.payload
       }
     case ADD_POST:
-      return { ...state,
+      return {
+        ...state,
         currentEvent: {
           ...state.currentEvent,
           posts: [
@@ -153,11 +173,13 @@ function rootReducer(state=initialState, action) {
         }
       }
     case GET_REVIEWS:
-      return { ...state,
+      return {
+        ...state,
         reviews: action.payload
       }
     case ADD_REVIEW:
-      return { ...state,
+      return {
+        ...state,
         currentBeer: {
           ...state.currentBeer,
           reviews: [
@@ -167,7 +189,8 @@ function rootReducer(state=initialState, action) {
         }
       }
     case GET_INVITATIONS:
-      return { ...state,
+      return {
+        ...state,
         invitations: action.payload
       }
     default:

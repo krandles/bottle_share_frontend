@@ -6,11 +6,11 @@ import { logout, getCurrentUser } from '../actions/users'
 
 class Navigation extends React.Component {
 
-  componentDidMount() {
-    if (localStorage.getItem("token")) {
-      this.props.getCurrentUser(this.props.userID)
-    }
-  }
+  // componentDidMount() {
+  //   if (localStorage.getItem("token")) {
+  //     this.props.getCurrentUser(this.props.userID)
+  //   }
+  // }
 
   render() {
     return (
