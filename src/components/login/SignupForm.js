@@ -43,20 +43,69 @@ class SignupForm extends React.Component {
   render() {
     return !this.props.loggedIn ? (
       <Modal
-        trigger={<Button fluid basic color="blue" to="#" className="item" onClick={this.handleOpen}>Sign Up</Button>}
+        trigger={
+          <Button
+            fluid
+            basic
+            color="blue"
+            to="#"
+            className="item"
+            onClick={this.handleOpen}
+          >
+            Sign Up
+          </Button>
+        }
         open={this.state.modalOpen}
         onClose={this.handleClose}
       >
         <Modal.Header>Sign Up</Modal.Header>
         <Modal.Content>
           <Form onSubmit={(event) => {this.onFormSubmit(event)}}>
-            <Form.Input label='Name:' name="name" value={this.state.name} onChange={this.onInputChange}/>
-            <Form.Input label='Email:' name="email" value={this.state.email} onChange={this.onInputChange}/>
-            <Form.Input label='Password:' type="password" name="password" value={this.state.password} onChange={this.onInputChange} />
-            <Form.Input label='Confirm Password:' type="password" name="confirmPassword" value={this.state.confirmPassword} onChange={this.onInputChange} />
-            <Form.Input label='Location:' name="location" value={this.state.location} onChange={this.onInputChange}/>
-            <Form.Input label='ZIP Code:' name="zipCode" value={this.state.zipCode} onChange={this.onInputChange} />
-            <Form.Button color='blue' fluid type="submit">Create Account</Form.Button>
+            <Form.Input
+              label='Name:'
+              name="name"
+              value={this.state.name}
+              onChange={this.onInputChange}
+            />
+            <Form.Input
+              label='Email:'
+              name="email"
+              value={this.state.email}
+              onChange={this.onInputChange}
+            />
+            <Form.Input
+              label='Password:'
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={this.onInputChange}
+            />
+            <Form.Input
+              label='Confirm Password:'
+              type="password"
+              name="confirmPassword"
+              value={this.state.confirmPassword}
+              onChange={this.onInputChange}
+            />
+            <Form.Input
+              label='Location:'
+              name="location"
+              value={this.state.location}
+              onChange={this.onInputChange}
+            />
+            <Form.Input
+              label='ZIP Code:'
+              name="zipCode"
+              value={this.state.zipCode}
+              onChange={this.onInputChange}
+            />
+            <Form.Button
+              fluid
+              color='blue'
+              type="submit"
+            >
+              Create Account
+            </Form.Button>
           </Form>
         </Modal.Content>
       </Modal>
