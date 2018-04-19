@@ -178,7 +178,7 @@ const api = {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(beer)
-    });
+    }).then(res => res.json());
   },
 
   getAllBreweries: () => {
@@ -205,7 +205,7 @@ const api = {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(brewery)
-    });
+    }).then(res => res.json());
   },
 
   getAllReviews: () => {

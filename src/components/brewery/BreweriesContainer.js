@@ -1,24 +1,34 @@
-import React from 'react'
-import BreweriesList from './BreweriesList'
-import NewBreweryModal from './NewBreweryModal'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Divider } from 'semantic-ui-react';
+import BreweriesList from './BreweriesList';
+import NewBreweryModal from './NewBreweryModal';
 
 class BreweriesContainer extends React.Component {
   state = {
 
   }
 
-  render () {
+  render() {
     return (
       <div className="ui text container main-section">
-        {this.props.loggedIn ? 
-            <NewBreweryModal addBreweryToList={this.props.addBreweryToList}/>
-          : null
-          }
-        <h1>Breweries</h1>
-        <BreweriesList breweries={this.props.breweries}/>
+        {this.props.loggedIn ?
+          <div>
+            <NewBreweryModal />
+            <Divider hidden />
+          </div>
+          :
+          null
+        }
+        <BreweriesList breweries={this.props.breweries} />
       </div>
-    )
+    );
   }
 }
 
-export default BreweriesContainer;
+const mapStateToProps = state => ({
+  breweries: state.breweries,
+  loggedIn: state.loggedIn
+});
+
+export default connect(mapStateToProps)(BreweriesContainer);

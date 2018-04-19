@@ -105,12 +105,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         beers: action.payload
-      }
+      };
     case GET_BEER:
       return {
         ...state,
         currentBeer: action.payload
-      }
+      };
     case ADD_BEER:
       return {
         ...state,
@@ -118,7 +118,7 @@ function rootReducer(state = initialState, action) {
           ...state.beers,
           action.payload
         ]
-      }
+      };
     case PATCH_BEER:
       const beers = state.beers.filter(beer => beer.id !== action.payload.id)
       return {
@@ -127,17 +127,17 @@ function rootReducer(state = initialState, action) {
           ...beers,
           action.payload
         ]
-      }
+      };
     case GET_BREWERIES:
       return {
         ...state,
         breweries: action.payload
-      }
+      };
     case GET_BREWERY:
       return {
         ...state,
         currentBrewery: action.payload
-      }
+      };
     case ADD_BREWERY:
       return {
         ...state,
@@ -145,7 +145,7 @@ function rootReducer(state = initialState, action) {
           ...state.breweries,
           action.payload
         ]
-      }
+      };
     case PATCH_BREWERY:
       const breweries = state.breweries.filter(brewery => brewery.id !== action.payload.id)
       return {
@@ -154,12 +154,12 @@ function rootReducer(state = initialState, action) {
           ...breweries,
           action.payload
         ]
-      }
+      };
     case GET_POSTS:
       return {
         ...state,
         posts: action.payload
-      }
+      };
     case ADD_POST:
       return {
         ...state,
@@ -170,12 +170,12 @@ function rootReducer(state = initialState, action) {
             ...state.currentEvent.posts
           ]
         }
-      }
+      };
     case GET_REVIEWS:
       return {
         ...state,
         reviews: action.payload
-      }
+      };
     case ADD_REVIEW:
       return {
         ...state,
@@ -186,15 +186,15 @@ function rootReducer(state = initialState, action) {
             ...state.currentBeer.reviews
           ]
         }
-      }
+      };
     case GET_INVITATIONS:
       return {
         ...state,
         invitations: action.payload
-      }
+      };
     default:
-      return state
+      return state;
   }
 }
 
-export default rootReducer
+export default rootReducer;

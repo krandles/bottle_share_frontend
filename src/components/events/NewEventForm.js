@@ -40,7 +40,7 @@ class NewEventForm extends React.Component {
   }
 
   onFormSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const details = this.state.eventDetails;
     const eventDetails = {
       organizer_id: this.props.organizer,

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { findUser, getCurrentUser } from './actions/users';
 import { getEvents } from './actions/events';
+import { getBeers } from './actions/beers';
+import { getBreweries } from './actions/breweries';
 import './css/App.css';
 
 
@@ -15,6 +17,8 @@ import DashboardContainer from './components/dashboard/DashboardContainer';
 import EventListContainer from './components/events/EventListContainer';
 import EventPage from './components/events/EventPage';
 import InvitationListContainer from './components/invitations/InvitationListContainer';
+import BeersContainer from './components/beer/BeersContainer';
+import BreweriesContainer from './components/brewery/BreweriesContainer';
 // import api from './api/adapter'
 
 class App extends Component {
@@ -24,6 +28,8 @@ class App extends Component {
         .then((res) => {
           this.props.getCurrentUser(res.payload.user.id);
           this.props.getEvents();
+          this.props.getBeers();
+          this.props.getBreweries();
         });
     }
   }
@@ -67,6 +73,16 @@ class App extends Component {
             path="/invitations"
             render={routerProps => <InvitationListContainer {...routerProps} />}
           />
+          <Route
+            exact
+            path="/beers"
+            render={routerProps => <BeersContainer {...routerProps} />}
+          />
+          <Route
+            exact
+            path="/breweries"
+            render={routerProps => <BreweriesContainer {...routerProps} />}
+          />
         </Switch>
         <Footer className="sticky-footer" />
       </div>
@@ -84,4 +100,10 @@ const mapStateToProps = state => ({
   }
 });
 
-export default withRouter(connect(mapStateToProps, { findUser, getCurrentUser, getEvents })(App));
+export default withRouter(connect(mapStateToProps, {
+  findUser,
+  getCurrentUser,
+  getEvents,
+  getBeers,
+  getBreweries
+})(App));

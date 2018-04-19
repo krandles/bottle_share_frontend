@@ -1,7 +1,7 @@
-import React from 'react'
-import { Button, Divider, Form, Item } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
-import api from '../../api/adapter'
+import React from 'react';
+import { Button, Divider, Form, Item } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import api from '../../api/adapter';
 
 class InvitationItem extends React.Component {
   state = {
@@ -9,59 +9,58 @@ class InvitationItem extends React.Component {
     status: this.props.invitation.status,
     contribution: this.props.invitation.contribution,
     comment: this.props.invitation.comment
-  }
+  };
 
   onInputChange = (name, value) => {
     this.setState({
       ...this.state,
-        [name]: value
-      }
-    )
+      [name]: value
+    });
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const invitation = {
       id: this.props.invitation.id,
       status: this.state.status,
       comment: this.state.comment,
       contribution: this.state.contribution
-    }
+    };
     api.patchInvitation(invitation)
     this.setState({
       ...this.state,
       editing: false
-    })
+    });
   }
 
   handleEdit = () => {
     this.setState({
       ...this.state,
       editing: true
-    })
+    });
   }
-  
+
   render() {
-    const i = this.props.invitation
-    const eventDate = new Date(i.date)
+    const i = this.props.invitation;
+    const eventDate = new Date(i.date);
     const dateOptions = {
       timeZone: 'UTC',
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric'
-    }
+    };
 
     return (
       <Item>
-        <Item.Content className='invitation'>
+        <Item.Content className="invitation">
           <Item.Header>
             {i.organizer} invited you to <Link to={`/events/${i.event_id}`}>{i.event}</Link><br/> on {eventDate.toLocaleDateString('en-US', dateOptions)}
           </Item.Header>
           <Button
-            color='blue'
-            className={this.state.editing ? 'basic' : '' }
-            floated='right'
+            color="blue"
+            className={this.state.editing ? 'basic' : ''}
+            floated="right"
             onClick={this.handleEdit}
           >
             {this.state.status === 'pending' ? 'Respond' : 'Edit Response'}
