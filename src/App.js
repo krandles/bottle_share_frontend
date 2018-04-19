@@ -1,77 +1,87 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { findUser, getCurrentUser } from './actions/users';
+import { getEvents } from './actions/events';
 import './css/App.css';
-import { Route, Switch, withRouter } from 'react-router-dom'
-import { findUser, getCurrentUser } from './actions/users'
-import { getEvents } from  './actions/events'
 
 
-import Navigation from './components/Navigation'
-import Footer from './components/Footer'
-import LoginContainer from './components/login/LoginContainer'
-import NewEventForm from './components/events/NewEventForm'
-import EditEventForm from './components/events/EditEventForm'
-import DashboardContainer from './components/dashboard/DashboardContainer'
-import EventListContainer from './components/events/EventListContainer'
-import EventPage from './components/events/EventPage'
-import InvitationListContainer from './components/invitations/InvitationListContainer'
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
+import LoginContainer from './components/login/LoginContainer';
+import NewEventForm from './components/events/NewEventForm';
+import EditEventForm from './components/events/EditEventForm';
+import DashboardContainer from './components/dashboard/DashboardContainer';
+import EventListContainer from './components/events/EventListContainer';
+import EventPage from './components/events/EventPage';
+import InvitationListContainer from './components/invitations/InvitationListContainer';
 // import api from './api/adapter'
 
 class App extends Component {
-
   componentDidMount() {
-
-    if (localStorage.getItem("token")) {
-      this.props.findUser(localStorage.getItem("token"))
-        .then(res => {
-          this.props.getCurrentUser(res.payload.user.id)
-          this.props.getEvents()
-        }
-      )
+    if (localStorage.getItem('token')) {
+      this.props.findUser(localStorage.getItem('token'))
+        .then((res) => {
+          this.props.getCurrentUser(res.payload.user.id);
+          this.props.getEvents();
+        });
     }
   }
 
   render() {
     return (
-      <div className='site'>
+      <div className="site">
         <Navigation history={this.props.history} />
         <Switch>
-          <Route exact path="/"
-            render={(routerProps) => <DashboardContainer {...routerProps}/>}
+          <Route
+            exact
+            path="/"
+            render={routerProps => <DashboardContainer {...routerProps} />}
           />
-          <Route exact path="/login"
-            render={(routerProps) => <LoginContainer {...routerProps}/>}
+          <Route
+            exact
+            path="/login"
+            render={routerProps => <LoginContainer {...routerProps} />}
           />
-          <Route exact path="/events/new"
-            render={(routerProps) => <NewEventForm {...routerProps} />}
+          <Route
+            exact
+            path="/events/new"
+            render={routerProps => <NewEventForm {...routerProps} />}
           />
-          <Route exact path="/events" 
-            render={(routerProps) => <EventListContainer {...routerProps} />}
+          <Route
+            exact
+            path="/events"
+            render={routerProps => <EventListContainer {...routerProps} />}
           />
-          <Route exact path="/events/:id"
-            render={(routerProps) => <EventPage {...routerProps} event={this.props.currentEvent} />}
+          <Route
+            exact
+            path="/events/:id"
+            render={routerProps => <EventPage {...routerProps} event={this.props.currentEvent} />}
           />
-          <Route path="/events/:id/edit"
-            render={(routerProps) => <EditEventForm {...routerProps} event={this.props.currentEvent}/>}
+          <Route
+            path="/events/:id/edit"
+            render={routerProps => <EditEventForm {...routerProps} event={this.props.currentEvent} />}
           />
-          <Route exact path="/invitations"
-            render={(routerProps) => <InvitationListContainer {...routerProps} />}
+          <Route
+            exact
+            path="/invitations"
+            render={routerProps => <InvitationListContainer {...routerProps} />}
           />
         </Switch>
-        <Footer className='sticky-footer' />
+        <Footer className="sticky-footer" />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = state => ({
+  return: {
     loggedIn: state.loggedIn,
     userID: state.userID,
     events: state.events,
     currentEvent: state.currentEvent,
     currentUser: state.currentUser
   }
-}
+});
 
-export default withRouter(connect(mapStateToProps, { findUser, getCurrentUser, getEvents })(App))
+export default withRouter(connect(mapStateToProps, { findUser, getCurrentUser, getEvents })(App));

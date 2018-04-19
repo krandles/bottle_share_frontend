@@ -1,9 +1,8 @@
 import React from 'react';
-import { Item, Divider } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Item, Divider } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
-const EventItem = props => {
-
+const EventItem = (props) => {
   const eventDate = new Date(props.event.date)
   const dateOptions = {
     timeZone: 'UTC',
@@ -11,8 +10,8 @@ const EventItem = props => {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  }
-  
+  };
+
   return (
     <Item className="ui">
       <Item.Content>
@@ -34,7 +33,7 @@ const EventItem = props => {
         <Divider hidden />
       </Item.Content>
     </Item>
-  )
-}
+  );
+};
 
-export default EventItem
+export default EventItem;

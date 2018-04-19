@@ -1,10 +1,10 @@
-import { LOGIN, LOGOUT, CREATE_USER, FIND_USER, GET_USERS, GET_CURRENT_USER } from '../actions/users'
-import { GET_EVENTS, GET_EVENT, ADD_EVENT, PATCH_EVENT } from '../actions/events'
-import { GET_BEERS, GET_BEER, ADD_BEER, PATCH_BEER } from '../actions/beers'
-import { GET_BREWERIES, GET_BREWERY, ADD_BREWERY, PATCH_BREWERY } from '../actions/breweries'
-import { GET_POSTS, ADD_POST } from '../actions/posts'
-import { GET_REVIEWS, ADD_REVIEW } from '../actions/reviews'
-import { GET_INVITATIONS } from '../actions/invitations'
+import { LOGIN, LOGOUT, CREATE_USER, FIND_USER, GET_USERS, GET_CURRENT_USER } from '../actions/users';
+import { GET_EVENTS, GET_EVENT, ADD_EVENT, PATCH_EVENT } from '../actions/events';
+import { GET_BEERS, GET_BEER, ADD_BEER, PATCH_BEER } from '../actions/beers';
+import { GET_BREWERIES, GET_BREWERY, ADD_BREWERY, PATCH_BREWERY } from '../actions/breweries';
+import { GET_POSTS, ADD_POST } from '../actions/posts';
+import { GET_REVIEWS, ADD_REVIEW } from '../actions/reviews';
+import { GET_INVITATIONS } from '../actions/invitations';
 
 
 // TODO: get rid of duplicate user info in state, add new models
@@ -12,9 +12,9 @@ const initialState = {
   loggedIn: false,
   userName: '',
   userID: '',
-  currentUser : {
+  currentUser: {
     id: null,
-    name: "",
+    name: '',
     invitations: [],
     events: [],
     hosted_events: []
@@ -24,67 +24,66 @@ const initialState = {
   breweries: [],
   beers: [],
   reviews: []
-}
+};
 
-function rootReducer(state=initialState, action) {
+function rootReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN:
       if (action.payload.token) {
-        localStorage.setItem("token", action.payload.token)
+        localStorage.setItem('token', action.payload.token)
         return {
           ...state,
           loggedIn: true,
           userName: action.payload.user.name,
           userID: action.payload.user.id
-        }
-      } else {
-        localStorage.removeItem("token")
-        return state
+        };
       }
+      localStorage.removeItem('token');
+      return state;
     case LOGOUT:
-      localStorage.removeItem('token')
+      localStorage.removeItem('token');
       return {
         ...state,
         loggedIn: false,
         userName: '',
         userID: '',
         currentUser: {}
-      }
+      };
     case CREATE_USER:
-      localStorage.setItem("token", action.payload.token)
+      localStorage.setItem('token', action.payload.token);
       return {
         ...state,
         loggedIn: true,
         userName: action.payload.user.name,
         userID: action.payload.user.id
-      }
+      };
     case FIND_USER:
       return {
         ...state,
         loggedIn: true,
         userName: action.payload.user.name,
         userID: action.payload.user.id
-      }
+      };
     case GET_USERS:
       return {
         ...state,
         users: action.payload
-      }
+      };
     case GET_CURRENT_USER:
       return {
         ...state,
         currentUser: action.payload
-      }
+      };
     case GET_EVENTS:
       return {
         ...state,
         events: action.payload
-      }
+      };
     case GET_EVENT:
       return {
         ...state,
         currentEvent: action.payload
-      }
+      };
     case ADD_EVENT:
       return {
         ...state,
@@ -92,9 +91,9 @@ function rootReducer(state=initialState, action) {
           ...state.events,
           action.payload
         ]
-      }
+      };
     case PATCH_EVENT:
-      const events = state.events.filter(event => event.id !== action.payload.id)
+      const events = state.events.filter(event => event.id !== action.payload.id);
       return {
         ...state,
         events: [

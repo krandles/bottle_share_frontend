@@ -1,77 +1,70 @@
 import React from 'react';
-import EventList from './EventList'
-import { connect } from 'react-redux'
-import { Button, Dimmer, Loader } from 'semantic-ui-react'
-import moment from 'moment'
+import { connect } from 'react-redux';
+import { Button, Dimmer, Loader } from 'semantic-ui-react';
+import moment from 'moment';
+import EventList from './EventList';
 
 class EventListContainer extends React.Component {
-
   state = {
-    eventsToShow: "mine"
+    eventsToShow: 'mine'
   }
 
   componentDidMount() {
-    if (!localStorage.getItem("token")) {
-      this.props.history.push('/login')
+    if (!localStorage.getItem('token')) {
+      this.props.history.push('/login');
     }
   }
 
   setEvents = (value) => {
-    this.setState({...this.state, eventsToShow: value})
+    this.setState({ ...this.state, eventsToShow: value });
   }
 
   isFutureDate = (date) => {
-    const momentToday = moment()
-    const momentEvent = moment(date).endOf('day')
-    return momentEvent >= momentToday
+    const momentToday = moment();
+    const momentEvent = moment(date).endOf('day');
+    return momentEvent >= momentToday;
   }
 
   invitationUsers = (e) => {
-    const users = e.invitations.map(i => i.user_id)
-    return users
+    const users = e.invitations.map(i => i.user_id);
+    return users;
   }
 
   sortEvents = (events, direction) => {
     if (direction === 'descending') {
-      return events.sort(function(a, b) {
-        return new Date(b.date) - new Date(a.date);
-      })
-    } else if (direction === 'ascending') {
-      return events.sort(function(a, b) {
-        return new Date(a.date) - new Date(b.date);
-      })
+      return events.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
+    return events.sort((a, b) => new Date(a.date) - new Date(b.date));
   }
-  
-  render() {
 
+  render() {
     if (this.state.eventsToShow) {
       return (
-        <div className='main-content'>
-          <Button.Group widths='3'>
+        <div className="main-content">
+          <Button.Group widths="3">
             <Button
-              color='blue'
-              className={this.state.eventsToShow === "mine" ? 'active' : 'basic'}
-              onClick={() => this.setEvents("mine")}
+              color="blue"
+              className={this.state.eventsToShow === 'mine' ? 'active' : 'basic'}
+              onClick={() => this.setEvents('mine')}
             >
               Upcoming Events
             </Button>
             <Button
-              color='blue'
-              className={this.state.eventsToShow === "public" ? 'active' : 'basic'}
-              onClick={() => this.setEvents("public")}
+              color="blue"
+              className={this.state.eventsToShow === 'public' ? 'active' : 'basic'}
+              onClick={() => this.setEvents('public')}
             >
               Browse Public Events
             </Button>
             <Button
-              color='blue'
-              className={this.state.eventsToShow === "past" ? 'active' : 'basic'}
-              onClick={() => this.setEvents("past")}
+              color="blue"
+              className={this.state.eventsToShow === 'past' ? 'active' : 'basic'}
+              onClick={() => this.setEvents('past')}
             >
               Past Events
             </Button>
           </Button.Group>
-          {this.state.eventsToShow === "mine" ?
+          {this.state.eventsToShow === 'mine' ?
             <EventList
               allEvents={this.sortEvents(
                 this.props.allEvents.filter(e => (
@@ -81,10 +74,10 @@ class EventListContainer extends React.Component {
                 'ascending'
               )}
             />
-            : 
+            :
             null
           }
-          {this.state.eventsToShow === "public" ?
+          {this.state.eventsToShow === 'public' ?
             <EventList
               allEvents={this.sortEvents(
                 this.props.allEvents.filter(e => (
@@ -96,8 +89,8 @@ class EventListContainer extends React.Component {
             :
             null
           }
-          {this.state.eventsToShow === "past" ?
-            <EventList 
+          {this.state.eventsToShow === 'past' ?
+            <EventList
               allEvents={this.sortEvents(
                 this.props.allEvents.filter(e => (
                   e.organizer_id === this.props.userID
@@ -110,22 +103,18 @@ class EventListContainer extends React.Component {
             null
           }
         </div>
-      )
-    } else {
-      return (
-        <Dimmer active inverted>
-          <Loader inverted>Loading</Loader>
-        </Dimmer>
-      )
+      );
     }
+
+    return (
+      <Dimmer active inverted>
+        <Loader inverted>Loading</Loader>
+      </Dimmer>
+    );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    allEvents: state.events,
-    userID: state.userID
-  }
-}
+const mapStateToProps = state => ({ allEvents: state.events, userID: state.userID });
 
-export default connect(mapStateToProps)(EventListContainer)
+
+export default connect(mapStateToProps)(EventListContainer);

@@ -1,8 +1,8 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { createUser } from '../../actions/users'
-import { Form, Modal, Button } from 'semantic-ui-react'
-import { Redirect } from 'react-router'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Form, Modal, Button } from 'semantic-ui-react';
+import { Redirect } from 'react-router';
+import { createUser } from '../../actions/users';
 
 class SignupForm extends React.Component {
   state = {
@@ -11,23 +11,17 @@ class SignupForm extends React.Component {
     email: '',
     password: '',
     confirmPassword: '',
-    dob: '',
     location: ''
   }
-
-  handleOpen = () => this.setState({ modalOpen: true })
-
-  handleClose = () => this.setState({ modalOpen: false })
-
 
   onInputChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
-    })
+    });
   }
 
   onFormSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const user = {
       name: this.state.name,
       email: this.state.email,
@@ -36,9 +30,13 @@ class SignupForm extends React.Component {
       zip_code: this.state.zipCode,
       location: this.state.location
     }
-    this.props.createUser(user)
-    this.setState({modalOpen: false})
+    this.props.createUser(user);
+    this.setState({ modalOpen: false });
   }
+
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => this.setState({ modalOpen: false })
 
   render() {
     return !this.props.loggedIn ? (
@@ -62,46 +60,46 @@ class SignupForm extends React.Component {
         <Modal.Content>
           <Form onSubmit={(event) => {this.onFormSubmit(event)}}>
             <Form.Input
-              label='Name:'
+              label="Name:"
               name="name"
               value={this.state.name}
               onChange={this.onInputChange}
             />
             <Form.Input
-              label='Email:'
+              label="Email:"
               name="email"
               value={this.state.email}
               onChange={this.onInputChange}
             />
             <Form.Input
-              label='Password:'
+              label="Password:"
               type="password"
               name="password"
               value={this.state.password}
               onChange={this.onInputChange}
             />
             <Form.Input
-              label='Confirm Password:'
+              label="Confirm Password:"
               type="password"
               name="confirmPassword"
               value={this.state.confirmPassword}
               onChange={this.onInputChange}
             />
             <Form.Input
-              label='Location:'
+              label="Location:"
               name="location"
               value={this.state.location}
               onChange={this.onInputChange}
             />
             <Form.Input
-              label='ZIP Code:'
+              label="ZIP Code:"
               name="zipCode"
               value={this.state.zipCode}
               onChange={this.onInputChange}
             />
             <Form.Button
               fluid
-              color='blue'
+              color="blue"
               type="submit"
             >
               Create Account
@@ -110,14 +108,11 @@ class SignupForm extends React.Component {
         </Modal.Content>
       </Modal>
     )
-    :
-    <Redirect to="/" />
+      :
+      <Redirect to="/" />;
   }
 }
 
-const mapStateToProps = (state) => {
-  return { loggedIn: state.loggedIn }
-}
+const mapStateToProps = state => ({ loggedIn: state.loggedIn });
 
-
-export default connect(mapStateToProps, { createUser })(SignupForm)
+export default connect(mapStateToProps, { createUser })(SignupForm);

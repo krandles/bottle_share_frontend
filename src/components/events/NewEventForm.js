@@ -1,10 +1,10 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Form } from 'semantic-ui-react'
-import { stateOptions } from './stateOptions'
-import { getAllUsers } from '../../actions/users'
-import { addEvent } from '../../actions/events'
-import api from '../../api/adapter'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Form } from 'semantic-ui-react';
+import stateOptions from './stateOptions';
+import { getAllUsers } from '../../actions/users';
+import { addEvent } from '../../actions/events';
+import api from '../../api/adapter';
 
 class NewEventForm extends React.Component {
   state = {
@@ -23,6 +23,12 @@ class NewEventForm extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if (localStorage.getItem('token')) {
+      this.props.getAllUsers();
+    }
+  }
+
   onInputChange = (name, value) => {
     this.setState({
       ...this.state,
@@ -30,12 +36,12 @@ class NewEventForm extends React.Component {
         ...this.state.eventDetails,
         [name]: value
       }
-    })
+    });
   }
 
   onFormSubmit = (e) => {
     e.preventDefault()
-    const details = this.state.eventDetails
+    const details = this.state.eventDetails;
     const eventDetails = {
       organizer_id: this.props.organizer,
       title: details.title,
@@ -48,103 +54,97 @@ class NewEventForm extends React.Component {
       zip: details.zipCode,
       description: details.description,
       private: details.isPrivate
-    }
+    };
     this.props.addEvent(eventDetails)
-      .then(res => {
+      .then((res) => {
         // console.log(res)
-        details.invitees.forEach(invitee => {
+        details.invitees.forEach((invitee) => {
           api.postNewInvitation({
             user_id: invitee,
             event_id: res.payload.id,
             status: 'pending'
-          })
-        })
-        this.props.history.push(`/events/${res.payload.id}`)
-      })
+          });
+        });
+        this.props.history.push(`/events/${res.payload.id}`);
+      });
   }
 
-  componentDidMount() {
-    if (localStorage.getItem("token")) {
-      this.props.getAllUsers()
-    }
-  }
-  
   render() {
-    const eventDetails = this.state.eventDetails
+    const { eventDetails } = this.state;
     return (
-      <div className='main-content'>
+      <div className="main-content">
         <Form onSubmit={this.onFormSubmit}>
           <Form.Input
-            name='title'
-            label='Title'
+            name="title"
+            label="Title"
             value={eventDetails.title}
-            onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
           />
           <Form.TextArea
             rows={4}
-            name='description'
-            label='Description'
+            name="description"
+            label="Description"
             value={eventDetails.description}
-            onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
           />
-          <Form.Group widths='equal'>
+          <Form.Group widths="equal">
             <Form.Input
               fluid
               name='location'
               label='Location'
               value={eventDetails.location}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, {value}) => { this.onInputChange(event.target.name, value); }}
             />
             <Form.Input
               fluid
-              name='date'
-              label='Date'
-              type='date'
+              name="date"
+              label="Date"
+              type="date"
               value={eventDetails.date}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
           </Form.Group>
-          <Form.Group widths='equal'>
+          <Form.Group widths="equal">
             <Form.Input
               fluid
-              name='address'
-              label='Address'
+              name="address"
+              label="Address"
               value={eventDetails.address}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
             <Form.Input
               fluid
-              name='address2'
-              label='Apt./Suite #'
+              name="address2"
+              label="Apt./Suite #"
               value={eventDetails.address2}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
           </Form.Group>
-          <Form.Group widths='equal'>
+          <Form.Group widths="equal">
             <Form.Input
               fluid
-              name='city'
-              label='City'
+              name="city"
+              label="City"
               value={eventDetails.city}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
             <Form.Select
               fluid
               search
               selection
               options={stateOptions}
-              name='stateAbbr'
-              label='State'
-              onChange={(event, {value}) => {this.onInputChange("stateAbbr", value)}}
+              name="stateAbbr"
+              label="State"
+              onChange={(event, { value }) => { this.onInputChange('stateAbbr', value); }}
             />
           </Form.Group>
-          <Form.Group widths='equal'>
+          <Form.Group widths="equal">
             <Form.Input
               fluid
-              name='zipCode'
-              label='ZIP Code'
+              name="zipCode"
+              label="ZIP Code"
               value={eventDetails.zipCode}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
             <Form.Select
               fluid
@@ -158,9 +158,9 @@ class NewEventForm extends React.Component {
                 value: false,
                 text: 'Public'
               }]}
-              name='isPrivate'
-              label='Event Type'
-              onChange={(event, {value}) => {this.onInputChange("isPrivate", value)}}
+              name="isPrivate"
+              label="Event Type"
+              onChange={(event, { value }) => { this.onInputChange('isPrivate', value); }}
             />
           </Form.Group>
           <Form.Select
@@ -171,22 +171,20 @@ class NewEventForm extends React.Component {
             options={this.props.usersArray.filter(u => u.value !== this.props.organizer)}
             label="Who's Invited?"
             value={eventDetails.invitees}
-            onChange={(event, {value}) => {this.onInputChange("invitees", value)}}
+            onChange={(event, { value }) => { this.onInputChange('invitees', value); }}
           />
-          <Form.Button type='submit'>Submit</Form.Button>
+          <Form.Button type="submit">Submit</Form.Button>
         </Form>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { 
+  return {
     organizer: state.userID,
-    usersArray: state.users.map(user => {
-      return { key: user.id, text: user.name, value: user.id }
-    })
-  }
-}
+    usersArray: state.users.map(user => ({ key: user.id, text: user.name, value: user.id }))
+  };
+};
 
-export default connect(mapStateToProps, { getAllUsers, addEvent })(NewEventForm)
+export default connect(mapStateToProps, { getAllUsers, addEvent })(NewEventForm);

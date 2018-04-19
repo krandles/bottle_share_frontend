@@ -74,8 +74,22 @@ class EditBeerModal extends React.Component {
         <Modal.Content>
           <Form>
           <Form.Group widths='equal'>
-              <Form.Input fluid label='Name:' name="name" value={this.state.name} onChange={(event, {value}) => {this.onInputChange(event, value)}}/>
-              <Form.Select fluid search label='Brewery:' name="breweryID" value={this.state.breweryID} options={this.props.breweriesArray} onChange={(event, {value}) => {this.onInputChange(event, value)}}/>
+              <Form.Input
+                fluid
+                label='Name:'
+                name="name"
+                value={this.state.name}
+                onChange={(event, {value}) => {this.onInputChange(event, value)}}
+              />
+              <Form.Select
+                fluid
+                search
+                label='Brewery:'
+                name="breweryID"
+                value={this.state.breweryID}
+                options={this.props.breweriesArray}
+                onChange={(event, {value}) => {this.onInputChange(event, value)}}
+              />
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.Input fluid label='ABV:' name="abv" value={this.state.abv} onChange={(event, {value}) => {this.onInputChange(event, value)}} />

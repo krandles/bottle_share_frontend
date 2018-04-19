@@ -1,28 +1,26 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { login } from '../../actions/users'
-import { Redirect } from 'react-router'
-import { Form, Modal, Button } from 'semantic-ui-react'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import { Form, Modal, Button } from 'semantic-ui-react';
+import { login } from '../../actions/users';
 
 class LoginForm extends React.Component {
-  state = {email: '', password: ''}
+  state = { email: '', password: '' }
 
-  handleOpen = () => this.setState({ modalOpen: true })
-
-  handleClose = () => this.setState({ modalOpen: false })
-
+  onFormSubmit = (e) => {
+    e.preventDefault();
+    this.props.login(this.state.email, this.state.password);
+  }
 
   onInputChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
-    })
+    });
   }
 
-  onFormSubmit = (e) => {
-    e.preventDefault()
-    this.props.login(this.state.email, this.state.password)
-  }
+  handleOpen = () => this.setState({ modalOpen: true })
 
+  handleClose = () => this.setState({ modalOpen: false })
 
   render() {
     return !this.props.loggedIn ? (
@@ -42,24 +40,24 @@ class LoginForm extends React.Component {
         onClose={this.handleClose}
       >
         <Modal.Header>Log In</Modal.Header>
-        <Modal.Content className='login-form'>
-          <Form onSubmit={(event) => {this.onFormSubmit(event)}}>
+        <Modal.Content className="login-form">
+          <Form onSubmit={(event) => { this.onFormSubmit(event); }}>
             <Form.Input
-              label='Email:'
+              label="Email:"
               name="email"
               value={this.state.email}
               onChange={this.onInputChange}
             />
             <Form.Input
-              label='Password:'
+              label="Password:"
               type="password"
               name="password"
               value={this.state.password}
               onChange={this.onInputChange}
             />
             <Form.Button
-              color='blue'
               fluid
+              color="blue"
               type="submit"
             >
               Submit
@@ -68,13 +66,11 @@ class LoginForm extends React.Component {
         </Modal.Content>
       </Modal>
     )
-    :
-    <Redirect to="/" />
+      :
+      <Redirect to="/" />;
   }
 }
 
-const mapStateToProps = (state) => {
-  return { loggedIn: state.loggedIn }
-}
+const mapStateToProps = state => ({ loggedIn: state.loggedIn });
 
-export default connect(mapStateToProps, { login })(LoginForm)
+export default connect(mapStateToProps, { login })(LoginForm);

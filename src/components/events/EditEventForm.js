@@ -1,8 +1,8 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { getEvent, patchEvent } from  '../../actions/events'
-import { Form } from 'semantic-ui-react'
-import { stateOptions } from './stateOptions'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Form } from 'semantic-ui-react';
+import { getEvent, patchEvent } from '../../actions/events';
+import stateOptions from './stateOptions';
 
 class EditEventForm extends React.Component {
   state = { currentEvent: {}}

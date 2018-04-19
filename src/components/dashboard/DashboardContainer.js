@@ -1,45 +1,36 @@
-import React from 'react'
-import Dashboard from './Dashboard'
-import { findUser, getCurrentUser } from '../../actions/users'
-import { getEvents } from  '../../actions/events'
-import { Redirect } from 'react-router'
-import { connect } from 'react-redux'
+import React from 'react';
+import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
+import { findUser, getCurrentUser } from '../../actions/users';
+import { getEvents } from '../../actions/events';
+import Dashboard from './Dashboard';
 
 class DashboardContainer extends React.Component {
-  
   componentDidMount() {
-
-    if (localStorage.getItem("token")) {
-      this.props.findUser(localStorage.getItem("token"))
+    if (localStorage.getItem('token')) {
+      this.props.findUser(localStorage.getItem('token'))
         // .then(res => console.log(res))
-        .then(res => this.props.getCurrentUser(res.payload.user.id))
-      this.props.getEvents()
-      //move to
-      // this.props.getCurrentUser(this.props.userID)
-      // this.props.getAllPosts()
-      // this.props.getAllInvitations()
-      // .then(()=>this.props.history.push("/"))
+        .then(res => this.props.getCurrentUser(res.payload.user.id));
+      this.props.getEvents();
     }
   }
 
   render() {
-    return  (
-      <div className='app'>
+    return (
+      <div className="app">
         {this.props.loggedIn ?
           <Dashboard />
           :
           <Redirect to="/login" />
         }
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedIn: state.loggedIn,
-    userID: state.userID
-  }
-}
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn,
+  userID: state.userID
+});
 
-export default connect(mapStateToProps, { findUser, getEvents, getCurrentUser })(DashboardContainer)
+export default connect(mapStateToProps, { findUser, getEvents, getCurrentUser })(DashboardContainer);
