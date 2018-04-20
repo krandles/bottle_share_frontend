@@ -75,7 +75,7 @@ class AttendeesList extends React.Component {
                   {i.contribution ? <List.Item>Is bringing {`${i.contribution}`}</List.Item> : null }
                 </List.List>
               </List.Item>
-            )
+            );
           })}
         </List>
       </div>

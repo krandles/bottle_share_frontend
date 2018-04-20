@@ -36,4 +36,4 @@ const mapStateToProps = state => ({
   currentUser: state.currentUser,
 });
 
-export default connect(mapStateToProps, { getCurrentUser, findUser })(InvitationListContainer)
+export default connect(mapStateToProps, { getCurrentUser, findUser })(InvitationListContainer);

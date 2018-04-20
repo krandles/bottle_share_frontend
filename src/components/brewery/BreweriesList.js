@@ -1,15 +1,15 @@
-import React from 'react'
-import BreweryCard from './BreweryCard'
+import React from 'react';
+import BreweryCard from './BreweryCard';
 
 const BreweriesList = (props) => {
-  let allBreweries = props.breweries
+  const { breweries } = props;
   return (
-    <div className={"ui four column stackable grid container"}>
-      {allBreweries.map(b => {
-        return <div key={b.id}><BreweryCard brewery={b} /></div>
+    <div className="ui four column stackable grid container">
+      {breweries.map((b) => {
+        return <div key={b.id}><BreweryCard brewery={b} /></div>;
       })}
     </div>
-  )
-}
+  );
+};
 
-export default BreweriesList
+export default BreweriesList;

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Icon } from 'semantic-ui-react';
 import ReactFilestack from 'filestack-react';
-import keys from '../../keys';
+import { filestackKey } from '../../keys';
 import { addPost } from '../../actions/posts';
 
 class NewPostForm extends React.Component {
@@ -55,7 +55,7 @@ class NewPostForm extends React.Component {
           onChange={(event, { value }) => { this.onInputChange(event, value); }}
         />
         <ReactFilestack
-          apikey={keys.filestackKey}
+          apikey={filestackKey}
           buttonClass="ui fluid medium button basic blue"
           options={basicOptions}
           onSuccess={this.onSuccess}
@@ -63,9 +63,15 @@ class NewPostForm extends React.Component {
         >
           <Icon name="photo" />Add A Photo
         </ReactFilestack>
-        <Form.Button color="blue" floated="right" type="submit">Submit Post</Form.Button>
+        <Form.Button
+          color="blue"
+          floated="right"
+          type="submit"
+        >
+          Submit Post
+        </Form.Button>
       </Form>
-    )
+    );
   }
 }
 

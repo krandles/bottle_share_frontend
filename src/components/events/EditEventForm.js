@@ -5,7 +5,32 @@ import { getEvent, patchEvent } from '../../actions/events';
 import stateOptions from './stateOptions';
 
 class EditEventForm extends React.Component {
-  state = { currentEvent: {}}
+  state = { currentEvent: {} };
+
+  componentDidMount() {
+    if (localStorage.getItem('token')) {
+      this.props.getEvent(this.props.match.params.id)
+        .then(() => {
+          const e = this.props.currentEvent
+          this.setState({
+            ...this.state,
+            currentEvent: {
+              id: e.id,
+              title: e.title,
+              location: e.location,
+              date: e.date,
+              address: e.address,
+              address2: e.address2,
+              city: e.city,
+              stateAbbr: e.state,
+              zipCode: e.zip,
+              description: e.description,
+              isPrivate: e.private
+            }
+          });
+        });
+    }
+  }
 
   onInputChange = (name, value) => {
     this.setState({
@@ -18,8 +43,8 @@ class EditEventForm extends React.Component {
   }
 
   onFormSubmit = (e) => {
-    e.preventDefault()
-    const details = this.state.currentEvent
+    e.preventDefault();
+    const details = this.state.currentEvent;
     const eventDetails = {
       id: details.id,
       organizer_id: details.organizer_id,
@@ -33,125 +58,100 @@ class EditEventForm extends React.Component {
       zip: details.zipCode,
       description: details.description,
       private: details.isPrivate
-    }
+    };
     this.props.patchEvent(eventDetails)
-    .then(this.props.history.push(`/events/${eventDetails.id}`))  
+      .then(this.props.history.push(`/events/${eventDetails.id}`));
   }
 
-  componentDidMount() {
-    if (localStorage.getItem("token")) {
-      this.props.getEvent(this.props.match.params.id)
-      .then(res => {
-        const e = this.props.currentEvent
-        this.setState({
-          ...this.state,
-          currentEvent: {
-            id: e.id,
-            title: e.title,
-            location: e.location,
-            date: e.date,
-            address: e.address,
-            address2: e.address2,
-            city: e.city,
-            stateAbbr: e.state,
-            zipCode: e.zip,
-            description: e.description,
-            isPrivate: e.private
-          }
-        })
-      })
-    }
-  }
-  
   render() {
-    const eventDetails = this.state.currentEvent
-    
+    const eventDetails = this.state.currentEvent;
+
     return (
-      <div className='main-content'>
+      <div className="ui text container main-section">
         <Form onSubmit={this.onFormSubmit}>
           <Form.Input
-            name='title'
-            label='Title'
+            name="title"
+            label="Title"
             value={eventDetails.title}
-            onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
           />
           <Form.TextArea
             rows={4}
-            name='description'
-            label='Description'
+            name="description"
+            label="Description"
             value={eventDetails.description}
-            onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+            onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
           />
-          <Form.Group widths='equal'>
+          <Form.Group widths="equal">
             <Form.Input
               fluid
-              name='location'
-              label='Location'
+              name="location"
+              label="Location"
               value={eventDetails.location}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
             <Form.Input
               fluid
-              name='date'
-              label='Date'
-              type='date'
+              name="date"
+              label="Date"
+              type="date"
               value={eventDetails.date}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
           </Form.Group>
-          <Form.Group widths='equal'>
+          <Form.Group widths="equal">
             <Form.Input
               fluid
-              name='address'
-              label='Address'
+              name="address"
+              label="Address"
               value={eventDetails.address}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
             <Form.Input
               fluid
-              name='address2'
-              label='Apt./Suite #'
+              name="address2"
+              label="Apt./Suite #"
               value={eventDetails.address2}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
           </Form.Group>
-          <Form.Group widths='equal'>
+          <Form.Group widths="equal">
             <Form.Input
               fluid
-              name='city'
-              label='City'
+              name="city"
+              label="City"
               value={eventDetails.city}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
             <Form.Select
               fluid
               search
               selection
-              name='stateAbbr'
-              label='State'
+              name="stateAbbr"
+              label="State"
               options={stateOptions}
               value={eventDetails.stateAbbr}
-              onChange={(event, {value}) => {this.onInputChange("stateAbbr", value)}}
+              onChange={(event, { value }) => { this.onInputChange('stateAbbr', value); }}
             />
           </Form.Group>
-          <Form.Group widths='equal'>
+          <Form.Group widths="equal">
             <Form.Input
               fluid
-              name='zipCode'
-              label='ZIP Code'
+              name="zipCode"
+              label="ZIP Code"
               value={eventDetails.zipCode}
-              onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
             <Form.Select
               fluid
-              name='isPrivate'
-              label='Event Type'
+              name="isPrivate"
+              label="Event Type"
               options={[
                 {
                   key: 'private',
                   value: true,
                   text: 'Private'
-                }, 
+                },
                 {
                   key: 'public',
                   value: false,
@@ -159,23 +159,22 @@ class EditEventForm extends React.Component {
                 }
               ]}
               value={eventDetails.isPrivate}
-              onChange={(event, {value}) => {this.onInputChange("isPrivate", value)}}
+              onChange={(event, { value }) => { this.onInputChange('isPrivate', value); }}
             />
           </Form.Group>
-          <Form.Button color='blue' floated='right' type='submit'>
+          <Form.Button color="blue" floated="right" type="submit">
             Save Changes
           </Form.Button>
         </Form>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => {
-  return { 
-    organizer: state.userID,
-    currentEvent: state.currentEvent
-  }
-}
+const mapStateToProps = state => ({
+  organizer: state.userID,
+  currentEvent: state.currentEvent
+});
 
-export default connect(mapStateToProps, { getEvent, patchEvent })(EditEventForm)
+
+export default connect(mapStateToProps, { getEvent, patchEvent })(EditEventForm);

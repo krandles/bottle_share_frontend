@@ -33,4 +33,8 @@ const mapStateToProps = state => ({
   userID: state.userID
 });
 
-export default connect(mapStateToProps, { findUser, getEvents, getCurrentUser })(DashboardContainer);
+export default connect(mapStateToProps, {
+  findUser,
+  getEvents,
+  getCurrentUser
+})(DashboardContainer);

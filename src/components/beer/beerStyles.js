@@ -31,7 +31,7 @@ const styles = [
   { text: 'Vienna Lager', value: 'Vienna Lager' },
   { text: 'Witbier', value: 'Witbier' },
   { text: 'Weissbier', value: 'Weissbier' }
-]
+];
 
-export default styles
+export default styles;
 

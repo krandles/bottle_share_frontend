@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, Modal } from 'semantic-ui-react';
 import ReactFilestack from 'filestack-react';
-
+import { filestackKeyBeers } from '../../keys';
 import styles from './beerStyles';
 import api from '../../api/adapter';
 
@@ -14,6 +14,16 @@ class NewBeerModal extends React.Component {
     style: '',
     url: ''
   }
+
+  onSuccess = (result) => {
+    this.setState({
+      url: result.filesUploaded[0].url
+    });
+  }; // works
+
+  onError = (error) => {
+    console.error('error', error);
+  };
 
   handleOpen = () => this.setState({ modalOpen: true })
 
@@ -46,7 +56,7 @@ class NewBeerModal extends React.Component {
       abv: this.state.abv,
       style: this.state.style,
       img_url: this.state.url
-    }
+    };
 
     api.postNewBeer(beer).then((res) => {
       this.props.addBeerToList(res);
@@ -54,18 +64,7 @@ class NewBeerModal extends React.Component {
     });
   }
 
-  onSuccess = (result) => {
-    this.setState({
-      url: result.filesUploaded[0].url
-    })
-  }; // works
-
-  onError = (error) => {
-    console.error('error', error);
-  };
-
   render() {
-    const apikey = 'Acu94EFL1STGYvkM6a8usz';
     const basicOptions = {
       accept: 'image/*',
       fromSources: ['local_file_system'],
@@ -114,16 +113,16 @@ class NewBeerModal extends React.Component {
                 onChange={(e, { value }) => { this.handleStyleChange(e, value); }}
               />
               <ReactFilestack
-                apikey={apikey}
+                apikey={filestackKeyBeers}
                 buttonText="Upload Image"
-                buttonClass="ui medium button gray"
+                buttonClass="ui medium button blue"
                 options={basicOptions}
                 onSuccess={this.onSuccess}
                 onError={this.onError}
               />
             </Form.Group>
-            <Button onClick={this.handleClose}>Cancel</Button>
-            <Button floated="right" onClick={this.saveBeer}>Save</Button>
+            <Button color="red" onClick={this.handleClose}>Cancel</Button>
+            <Button color="blue" floated="right" onClick={this.saveBeer}>Save</Button>
           </Form>
         </Modal.Content>
       </Modal>

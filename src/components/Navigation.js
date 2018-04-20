@@ -27,6 +27,7 @@ const Navigation = props => (
     <div className="top right menu">
       {props.loggedIn ?
         <Popup
+          on="click"
           horizontalOffset={3}
           trigger={<Icon className="avatar" name="user circle" size="big" />}
           content={
@@ -40,10 +41,8 @@ const Navigation = props => (
               >
                 Logout
               </Button>
-              {/* </Button.Group> */}
             </div>
           }
-          on="click"
         />
         :
         null
@@ -57,6 +56,5 @@ const mapStateToProps = state => ({
   userID: state.userID,
   currentUser: state.currentUser
 });
-
 
 export default withRouter(connect(mapStateToProps, { logout, getCurrentUser })(Navigation))

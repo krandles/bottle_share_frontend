@@ -9,12 +9,9 @@ import AttendeesList from './AttendeesList';
 import { getEvent } from '../../actions/events';
 import { getAllUsers } from '../../actions/users';
 import { addInvitation } from '../../actions/invitations';
-import keys from '../../keys';
-import api from '../../api/adapter';
-
+import { googleMapsKey } from '../../keys';
 
 class EventPage extends React.Component {
-
   state = {
     discussion: true,
     addInvites: false,
@@ -80,11 +77,11 @@ class EventPage extends React.Component {
       user_id: this.props.userID,
       event_id: this.props.currentEvent.id,
       status: 'confirmed'
-    })
+    });
     this.setState({
       ...this.state,
       rsvpDisabled: true
-    })
+    });
   }
 
   render() {
@@ -178,7 +175,7 @@ class EventPage extends React.Component {
             height="300"
             frameBorder="0"
             style={{ border: 0 }}
-            src={`${this.props.currentEvent.map_url + keys.googleMapsKey}`}
+            src={`${this.props.currentEvent.map_url + googleMapsKey}`}
             allowFullScreen
           />
           <Divider hidden />
@@ -221,4 +218,4 @@ const mapStateToProps = state => (
   }
 );
 
-export default connect(mapStateToProps, { getEvent, getAllUsers, addInvitation })(EventPage)
+export default connect(mapStateToProps, { getEvent, getAllUsers, addInvitation })(EventPage);

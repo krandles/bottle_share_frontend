@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Form, Icon, Modal } from 'semantic-ui-react';
 import ReactFilestack from 'filestack-react';
-
 import styles from './beerStyles';
+import { filestackKeyBeers } from '../../keys';
 import api from '../../api/adapter';
 
 class EditBeerModal extends React.Component {
@@ -47,14 +47,13 @@ class EditBeerModal extends React.Component {
       img_url: this.state.img_url
     };
 
-    api.patchBeer(beer).then((res) => {
+    api.patchBeer(beer).then(() => {
       // this.props.addBeerToList(res)
       this.setState({ modalOpen: false });
     });
   }
 
   render() {
-    const apikey = 'Acu94EFL1STGYvkM6a8usz';
     const basicOptions = {
       accept: 'image/*',
       fromSources: ['local_file_system'],
@@ -112,16 +111,16 @@ class EditBeerModal extends React.Component {
                 onChange={(event, { value }) => { this.onInputChange(event, value); }}
               />
               <ReactFilestack
-                apikey={apikey}
+                apikey={filestackKeyBeers}
                 buttonText="Upload image"
-                buttonClass="ui medium button gray"
+                buttonClass="ui medium button blue fluid"
                 options={basicOptions}
                 onSuccess={this.onSuccess}
                 onError={this.onError}
               />
             </Form.Group>
-            <Button onClick={this.handleClose}>Cancel</Button>
-            <Button floated="right" onClick={this.saveBeer}>Save</Button>
+            <Button color="red" onClick={this.handleClose}>Cancel</Button>
+            <Button color="blue" floated="right" onClick={this.saveBeer}>Save</Button>
           </Form>
         </Modal.Content>
       </Modal>

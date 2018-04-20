@@ -26,7 +26,7 @@ class InvitationItem extends React.Component {
       comment: this.state.comment,
       contribution: this.state.contribution
     };
-    api.patchInvitation(invitation)
+    api.patchInvitation(invitation);
     this.setState({
       ...this.state,
       editing: false
@@ -55,7 +55,7 @@ class InvitationItem extends React.Component {
       <Item>
         <Item.Content className="invitation">
           <Item.Header>
-            {i.organizer} invited you to <Link to={`/events/${i.event_id}`}>{i.event}</Link><br/> on {eventDate.toLocaleDateString('en-US', dateOptions)}
+            {i.organizer} invited you to <Link to={`/events/${i.event_id}`}>{i.event}</Link><br /> on {eventDate.toLocaleDateString('en-US', dateOptions)}
           </Item.Header>
           <Button
             color="blue"
@@ -72,38 +72,38 @@ class InvitationItem extends React.Component {
             :
             null
           }
-          {this.state.editing ? 
+          {this.state.editing ?
             <Form onSubmit={this.handleSubmit} >
               <Form.Select
                 options={[
-                  {key: 'pending', value: 'pending', text: 'Pending'},
-                  {key: 'confirmed', value: 'confirmed', text: 'Confirmed'},
-                  {key: 'declined', value: 'declined', text: 'Declined'},
-                  {key: 'maybe', value: 'maybe', text: 'Maybe'}
+                  { key: 'pending', value: 'pending', text: 'Pending' },
+                  { key: 'confirmed', value: 'confirmed', text: 'Confirmed' },
+                  { key: 'declined', value: 'declined', text: 'Declined' },
+                  { key: 'maybe', value: 'maybe', text: 'Maybe' }
                 ]}
-                name='response'
-                label='Your Response'
+                name="response"
+                label="Your Response"
                 defaultValue={this.state.status}
-                onChange={(event, {value}) => {this.onInputChange("status", value)}}
+                onChange={(event, { value }) => { this.onInputChange('status', value); }}
               />
               <Form.Input
                 fluid
-                name='comment'
-                label='Comment'
+                name="comment"
+                label="Comment"
                 value={this.state.comment}
-                onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+                onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
               />
               <Form.Input
                 fluid
-                name='contribution'
-                label='What Are You Bringing To Share?'
+                name="contribution"
+                label="What Are You Bringing To Share?"
                 value={this.state.contribution}
-                onChange={(event, {value}) => {this.onInputChange(event.target.name, value)}}
+                onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
               />
               <Form.Button
-                color='blue'
-                floated='right'
-                type='submit'
+                color="blue"
+                floated="right"
+                type="submit"
               >
                 Save Response
               </Form.Button>
@@ -114,8 +114,8 @@ class InvitationItem extends React.Component {
           <Divider clearing />
         </Item.Content>
       </Item>
-    )
+    );
   }
 }
 
-export default InvitationItem
+export default InvitationItem;

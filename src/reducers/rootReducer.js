@@ -6,7 +6,6 @@ import { GET_POSTS, ADD_POST } from '../actions/posts';
 import { GET_REVIEWS, ADD_REVIEW } from '../actions/reviews';
 import { GET_INVITATIONS, ADD_INVITATION } from '../actions/invitations';
 
-
 // TODO: get rid of duplicate user info in state, add new models
 const initialState = {
   loggedIn: false,
@@ -27,6 +26,9 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action) {
+  let events = [];
+  let beers = [];
+  let breweries = [];
   switch (action.type) {
     case LOGIN:
       if (action.payload.token) {
@@ -93,14 +95,14 @@ function rootReducer(state = initialState, action) {
         ]
       };
     case PATCH_EVENT:
-      const events = state.events.filter(event => event.id !== action.payload.id);
+      events = state.events.filter(event => event.id !== action.payload.id);
       return {
         ...state,
         events: [
           ...events,
           action.payload
         ]
-      }
+      };
     case GET_BEERS:
       return {
         ...state,
@@ -120,7 +122,7 @@ function rootReducer(state = initialState, action) {
         ]
       };
     case PATCH_BEER:
-      const beers = state.beers.filter(beer => beer.id !== action.payload.id)
+      beers = state.beers.filter(beer => beer.id !== action.payload.id)
       return {
         ...state,
         beers: [
@@ -147,7 +149,7 @@ function rootReducer(state = initialState, action) {
         ]
       };
     case PATCH_BREWERY:
-      const breweries = state.breweries.filter(brewery => brewery.id !== action.payload.id)
+      breweries = state.breweries.filter(brewery => brewery.id !== action.payload.id)
       return {
         ...state,
         breweries: [

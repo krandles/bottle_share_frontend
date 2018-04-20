@@ -6,6 +6,6 @@ const PostList = props => (
   <Item.Group>
     {props.allPosts.map(p => <PostItem key={p.id} post={p} author={p.author} />)}
   </Item.Group>
-)
+);
 
 export default PostList;

@@ -3,7 +3,7 @@ import { Item, Divider } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 const EventItem = (props) => {
-  const eventDate = new Date(props.event.date)
+  const eventDate = new Date(props.event.date);
   const dateOptions = {
     timeZone: 'UTC',
     weekday: 'long',
@@ -15,7 +15,7 @@ const EventItem = (props) => {
   return (
     <Item className="ui">
       <Item.Content>
-        <Item.Header className='event-title'>
+        <Item.Header className="event-title">
           <Link to={`/events/${props.event.id}`}>
             {props.event.title.toUpperCase()}
           </Link>
