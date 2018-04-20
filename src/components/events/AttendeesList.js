@@ -1,86 +1,86 @@
-import React from 'react'
-import { Button, List } from 'semantic-ui-react'
+import React from 'react';
+import { Button, List } from 'semantic-ui-react';
 
 class AttendeesList extends React.Component {
-  state = { content: "confirmed" }
+  state = { content: 'confirmed' }
 
   setContent = (content) => {
-    this.setState({...this.state, content: content})
+    this.setState({ ...this.state, content });
   }
-  
+
   render() {
-    const invitations = this.props.invitations
-    const confirmed = invitations.filter(i => i.status === "confirmed")
-    const declined = invitations.filter(i => i.status === "declined")
-    const maybe = invitations.filter(i => i.status === "maybe")
-    const pending = invitations.filter(i => i.status === "pending")
-    let content = []
+    const { invitations } = this.props;
+    const confirmed = invitations.filter(i => i.status === 'confirmed');
+    const declined = invitations.filter(i => i.status === 'declined');
+    const maybe = invitations.filter(i => i.status === 'maybe');
+    const pending = invitations.filter(i => i.status === 'pending');
+    let content = [];
 
     switch (this.state.content) {
       case 'confirmed':
-        content = confirmed
-        break
+        content = confirmed;
+        break;
       case 'declined':
-        content = declined
-        break
+        content = declined;
+        break;
       case 'maybe':
-        content = maybe
-        break
+        content = maybe;
+        break;
       case 'pending':
-        content = pending
-        break
+        content = pending;
+        break;
       default:
-        content = confirmed
+        content = confirmed;
     }
-    
+
     return (
       <div>
         <Button.Group widths="4">
           <Button
-            color='green'
-            className={this.state.content === "confirmed" ? 'active' : 'basic' }
-            onClick={() => this.setContent("confirmed")}
+            color="green"
+            className={this.state.content === 'confirmed' ? 'active' : 'basic'}
+            onClick={() => this.setContent('confirmed')}
           >
             Confirmed
           </Button>
           <Button
-            color='yellow'
-            className={this.state.content === "maybe" ? 'active' : 'basic' }
-            onClick={() => this.setContent("maybe")}
+            color="yellow"
+            className={this.state.content === 'maybe' ? 'active' : 'basic'}
+            onClick={() => this.setContent('maybe')}
           >
             Maybe
           </Button>
           <Button
-            color='red'
-            className={this.state.content === "declined" ? 'active' : 'basic' }
-            onClick={() => this.setContent("declined")}
+            color="red"
+            className={this.state.content === 'declined' ? 'active' : 'basic'}
+            onClick={() => this.setContent('declined')}
           >
             Declined
           </Button>
           <Button
-            color='blue'
-            className={this.state.content === "pending" ? 'active' : 'basic' }
-            onClick={() => this.setContent("pending")}
+            color="blue"
+            className={this.state.content === 'pending' ? 'active' : 'basic'}
+            onClick={() => this.setContent('pending')}
           >
             Awaiting Response
           </Button>
         </Button.Group>
         <List>
-          {content.map(i => {
+          {content.map((i) => {
             return (
               <List.Item key={i.id}>
                 <List.Header>{i.invitee}</List.Header>
-                  <List.List bulleted>
-                    {i.comment ? <List.Item>Replied {`"${i.comment}"`}</List.Item> : null }
-                    {i.contribution ? <List.Item>Is bringing {`${i.contribution}`}</List.Item> : null }
-                  </List.List>
+                <List.List bulleted="true">
+                  {i.comment ? <List.Item>Replied {`"${i.comment}"`}</List.Item> : null }
+                  {i.contribution ? <List.Item>Is bringing {`${i.contribution}`}</List.Item> : null }
+                </List.List>
               </List.Item>
             )
           })}
         </List>
       </div>
-    )
+    );
   }
 }
 
-export default AttendeesList
+export default AttendeesList;

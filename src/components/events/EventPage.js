@@ -1,15 +1,16 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Button, Divider, Dimmer, Form, Icon, Loader } from 'semantic-ui-react'
-import EventItem from './EventItem'
-import NewPostForm from '../posts/NewPostForm'
-import PostList from '../posts/PostList'
-import AttendeesList from './AttendeesList'
-import { getEvent } from  '../../actions/events'
-import { getAllUsers } from '../../actions/users'
-import { Link } from 'react-router-dom'
-import keys from '../../keys'
-import api from '../../api/adapter'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Button, Divider, Dimmer, Form, Icon, Loader } from 'semantic-ui-react';
+import EventItem from './EventItem';
+import NewPostForm from '../posts/NewPostForm';
+import PostList from '../posts/PostList';
+import AttendeesList from './AttendeesList';
+import { getEvent } from '../../actions/events';
+import { getAllUsers } from '../../actions/users';
+import { addInvitation } from '../../actions/invitations';
+import keys from '../../keys';
+import api from '../../api/adapter';
 
 
 class EventPage extends React.Component {
@@ -45,7 +46,7 @@ class EventPage extends React.Component {
   postInvitations = (e) => {
     e.preventDefault();
     this.state.invitees.forEach((invitee) => {
-      api.postNewInvitation({
+      this.props.addInvitation({
         user_id: invitee,
         event_id: this.props.currentEvent.id,
         status: 'pending'
@@ -75,7 +76,7 @@ class EventPage extends React.Component {
   }
 
   createInvitation = () => {
-    api.postNewInvitation({
+    this.props.addInvitation({
       user_id: this.props.userID,
       event_id: this.props.currentEvent.id,
       status: 'confirmed'
@@ -87,11 +88,8 @@ class EventPage extends React.Component {
   }
 
   render() {
-
     if (this.props.currentEvent && this.props.usersArray) {
-
-      const uninvitedUsers = this.filterInvites(this.props.usersArray)
-      
+      const uninvitedUsers = this.filterInvites(this.props.usersArray);
       const contentPane = this.state.discussion ? (
         <div>
           <NewPostForm eventID={this.props.currentEvent.id} />
@@ -105,7 +103,7 @@ class EventPage extends React.Component {
         );
 
       return (
-        <div className="main-content">
+        <div className="ui text container main-section">
           <EventItem event={this.props.currentEvent} />
           <Divider section hidden />
           {this.props.userID === this.props.currentEvent.organizer_id ?
@@ -117,7 +115,7 @@ class EventPage extends React.Component {
                   as={Link}
                   to={`/events/${this.props.match.params.id}/edit`}
                 >
-                  <Icon name="edit"/>
+                  <Icon name="edit" />
                   Edit Event Details
                 </Button>
                 <Button
@@ -223,4 +221,4 @@ const mapStateToProps = state => (
   }
 );
 
-export default connect(mapStateToProps, { getEvent, getAllUsers })(EventPage)
+export default connect(mapStateToProps, { getEvent, getAllUsers, addInvitation })(EventPage)

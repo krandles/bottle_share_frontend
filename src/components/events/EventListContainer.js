@@ -40,7 +40,7 @@ class EventListContainer extends React.Component {
   render() {
     if (this.state.eventsToShow) {
       return (
-        <div className="main-content">
+        <div className="ui text container main-section">
           <Button.Group widths="3">
             <Button
               color="blue"

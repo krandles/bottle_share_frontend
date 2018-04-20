@@ -4,7 +4,7 @@ import { GET_BEERS, GET_BEER, ADD_BEER, PATCH_BEER } from '../actions/beers';
 import { GET_BREWERIES, GET_BREWERY, ADD_BREWERY, PATCH_BREWERY } from '../actions/breweries';
 import { GET_POSTS, ADD_POST } from '../actions/posts';
 import { GET_REVIEWS, ADD_REVIEW } from '../actions/reviews';
-import { GET_INVITATIONS } from '../actions/invitations';
+import { GET_INVITATIONS, ADD_INVITATION } from '../actions/invitations';
 
 
 // TODO: get rid of duplicate user info in state, add new models
@@ -191,6 +191,17 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         invitations: action.payload
+      };
+    case ADD_INVITATION:
+      return {
+        ...state,
+        currentEvent: {
+          ...state.currentEvent,
+          invitations: [
+            ...state.currentEvent.invitations,
+            action.payload
+          ]
+        }
       };
     default:
       return state;

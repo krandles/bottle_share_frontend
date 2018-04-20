@@ -14,7 +14,7 @@ class InvitationListContainer extends React.Component {
   render() {
     if (this.props.currentUser.invitations) {
       return (
-        <div className="main-content">
+        <div className="ui text container main-section">
           <InvitationList invitations={this.props.currentUser.invitations} />
         </div>
       );
@@ -35,6 +35,5 @@ const mapStateToProps = state => ({
   userID: state.userID,
   currentUser: state.currentUser,
 });
-
 
 export default connect(mapStateToProps, { getCurrentUser, findUser })(InvitationListContainer)

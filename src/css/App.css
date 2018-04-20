@@ -1,3 +1,15 @@
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Istok Web', sans-serif;
+  font-size: 16px;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
 .App {
   text-align: center; 
 }
@@ -31,16 +43,6 @@
   padding-bottom: 10px;
 }
 
-.main-content {
-  width: 60%;
-  position: absolute;
-  top: 100px;
-  left: 50%;
-  margin-bottom: 100px;
-  transform: translate(-50%);
-  
-}
-
 .avatar {
   position: relative;
   top: 50%;
@@ -59,11 +61,6 @@ h2.login-title {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   font-size: 30px;
-}
-
-body {
-  font-family: 'Istok Web', sans-serif;
-  font-size: 16px;
 }
 
 .button {
@@ -119,7 +116,7 @@ div.meta {
 }
 
 .ui.inverted.vertical.footer.segment {
-  position: fixed;
+  /* position: fixed; */
   left: 0px;
   bottom: 0px;
   width: 100%;
@@ -143,10 +140,6 @@ div.meta {
 .ui.footer.segment {
   margin: 5em 0em 0em;
   padding: 5em 0em;
-}
-
-html {
-  height: 100%;
 }
 
 .site {
@@ -174,6 +167,21 @@ html {
 
 .main-section {
   margin-top: 100px;
+  width: 60%;
+  /* position: absolute; */
+  top: 100px;
+  /* left: 50%; */
+  margin-bottom: 100px;
+  /* transform: translate(-50%); */
+}
+
+.main-content {
+  width: 60%;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  margin-bottom: 100px;
+  transform: translate(-50%);
 }
 
 .ui.text.container {
