@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Form } from 'semantic-ui-react';
 import stateOptions from './stateOptions';
@@ -72,7 +73,7 @@ class NewEventForm extends React.Component {
   render() {
     const { eventDetails } = this.state;
     return (
-      <div className="main-content">
+      <div className="ui text container main-section">
         <Form onSubmit={this.onFormSubmit}>
           <Form.Input
             name="title"
@@ -90,10 +91,10 @@ class NewEventForm extends React.Component {
           <Form.Group widths="equal">
             <Form.Input
               fluid
-              name='location'
-              label='Location'
+              name="location"
+              label="Location"
               value={eventDetails.location}
-              onChange={(event, {value}) => { this.onInputChange(event.target.name, value); }}
+              onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
             />
             <Form.Input
               fluid
@@ -160,6 +161,7 @@ class NewEventForm extends React.Component {
               }]}
               name="isPrivate"
               label="Event Type"
+              value={eventDetails.isPrivate}
               onChange={(event, { value }) => { this.onInputChange('isPrivate', value); }}
             />
           </Form.Group>
@@ -180,11 +182,17 @@ class NewEventForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    organizer: state.userID,
-    usersArray: state.users.map(user => ({ key: user.id, text: user.name, value: user.id }))
-  };
+const mapStateToProps = state => ({
+  organizer: parseInt(state.userID, 10),
+  usersArray: state.users.map(user => ({ key: user.id, text: user.name, value: user.id }))
+});
+
+NewEventForm.propTypes = {
+  getAllUsers: PropTypes.func.isRequired,
+  addEvent: PropTypes.func.isRequired,
+  usersArray: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  organizer: PropTypes.number.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
 
 export default connect(mapStateToProps, { getAllUsers, addEvent })(NewEventForm);

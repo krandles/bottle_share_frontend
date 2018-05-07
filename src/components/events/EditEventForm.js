@@ -11,7 +11,7 @@ class EditEventForm extends React.Component {
     if (localStorage.getItem('token')) {
       this.props.getEvent(this.props.match.params.id)
         .then(() => {
-          const e = this.props.currentEvent
+          const e = this.props.currentEvent;
           this.setState({
             ...this.state,
             currentEvent: {
@@ -39,7 +39,7 @@ class EditEventForm extends React.Component {
         ...this.state.currentEvent,
         [name]: value
       }
-    })
+    });
   }
 
   onFormSubmit = (e) => {

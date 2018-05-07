@@ -7,7 +7,11 @@ module.exports = {
     ],
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "comma-dangle": 0
+        "comma-dangle": 0,
+        "jsx-a11y/anchor-is-valid": [ "error", {
+            "components": [ "Link" ],
+            "specialLink": [ "to" ]
+          }]
       },
     "env": {
         "browser": true

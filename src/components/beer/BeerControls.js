@@ -1,6 +1,7 @@
 import React from 'react';
-import { Divider, Form } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Divider, Form } from 'semantic-ui-react';
 import NewBeerModal from './NewBeerModal';
 import { addBeer } from '../../actions/beers';
 
@@ -50,5 +51,16 @@ const BeerControls = props => (
 const mapStateToProps = state => ({
   loggedIn: state.loggedIn
 });
+
+BeerControls.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+  addBeer: PropTypes.func.isRequired,
+  breweryQuery: PropTypes.string.isRequired,
+  nameQuery: PropTypes.string.isRequired,
+  handleNameChange: PropTypes.func.isRequired,
+  handleBreweryChange: PropTypes.func.isRequired,
+  handleSortChange: PropTypes.func.isRequired,
+  breweriesArray: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+};
 
 export default connect(mapStateToProps, { addBeer })(BeerControls);

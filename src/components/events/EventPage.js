@@ -37,7 +37,8 @@ class EventPage extends React.Component {
   showInviteForm = () => {
     this.setState({
       ...this.state,
-      addInvites: !this.state.addInvites});
+      addInvites: !this.state.addInvites
+    });
   }
 
   postInvitations = (e) => {
@@ -85,7 +86,7 @@ class EventPage extends React.Component {
   }
 
   render() {
-    if (this.props.currentEvent && this.props.usersArray) {
+    if (this.props.currentEvent.id && this.props.usersArray) {
       const uninvitedUsers = this.filterInvites(this.props.usersArray);
       const contentPane = this.state.discussion ? (
         <div>

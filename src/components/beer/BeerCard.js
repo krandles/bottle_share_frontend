@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Card, Image } from 'semantic-ui-react';
 import EditBeerModal from './EditBeerModal';
@@ -7,7 +8,7 @@ const BeerCard = (props) => {
   const { beer } = props;
   return (
     <Card>
-      <Image src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg' } alt={beer.name} />
+      <Image src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'} alt={beer.name} />
       <Card.Content>
         <Card.Header>
           {beer.name}
@@ -31,6 +32,11 @@ const BeerCard = (props) => {
       </Card.Content>
     </Card>
   );
+};
+
+BeerCard.propTypes = {
+  beer: PropTypes.shape({}).isRequired,
+  breweriesArray: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 
 export default BeerCard;

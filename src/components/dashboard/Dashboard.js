@@ -46,7 +46,7 @@ class Dashboard extends React.Component {
           <h4>You have no events scheduled this week</h4>
         }
       </div>
-    )
+    );
   }
 }
 

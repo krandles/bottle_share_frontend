@@ -18,6 +18,7 @@ const initialState = {
     events: [],
     hosted_events: []
   },
+  currentEvent: {},
   users: [],
   events: [],
   breweries: [],
@@ -32,7 +33,7 @@ function rootReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN:
       if (action.payload.token) {
-        localStorage.setItem('token', action.payload.token)
+        localStorage.setItem('token', action.payload.token);
         return {
           ...state,
           loggedIn: true,
@@ -122,7 +123,7 @@ function rootReducer(state = initialState, action) {
         ]
       };
     case PATCH_BEER:
-      beers = state.beers.filter(beer => beer.id !== action.payload.id)
+      beers = state.beers.filter(beer => beer.id !== action.payload.id);
       return {
         ...state,
         beers: [
@@ -149,7 +150,7 @@ function rootReducer(state = initialState, action) {
         ]
       };
     case PATCH_BREWERY:
-      breweries = state.breweries.filter(brewery => brewery.id !== action.payload.id)
+      breweries = state.breweries.filter(brewery => brewery.id !== action.payload.id);
       return {
         ...state,
         breweries: [

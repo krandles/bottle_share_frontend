@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Button, Icon, Menu, Popup } from 'semantic-ui-react';
 import { connect } from 'react-redux';
@@ -57,4 +58,11 @@ const mapStateToProps = state => ({
   currentUser: state.currentUser
 });
 
-export default withRouter(connect(mapStateToProps, { logout, getCurrentUser })(Navigation))
+Navigation.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
+  history: PropTypes.shape({}).isRequired
+};
+
+export default withRouter(connect(mapStateToProps, { logout, getCurrentUser })(Navigation));

@@ -6,7 +6,7 @@ const loginHeaders = () => {
   };
 };
 
-const apiRoot = 'http://192.168.1.94:3000';
+const apiRoot = 'http://192.168.1.94:3000/api/v1';
 
 const api = {
 
@@ -40,7 +40,7 @@ const api = {
   },
 
   getCurrentUser: (id) => {
-    return fetch(`http://192.168.1.94:3000/users/${id}`, {
+    return fetch(`${apiRoot}/users/${id}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -70,7 +70,7 @@ const api = {
   },
 
   getEvent: (id) => {
-    return fetch(`http://192.168.1.94:3000/events/${id}`, {
+    return fetch(`${apiRoot}/events/${id}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -91,7 +91,7 @@ const api = {
   },
 
   patchEvent: (event) => {
-    return fetch(`http://192.168.1.94:3000/events/${event.id}`, {
+    return fetch(`${apiRoot}/events/${event.id}`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
@@ -123,7 +123,7 @@ const api = {
   },
 
   patchInvitation: (invitation) => {
-    return fetch(`http://192.168.1.94:3000/invitations/${invitation.id}`, {
+    return fetch(`${apiRoot}/invitations/${invitation.id}`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
@@ -171,7 +171,7 @@ const api = {
   },
 
   patchBeer: (beer) => {
-    return fetch(`http://192.168.1.94:3000/beers/${beer.id}`, {
+    return fetch(`${apiRoot}/beers/${beer.id}`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
@@ -198,7 +198,7 @@ const api = {
   },
 
   patchBrewery: (brewery) => {
-    return fetch(`http://192.168.1.94:3000/breweries/${brewery.id}`, {
+    return fetch(`${apiRoot}/breweries/${brewery.id}`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',

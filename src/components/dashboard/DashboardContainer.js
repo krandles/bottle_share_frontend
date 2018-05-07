@@ -9,7 +9,6 @@ class DashboardContainer extends React.Component {
   componentDidMount() {
     if (localStorage.getItem('token')) {
       this.props.findUser(localStorage.getItem('token'))
-        // .then(res => console.log(res))
         .then(res => this.props.getCurrentUser(res.payload.user.id));
       this.props.getEvents();
     }

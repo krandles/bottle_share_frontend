@@ -19,35 +19,41 @@ class NewBeerModal extends React.Component {
     this.setState({
       url: result.filesUploaded[0].url
     });
-  }; // works
+  };
 
   onError = (error) => {
     console.error('error', error);
   };
 
+  onInputChange = (name, value) => {
+    this.setState({
+      [name]: value
+    });
+  }
+
   handleOpen = () => this.setState({ modalOpen: true })
 
   handleClose = () => this.setState({ modalOpen: false })
 
-  handleNameChange = (value) => {
-    this.setState({ name: value });
-  }
+  // handleNameChange = (value) => {
+  //   this.setState({ name: value });
+  // }
 
-  handleAbvChange = (value) => {
-    this.setState({ abv: value });
-  }
+  // handleAbvChange = (value) => {
+  //   this.setState({ abv: value });
+  // }
 
-  handleBreweryChange = (value) => {
-    this.setState({ breweryID: value });
-  }
+  // handleBreweryChange = (value) => {
+  //   this.setState({ breweryID: value });
+  // }
 
-  handleAbvChange = (value) => {
-    this.setState({ abv: value });
-  }
+  // handleAbvChange = (value) => {
+  //   this.setState({ abv: value });
+  // }
 
-  handleStyleChange = (event, value) => {
-    this.setState({ style: value });
-  }
+  // handleStyleChange = (event, value) => {
+  //   this.setState({ style: value });
+  // }
 
   saveBeer = () => {
     const beer = {
@@ -86,31 +92,35 @@ class NewBeerModal extends React.Component {
             <Form.Group widths="equal">
               <Form.Input
                 fluid
+                name="name"
                 label="Name:"
                 value={this.state.name}
-                onChange={(event, { value }) => { this.handleNameChange(value); }}
+                onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
               />
               <Form.Select
                 fluid
                 search
+                name="breweryID"
                 label="Brewery:"
                 options={this.props.breweriesArray}
-                onChange={(event, { value }) => { this.handleBreweryChange(value); }}
+                onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
               />
             </Form.Group>
             <Form.Group widths="equal">
               <Form.Input
                 fluid
+                name="abv"
                 label="ABV:"
                 value={this.state.abv}
-                onChange={(event, { value }) => { this.handleAbvChange(value); }}
+                onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
               />
               <Form.Select
                 fluid
                 search
+                name="style"
                 label="Style:"
                 options={styles}
-                onChange={(e, { value }) => { this.handleStyleChange(e, value); }}
+                onChange={(event, { value }) => { this.onInputChange('style', value); }}
               />
               <ReactFilestack
                 apikey={filestackKeyBeers}

@@ -1,4 +1,4 @@
-const styles = [
+export default [
   { text: 'Altbier', value: 'Altbier' },
   { text: 'Amber Ale', value: 'Amber Ale' },
   { text: 'Barleywine', value: 'Barleywine' },
@@ -32,6 +32,4 @@ const styles = [
   { text: 'Witbier', value: 'Witbier' },
   { text: 'Weissbier', value: 'Weissbier' }
 ];
-
-export default styles;
 

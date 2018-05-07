@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import BeersList from './BeersList';
 import BeerControls from './BeerControls';
@@ -8,34 +9,35 @@ class BeersContainer extends React.Component {
   state = {
     sort: 'none',
     nameQuery: '',
-    breweryQuery: ''
+    breweryQuery: '',
+    breweriesArray: []
+  }
+
+  componentDidMount() {
+    if (this.props.breweries) {
+      this.makeBreweriesList();
+    }
   }
 
   nameSort = beers => (beers.sort((a, b) => (a.name.localeCompare(b.name))));
 
   // TODO: add sort logic
-  ratingSort = (beers) => {
-    return beers
-  }
+  ratingSort = beers => beers
 
-  reviewsSort = (beers) => {
-    return beers
-  }
+  reviewsSort = beers => beers
 
   nameFilter = (beers, nameQuery) => {
     if (this.state.nameQuery) {
-      return beers.filter((beer) => {
-        return beer.name.toLowerCase().includes(nameQuery.toLowerCase());
-      });
+      return beers.filter(beer => beer.name.toLowerCase().includes(nameQuery.toLowerCase()));
     }
     return beers;
   }
 
   breweryFilter = (beers, breweryQuery) => {
     if (this.state.breweryQuery) {
-      return beers.filter((beer) => {
-        return beer.brewery.name.toLowerCase().includes(breweryQuery.toLowerCase());
-      });
+      return beers.filter(beer => (
+        beer.brewery.name.toLowerCase().includes(breweryQuery.toLowerCase())
+      ));
     }
     return beers;
   }
@@ -63,6 +65,11 @@ class BeersContainer extends React.Component {
     }
   }
 
+  makeBreweriesList = () => this.setState({
+    breweriesArray:
+      this.props.breweries.map(brewery => ({ text: brewery.name, value: brewery.id }))
+  })
+
   render() {
     const sortedBeers = this.sortBeers(this.props.beers);
     const nameFilteredBeers = this.nameFilter(sortedBeers, this.state.nameQuery);
@@ -75,17 +82,24 @@ class BeersContainer extends React.Component {
           breweryQuery={this.state.breweryQuery}
           handleNameChange={this.handleNameChange}
           handleBreweryChange={this.handleBreweryChange}
-          breweriesArray={this.props.breweriesArray}
+          breweriesArray={this.state.breweriesArray}
           addBeerToList={this.props.addBeer}
         />
-        <BeersList beers={breweryFilteredBeers} breweriesArray={this.props.breweriesArray}/>
+        <BeersList beers={breweryFilteredBeers} breweriesArray={this.state.breweriesArray} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  beers: state.beers
+  beers: state.beers,
+  breweries: state.breweries
 });
+
+BeersContainer.propTypes = {
+  addBeer: PropTypes.func.isRequired,
+  beers: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  breweries: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+};
 
 export default connect(mapStateToProps, { addBeer })(BeersContainer);

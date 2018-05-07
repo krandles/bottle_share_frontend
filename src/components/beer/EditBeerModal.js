@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Form, Icon, Modal } from 'semantic-ui-react';
 import ReactFilestack from 'filestack-react';
 import styles from './beerStyles';
@@ -10,11 +11,10 @@ class EditBeerModal extends React.Component {
     modalOpen: false,
     beerID: this.props.beer.id,
     name: this.props.beer.name,
-    breweryName: this.props.beer.brewery.name,
     breweryID: this.props.beer.brewery.id,
     abv: this.props.beer.abv,
     style: this.props.beer.style,
-    img_url: this.props.beer.img_url
+    img_url: this.props.beer.img_url || ''
   }
 
   onError = (error) => {
@@ -27,9 +27,9 @@ class EditBeerModal extends React.Component {
     });
   }; // works
 
-  onInputChange = (e, value) => {
+  onInputChange = (name, value) => {
     this.setState({
-      [e.target.name]: value
+      [name]: value
     });
   }
 
@@ -81,7 +81,7 @@ class EditBeerModal extends React.Component {
                 label="Name:"
                 name="name"
                 value={this.state.name}
-                onChange={(event, { value }) => { this.onInputChange(event, value); }}
+                onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
               />
               <Form.Select
                 fluid
@@ -90,7 +90,7 @@ class EditBeerModal extends React.Component {
                 name="breweryID"
                 value={this.state.breweryID}
                 options={this.props.breweriesArray}
-                onChange={(event, { value }) => { this.onInputChange(event, value); }}
+                onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
               />
             </Form.Group>
             <Form.Group widths="equal">
@@ -99,7 +99,7 @@ class EditBeerModal extends React.Component {
                 label="ABV:"
                 name="abv"
                 value={this.state.abv}
-                onChange={(event, { value }) => { this.onInputChange(event, value); }}
+                onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
               />
               <Form.Select
                 fluid
@@ -108,7 +108,7 @@ class EditBeerModal extends React.Component {
                 name="style"
                 value={this.state.style}
                 options={styles}
-                onChange={(event, { value }) => { this.onInputChange(event, value); }}
+                onChange={(event, { value }) => { this.onInputChange('style', value); }}
               />
               <ReactFilestack
                 apikey={filestackKeyBeers}
@@ -127,5 +127,17 @@ class EditBeerModal extends React.Component {
     );
   }
 }
+
+EditBeerModal.propTypes = {
+  beer: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    abv: PropTypes.number.isRequired,
+    style: PropTypes.string.isRequired,
+    brewery: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
+    img_url: PropTypes.string.isRequired
+  }).isRequired,
+  breweriesArray: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+};
 
 export default EditBeerModal;

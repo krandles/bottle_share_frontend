@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { findUser, getCurrentUser } from './actions/users';
 import { getEvents } from './actions/events';
 import { getBeers } from './actions/beers';
 import { getBreweries } from './actions/breweries';
-import './css/App.css';
-
-
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import LoginContainer from './components/login/LoginContainer';
@@ -19,7 +17,7 @@ import EventPage from './components/events/EventPage';
 import InvitationListContainer from './components/invitations/InvitationListContainer';
 import BeersContainer from './components/beer/BeersContainer';
 import BreweriesContainer from './components/brewery/BreweriesContainer';
-// import api from './api/adapter'
+import './css/App.css';
 
 class App extends Component {
   componentDidMount() {
@@ -62,11 +60,15 @@ class App extends Component {
           <Route
             exact
             path="/events/:id"
-            render={routerProps => <EventPage {...routerProps} event={this.props.currentEvent} />}
+            render={
+              routerProps => <EventPage {...routerProps} event={this.props.currentEvent} />
+            }
           />
           <Route
             path="/events/:id/edit"
-            render={routerProps => <EditEventForm {...routerProps} event={this.props.currentEvent} />}
+            render={
+              routerProps => <EditEventForm {...routerProps} event={this.props.currentEvent} />
+            }
           />
           <Route
             exact
@@ -100,10 +102,25 @@ const mapStateToProps = state => ({
   }
 });
 
+App.propTypes = {
+  findUser: PropTypes.func.isRequired,
+  getCurrentUser: PropTypes.func.isRequired,
+  getBeers: PropTypes.func.isRequired,
+  getEvents: PropTypes.func.isRequired,
+  getBreweries: PropTypes.func.isRequired,
+  currentEvent: PropTypes.shape({}),
+  history: PropTypes.shape({})
+};
+
+App.defaultProps = {
+  currentEvent: {},
+  history: {}
+};
+
 export default withRouter(connect(mapStateToProps, {
   findUser,
   getCurrentUser,
   getEvents,
   getBeers,
-  getBreweries
+  getBreweries,
 })(App));
