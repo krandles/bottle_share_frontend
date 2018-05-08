@@ -9,15 +9,14 @@ class BeersContainer extends React.Component {
   state = {
     sort: 'none',
     nameQuery: '',
-    breweryQuery: '',
-    breweriesArray: []
+    breweryQuery: ''
   }
 
-  componentDidMount() {
-    if (this.props.breweries) {
-      this.makeBreweriesList();
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.breweries) {
+  //     this.makeBreweriesList();
+  //   }
+  // }
 
   nameSort = beers => (beers.sort((a, b) => (a.name.localeCompare(b.name))));
 
@@ -65,10 +64,10 @@ class BeersContainer extends React.Component {
     }
   }
 
-  makeBreweriesList = () => this.setState({
-    breweriesArray:
-      this.props.breweries.map(brewery => ({ text: brewery.name, value: brewery.id }))
-  })
+  // makeBreweriesList = () => this.setState({
+  //   breweriesArray:
+  //     this.props.breweries.map(brewery => ({ text: brewery.name, value: brewery.id }))
+  // })
 
   render() {
     const sortedBeers = this.sortBeers(this.props.beers);
@@ -82,10 +81,10 @@ class BeersContainer extends React.Component {
           breweryQuery={this.state.breweryQuery}
           handleNameChange={this.handleNameChange}
           handleBreweryChange={this.handleBreweryChange}
-          breweriesArray={this.state.breweriesArray}
+          breweriesArray={this.props.breweriesArray}
           addBeerToList={this.props.addBeer}
         />
-        <BeersList beers={breweryFilteredBeers} breweriesArray={this.state.breweriesArray} />
+        <BeersList beers={breweryFilteredBeers} breweriesArray={this.props.breweriesArray} />
       </div>
     );
   }
@@ -93,13 +92,15 @@ class BeersContainer extends React.Component {
 
 const mapStateToProps = state => ({
   beers: state.beers,
-  breweries: state.breweries
+  breweries: state.breweries,
+  breweriesArray: state.breweriesArray
 });
 
 BeersContainer.propTypes = {
   addBeer: PropTypes.func.isRequired,
   beers: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  breweries: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+  breweries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  breweriesArray: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 
 export default connect(mapStateToProps, { addBeer })(BeersContainer);

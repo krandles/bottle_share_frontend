@@ -1,18 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import { Card } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
+import { Card } from 'semantic-ui-react';
 
 const ReviewCard = (props) => {
-  let review = props.review
+  const { review } = props;
   return (
     <Card fluid>
       <Card.Content>
-        {review.beer.brewery.name} - {review.beer.name}<br/>
+        {review.brewery.name} - {review.beer.name}<br />
         Rating: {review.rating} - {review.content}
       </Card.Content>
     </Card>
-  )
-}
+  );
+};
 
-
-export default ReviewCard
+export default ReviewCard;

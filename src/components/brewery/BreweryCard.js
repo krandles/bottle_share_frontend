@@ -5,6 +5,10 @@ import EditBreweryModal from './EditBreweryModal';
 
 const BreweryCard = (props) => {
   const { brewery } = props;
+  let urlText = '';
+  if (props.brewery.url) {
+    urlText = props.brewery.url.split('//')[1];
+  }
   return (
     <Card>
       <Card.Content>
@@ -12,7 +16,7 @@ const BreweryCard = (props) => {
           {brewery.name}
           <EditBreweryModal brewery={brewery} />
         </Card.Header>
-        <Card.Meta><Link to={`${brewery.url}`}>{brewery.url}</Link></Card.Meta>
+        <Card.Meta><Link target="_blank" to={`${brewery.url}`}>{urlText}</Link></Card.Meta>
         <Card.Description>
           <h4>{brewery.location}</h4>
         </Card.Description>

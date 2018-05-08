@@ -11,7 +11,8 @@ class SignupForm extends React.Component {
     email: '',
     password: '',
     confirmPassword: '',
-    location: ''
+    location: '',
+    zipCode: ''
   }
 
   onInputChange = (e) => {
@@ -29,7 +30,7 @@ class SignupForm extends React.Component {
       password_confirmation: this.state.confirmPassword,
       zip_code: this.state.zipCode,
       location: this.state.location
-    }
+    };
     this.props.createUser(user);
     this.setState({ modalOpen: false });
   }
@@ -58,7 +59,7 @@ class SignupForm extends React.Component {
       >
         <Modal.Header>Sign Up</Modal.Header>
         <Modal.Content>
-          <Form onSubmit={(event) => {this.onFormSubmit(event)}}>
+          <Form onSubmit={(event) => { this.onFormSubmit(event); }}>
             <Form.Input
               label="Name:"
               name="name"

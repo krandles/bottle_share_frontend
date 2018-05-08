@@ -1,11 +1,14 @@
-import React from 'react'
-import ReviewControls from './ReviewControls'
-import ReviewsList from './ReviewsList'
+import React from 'react';
+import { connect } from 'react-redux';
+import ReviewControls from './ReviewControls';
+import ReviewsList from './ReviewsList';
 
 class ReviewsContainer extends React.Component {
+  state = {
 
+  }
 
-  render () {
+  render() {
     return (
       <div className="ui text container main-section">
         <ReviewControls
@@ -13,10 +16,14 @@ class ReviewsContainer extends React.Component {
           addReviewToList={this.props.addReviewToList}
           loggedIn={this.props.loggedIn}
         />
-        <ReviewsList reviews={this.props.reviews} />
+        <ReviewsList allReviews={this.props.reviews} />
       </div>
-    )
+    );
   }
 }
 
-export default ReviewsContainer;
+const mapStateToProps = state => ({
+  reviews: state.reviews
+});
+
+export default connect(mapStateToProps)(ReviewsContainer);

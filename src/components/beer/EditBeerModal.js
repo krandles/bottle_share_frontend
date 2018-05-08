@@ -1,10 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Form, Icon, Modal } from 'semantic-ui-react';
 import ReactFilestack from 'filestack-react';
 import styles from './beerStyles';
 import { filestackKeyBeers } from '../../keys';
-import api from '../../api/adapter';
+import { patchBeer } from '../../actions/beers';
+// import api from '../../api/adapter';
 
 class EditBeerModal extends React.Component {
   state = {
@@ -47,8 +49,7 @@ class EditBeerModal extends React.Component {
       img_url: this.state.img_url
     };
 
-    api.patchBeer(beer).then(() => {
-      // this.props.addBeerToList(res)
+    this.props.patchBeer(beer).then(() => {
       this.setState({ modalOpen: false });
     });
   }
@@ -128,6 +129,12 @@ class EditBeerModal extends React.Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   return: {
+//     breweriesArray: state.breweriesArray
+//   }
+// });
+
 EditBeerModal.propTypes = {
   beer: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -140,4 +147,5 @@ EditBeerModal.propTypes = {
   breweriesArray: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 
-export default EditBeerModal;
+export default connect(undefined, { patchBeer })(EditBeerModal);
+// export default EditBeerModal;

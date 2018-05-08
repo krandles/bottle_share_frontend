@@ -1,7 +1,7 @@
 import { LOGIN, LOGOUT, CREATE_USER, FIND_USER, GET_USERS, GET_CURRENT_USER } from '../actions/users';
 import { GET_EVENTS, GET_EVENT, ADD_EVENT, PATCH_EVENT } from '../actions/events';
 import { GET_BEERS, GET_BEER, ADD_BEER, PATCH_BEER } from '../actions/beers';
-import { GET_BREWERIES, GET_BREWERY, ADD_BREWERY, PATCH_BREWERY } from '../actions/breweries';
+import { GET_BREWERIES, GET_BREWERY, ADD_BREWERY, PATCH_BREWERY, MAKE_BREWERIES_LIST } from '../actions/breweries';
 import { GET_POSTS, ADD_POST } from '../actions/posts';
 import { GET_REVIEWS, ADD_REVIEW } from '../actions/reviews';
 import { GET_INVITATIONS, ADD_INVITATION } from '../actions/invitations';
@@ -30,6 +30,7 @@ function rootReducer(state = initialState, action) {
   let events = [];
   let beers = [];
   let breweries = [];
+  let breweriesArray = [];
   switch (action.type) {
     case LOGIN:
       if (action.payload.token) {
@@ -115,6 +116,7 @@ function rootReducer(state = initialState, action) {
         currentBeer: action.payload
       };
     case ADD_BEER:
+      console.log(action.payload)
       return {
         ...state,
         beers: [
@@ -157,6 +159,12 @@ function rootReducer(state = initialState, action) {
           ...breweries,
           action.payload
         ]
+      };
+    case MAKE_BREWERIES_LIST:
+      breweriesArray = state.breweries.map(brewery => ({ key: brewery.id, text: brewery.name, value: brewery.id }));
+      return {
+        ...state,
+        breweriesArray
       };
     case GET_POSTS:
       return {

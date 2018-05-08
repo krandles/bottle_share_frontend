@@ -1,9 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Button, Form, Modal } from 'semantic-ui-react';
 import ReactFilestack from 'filestack-react';
 import { filestackKeyBeers } from '../../keys';
 import styles from './beerStyles';
-import api from '../../api/adapter';
+import { addBeer } from '../../actions/beers';
 
 class NewBeerModal extends React.Component {
   state = {
@@ -35,26 +36,6 @@ class NewBeerModal extends React.Component {
 
   handleClose = () => this.setState({ modalOpen: false })
 
-  // handleNameChange = (value) => {
-  //   this.setState({ name: value });
-  // }
-
-  // handleAbvChange = (value) => {
-  //   this.setState({ abv: value });
-  // }
-
-  // handleBreweryChange = (value) => {
-  //   this.setState({ breweryID: value });
-  // }
-
-  // handleAbvChange = (value) => {
-  //   this.setState({ abv: value });
-  // }
-
-  // handleStyleChange = (event, value) => {
-  //   this.setState({ style: value });
-  // }
-
   saveBeer = () => {
     const beer = {
       name: this.state.name,
@@ -64,10 +45,10 @@ class NewBeerModal extends React.Component {
       img_url: this.state.url
     };
 
-    api.postNewBeer(beer).then((res) => {
-      this.props.addBeerToList(res);
-      this.setState({ modalOpen: false });
-    });
+    this.props.addBeer(beer)
+      .then(() => {
+        this.setState({ modalOpen: false });
+      });
   }
 
   render() {
@@ -103,7 +84,7 @@ class NewBeerModal extends React.Component {
                 name="breweryID"
                 label="Brewery:"
                 options={this.props.breweriesArray}
-                onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
+                onChange={(event, { value }) => { this.onInputChange('breweryID', value); }}
               />
             </Form.Group>
             <Form.Group widths="equal">
@@ -140,4 +121,4 @@ class NewBeerModal extends React.Component {
   }
 }
 
-export default NewBeerModal;
+export default connect(undefined, { addBeer })(NewBeerModal);

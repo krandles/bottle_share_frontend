@@ -4,6 +4,7 @@ export const GET_BREWERIES = 'GET_BREWERIES';
 export const GET_BREWERY = 'GET_BREWERY';
 export const ADD_BREWERY = 'ADD_BREWERY';
 export const PATCH_BREWERY = 'PATCH_BREWERY';
+export const MAKE_BREWERIES_LIST = 'MAKE_BREWERIES_LIST';
 
 export const getBreweries = () => {
   return (dispatch) => {
@@ -42,5 +43,11 @@ export const patchBrewery = (brewery) => {
         type: PATCH_BREWERY,
         payload: json
       }));
+  };
+};
+
+export const makeBreweriesList = () => {
+  return (dispatch) => {
+    dispatch({ type: MAKE_BREWERIES_LIST });
   };
 };

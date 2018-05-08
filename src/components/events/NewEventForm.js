@@ -58,7 +58,6 @@ class NewEventForm extends React.Component {
     };
     this.props.addEvent(eventDetails)
       .then((res) => {
-        // console.log(res)
         details.invitees.forEach((invitee) => {
           api.postNewInvitation({
             user_id: invitee,

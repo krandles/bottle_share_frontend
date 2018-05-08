@@ -1,15 +1,17 @@
 import React from 'react';
-import ReviewCard from './ReviewCard'
+import ReviewCard from './ReviewCard';
 
 const ReviewsList = (props) => {
-  let allReviews = props.reviews
+  const { allReviews } = props;
   return (
-    <div className={"ui stackable grid container"}>
-      {allReviews.map(r => {
-        return <div key={r.id}><ReviewCard review={r}/></div>
-      })}
+    <div className="ui stackable grid container">
+      {allReviews.map(r => (
+        <div key={r.id}>
+          <ReviewCard review={r} />
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default ReviewsList
+export default ReviewsList;

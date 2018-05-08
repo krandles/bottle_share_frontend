@@ -5,7 +5,8 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { findUser, getCurrentUser } from './actions/users';
 import { getEvents } from './actions/events';
 import { getBeers } from './actions/beers';
-import { getBreweries } from './actions/breweries';
+import { getBreweries, makeBreweriesList } from './actions/breweries';
+import { getReviews } from './actions/reviews';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import LoginContainer from './components/login/LoginContainer';
@@ -17,6 +18,7 @@ import EventPage from './components/events/EventPage';
 import InvitationListContainer from './components/invitations/InvitationListContainer';
 import BeersContainer from './components/beer/BeersContainer';
 import BreweriesContainer from './components/brewery/BreweriesContainer';
+import ReviewsContainer from './components/review/ReviewsContainer';
 import './css/App.css';
 
 class App extends Component {
@@ -27,7 +29,11 @@ class App extends Component {
           this.props.getCurrentUser(res.payload.user.id);
           this.props.getEvents();
           this.props.getBeers();
-          this.props.getBreweries();
+          this.props.getBreweries()
+            .then(() => {
+              this.props.makeBreweriesList();
+            });
+          this.props.getReviews();
         });
     }
   }
@@ -85,6 +91,11 @@ class App extends Component {
             path="/breweries"
             render={routerProps => <BreweriesContainer {...routerProps} />}
           />
+          <Route
+            exact
+            path="/reviews"
+            render={routerProps => <ReviewsContainer {...routerProps} />}
+          />
         </Switch>
         <Footer className="sticky-footer" />
       </div>
@@ -123,4 +134,6 @@ export default withRouter(connect(mapStateToProps, {
   getEvents,
   getBeers,
   getBreweries,
+  getReviews,
+  makeBreweriesList
 })(App));
