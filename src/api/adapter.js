@@ -7,10 +7,10 @@ const loginHeaders = () => {
 };
 
 // production
-// const apiRoot = 'https://gentle-hamlet-89215.herokuapp.com/api/v1';
+const apiRoot = 'https://gentle-hamlet-89215.herokuapp.com/api/v1';
 
 // dev
-const apiRoot = 'http://192.168.1.94:3000/api/v1';
+// const apiRoot = 'http://192.168.1.94:3000/api/v1';
 
 const api = {
 
