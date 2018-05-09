@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Dimmer, Loader } from 'semantic-ui-react';
 import BeersList from './BeersList';
 import BeerControls from './BeerControls';
 import { addBeer } from '../../actions/beers';
@@ -70,22 +71,30 @@ class BeersContainer extends React.Component {
   // })
 
   render() {
-    const sortedBeers = this.sortBeers(this.props.beers);
-    const nameFilteredBeers = this.nameFilter(sortedBeers, this.state.nameQuery);
-    const breweryFilteredBeers = this.breweryFilter(nameFilteredBeers, this.state.breweryQuery);
+    if (this.props.beers) {
+      const sortedBeers = this.sortBeers(this.props.beers);
+      const nameFilteredBeers = this.nameFilter(sortedBeers, this.state.nameQuery);
+      const breweryFilteredBeers = this.breweryFilter(nameFilteredBeers, this.state.breweryQuery);
+      return (
+        <div className="ui text container main-section">
+          <BeerControls
+            handleSortChange={this.handleSortChange}
+            nameQuery={this.state.nameQuery}
+            breweryQuery={this.state.breweryQuery}
+            handleNameChange={this.handleNameChange}
+            handleBreweryChange={this.handleBreweryChange}
+            breweriesArray={this.props.breweriesArray}
+            addBeerToList={this.props.addBeer}
+          />
+          <BeersList beers={breweryFilteredBeers} breweriesArray={this.props.breweriesArray} />
+        </div>
+      );
+    }
+
     return (
-      <div className="ui text container main-section">
-        <BeerControls
-          handleSortChange={this.handleSortChange}
-          nameQuery={this.state.nameQuery}
-          breweryQuery={this.state.breweryQuery}
-          handleNameChange={this.handleNameChange}
-          handleBreweryChange={this.handleBreweryChange}
-          breweriesArray={this.props.breweriesArray}
-          addBeerToList={this.props.addBeer}
-        />
-        <BeersList beers={breweryFilteredBeers} breweriesArray={this.props.breweriesArray} />
-      </div>
+      <Dimmer active inverted>
+        <Loader inverted>Loading</Loader>
+      </Dimmer>
     );
   }
 }
