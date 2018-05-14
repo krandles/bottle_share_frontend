@@ -148,10 +148,10 @@ div.meta {
   grid-template-rows: 1fr auto;
 }
 
-.sticky-footer {
+/* .sticky-footer {
   grid-row-start: 2;
   grid-row-end: 3;
-}
+} */
 
 .ui.card:first-child {
   margin-top: 10px;
@@ -167,9 +167,9 @@ div.meta {
 
 .main-section {
   margin-top: 100px;
-  width: 60%;
+  /* width: 60%; */
   /* position: absolute; */
-  top: 100px;
+  /* top: 100px; */
   /* left: 50%; */
   margin-bottom: 100px;
   /* transform: translate(-50%); */
