@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Icon } from 'semantic-ui-react';
 import ReactFilestack from 'filestack-react';
-import { filestackKey } from '../../keys';
 import { addPost } from '../../actions/posts';
 
 class NewPostForm extends React.Component {
@@ -55,7 +54,7 @@ class NewPostForm extends React.Component {
           onChange={(event, { value }) => { this.onInputChange(event, value); }}
         />
         <ReactFilestack
-          apikey={filestackKey}
+          apikey={process.env.REACT_APP_FILESTACK_KEY}
           buttonClass="ui fluid medium button basic blue"
           options={basicOptions}
           onSuccess={this.onSuccess}

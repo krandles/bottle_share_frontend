@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, Modal } from 'semantic-ui-react';
 import ReactFilestack from 'filestack-react';
-import { filestackKeyBeers } from '../../keys';
 import styles from './beerStyles';
 import { addBeer } from '../../actions/beers';
 
@@ -104,7 +103,7 @@ class NewBeerModal extends React.Component {
                 onChange={(event, { value }) => { this.onInputChange('style', value); }}
               />
               <ReactFilestack
-                apikey={filestackKeyBeers}
+                apikey={process.env.REACT_APP_FILESTACK_KEY_BEERS}
                 buttonText="Upload Image"
                 buttonClass="ui medium button blue"
                 options={basicOptions}

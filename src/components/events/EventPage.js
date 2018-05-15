@@ -9,7 +9,6 @@ import AttendeesList from './AttendeesList';
 import { getEvent } from '../../actions/events';
 import { getAllUsers } from '../../actions/users';
 import { addInvitation } from '../../actions/invitations';
-import { googleMapsKey } from '../../keys';
 
 class EventPage extends React.Component {
   state = {
@@ -176,7 +175,7 @@ class EventPage extends React.Component {
             height="300"
             frameBorder="0"
             style={{ border: 0 }}
-            src={`${this.props.currentEvent.map_url + googleMapsKey}`}
+            src={`${this.props.currentEvent.map_url + process.env.REACT_APP_GOOGLE_MAPS_KEY}`}
             allowFullScreen
           />
           <Divider hidden />
