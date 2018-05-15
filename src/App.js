@@ -28,14 +28,14 @@ class App extends Component {
         .then((res) => {
           this.props.getCurrentUser(res.payload.user.id);
           this.props.getEvents();
-          this.props.getBeers();
-          this.props.getBreweries()
-            .then(() => {
-              this.props.makeBreweriesList();
-            });
-          this.props.getReviews();
         });
     }
+    this.props.getBeers();
+    this.props.getBreweries()
+      .then(() => {
+        this.props.makeBreweriesList();
+      });
+    this.props.getReviews();
   }
 
   render() {

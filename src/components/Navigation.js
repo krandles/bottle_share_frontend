@@ -19,12 +19,20 @@ const Navigation = props => (
     <Menu.Item name="reviews" as={NavLink} exact to="/reviews" >
       Reviews
     </Menu.Item>
-    <Menu.Item name="events" as={NavLink} exact to="/events" >
-      Events
-    </Menu.Item>
-    <Menu.Item name="invitations" as={NavLink} exact to="/invitations" >
-      Invitations
-    </Menu.Item>
+    {props.loggedIn ?
+      <Menu.Item name="events" as={NavLink} exact to="/events" >
+        Events
+      </Menu.Item>
+      :
+      null
+    }
+    {props.loggedIn ?
+      <Menu.Item name="invitations" as={NavLink} exact to="/invitations" >
+        Invitations
+      </Menu.Item>
+      :
+      null
+    }
     <div className="top right menu">
       {props.loggedIn ?
         <Popup

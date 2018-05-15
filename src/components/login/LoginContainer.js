@@ -7,9 +7,10 @@ import SignupForm from './SignupForm';
 const LoginContainer = props => (
   <Grid className="ui text container main-section">
     <Grid.Column width={10} className="login-content">
-      <h2 className="login-title">Welcome to Tapped Events</h2>
-      <p>The event manager for beer lovers.</p>
-      <p>Plan and discuss your next bottle share,&nbsp;
+      <h2 className="login-title">Welcome to Tapped</h2>
+      <p>The destination for craft beer enthusiasts.</p>
+      <p>Browse our beer and brewery listings, or log in to&nbsp;
+        plan and discuss your next bottle share,&nbsp;
         or explore public events to meet others who share&nbsp;
         your love for the only beverage that matters.
       </p>
