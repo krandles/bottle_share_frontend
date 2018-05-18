@@ -5,13 +5,9 @@ html {
 body {
   font-family: 'Istok Web', sans-serif;
   font-size: 16px;
-  min-height: 100%;
+  /* min-height: 100%; */
   display: grid;
-  grid-template-rows: 1fr auto;
-}
-
-.App {
-  text-align: center; 
+  /* grid-template-rows: 1fr auto; */
 }
 
 .ui.menu .item>img:not(.ui) {
@@ -116,7 +112,7 @@ div.meta {
 }
 
 .ui.inverted.vertical.footer.segment {
-  /* position: fixed; */
+  position: fixed;
   left: 0px;
   bottom: 0px;
   width: 100%;
@@ -138,20 +134,9 @@ div.meta {
 }
 
 .ui.footer.segment {
-  margin: 5em 0em 0em;
+  /* margin: 5em 0em 0em; */
   padding: 5em 0em;
 }
-
-.site {
-  min-height: 100%;
-  display: grid;
-  grid-template-rows: 1fr auto;
-}
-
-/* .sticky-footer {
-  grid-row-start: 2;
-  grid-row-end: 3;
-} */
 
 .ui.card:first-child {
   margin-top: 10px;
@@ -171,7 +156,8 @@ div.meta {
   /* position: absolute; */
   /* top: 100px; */
   /* left: 50%; */
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
+  /* max-width: 960px!important; */
   /* transform: translate(-50%); */
 }
 

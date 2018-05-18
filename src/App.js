@@ -40,7 +40,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="site">
+      <div>
         <Navigation history={this.props.history} />
         <Switch>
           <Route
