@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Grid } from 'semantic-ui-react';
 import BeerCard from './BeerCard';
 
 const BeersList = (props) => {
   const { beers } = props;
   return (
-    <div className="ui four column stackable grid container">
+    <Grid columns={3} stackable centered >
       {beers.map(b => (
-        <div key={b.id}>
-          <BeerCard beer={b} breweriesArray={props.breweriesArray} />
-        </div>
+        <Grid.Column width={5}>
+          <BeerCard beer={b} key={b.id} breweriesArray={props.breweriesArray} />
+        </Grid.Column>
       ))}
-    </div>
+    </Grid>
   );
 };
 

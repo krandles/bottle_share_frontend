@@ -105,7 +105,7 @@ class NewBeerModal extends React.Component {
               <ReactFilestack
                 apikey={process.env.REACT_APP_FILESTACK_KEY_BEERS}
                 buttonText="Upload Image"
-                buttonClass="ui medium button blue"
+                buttonClass="ui medium button blue fluid no-bottom-margin"
                 options={basicOptions}
                 onSuccess={this.onSuccess}
                 onError={this.onError}
