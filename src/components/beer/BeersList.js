@@ -8,9 +8,9 @@ const BeersList = (props) => {
   return (
     <Grid columns={3} stackable centered >
       {beers.map(b => (
-        <Grid.Column width={5}>
+        <Grid.Item key={b.id} >
           <BeerCard beer={b} key={b.id} breweriesArray={props.breweriesArray} />
-        </Grid.Column>
+        </Grid.Item>
       ))}
     </Grid>
   );

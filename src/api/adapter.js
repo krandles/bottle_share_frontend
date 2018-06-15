@@ -6,11 +6,19 @@ const loginHeaders = () => {
   };
 };
 
+const authHeaders = () => {
+  return {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    Authorization: localStorage.getItem('token')
+  };
+};
+
 // production
-const apiRoot = 'https://gentle-hamlet-89215.herokuapp.com/api/v1';
+// const apiRoot = 'https://gentle-hamlet-89215.herokuapp.com/api/v1';
 
 // dev
-// const apiRoot = 'http://192.168.1.94:3000/api/v1';
+const apiRoot = 'http://192.168.1.94:3000/api/v1';
 
 const api = {
 
@@ -46,50 +54,35 @@ const api = {
   getCurrentUser: (id) => {
     return fetch(`${apiRoot}/users/${id}`, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
+      headers: authHeaders()
     }).then(res => res.json());
   },
 
   getAllUsers: () => {
     return fetch(`${apiRoot}/users`, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
+      headers: authHeaders(),
     }).then(res => res.json());
   },
 
   getAllEvents: () => {
     return fetch(`${apiRoot}/events`, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
+      headers: authHeaders(),
     }).then(res => res.json());
   },
 
   getEvent: (id) => {
     return fetch(`${apiRoot}/events/${id}`, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
+      headers: authHeaders()
     }).then(res => res.json());
   },
 
   postNewEvent: (event) => {
     return fetch(`${apiRoot}/events`, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: authHeaders(),
       body: JSON.stringify({ event })
     }).then(res => res.json());
   },
@@ -97,10 +90,7 @@ const api = {
   patchEvent: (event) => {
     return fetch(`${apiRoot}/events/${event.id}`, {
       method: 'PATCH',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: authHeaders(),
       body: JSON.stringify(event)
     }).then(res => res.json());
   },
@@ -108,20 +98,14 @@ const api = {
   getAllInvitations: () => {
     return fetch(`${apiRoot}/invitations`, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
+      headers: authHeaders(),
     }).then(res => res.json());
   },
 
   postNewInvitation: (invitation) => {
     return fetch(`${apiRoot}/invitations`, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: authHeaders(),
       body: JSON.stringify({ invitation })
     }).then(res => res.json());
   },
@@ -129,10 +113,7 @@ const api = {
   patchInvitation: (invitation) => {
     return fetch(`${apiRoot}/invitations/${invitation.id}`, {
       method: 'PATCH',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: authHeaders(),
       body: JSON.stringify(invitation)
     }).then(res => res.json());
   },
@@ -140,10 +121,7 @@ const api = {
   postNewPost: (post) => {
     return fetch(`${apiRoot}/posts`, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: authHeaders(),
       body: JSON.stringify({ post })
     }).then(res => res.json());
   },
@@ -151,10 +129,7 @@ const api = {
   getAllPosts: () => {
     return fetch(`${apiRoot}/posts`, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
+      headers: authHeaders()
     }).then(res => res.json());
   },
 
@@ -166,10 +141,7 @@ const api = {
   postNewBeer: (beer) => {
     return fetch(`${apiRoot}/beers`, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: authHeaders(),
       body: JSON.stringify(beer)
     }).then(res => res.json());
   },
@@ -177,10 +149,7 @@ const api = {
   patchBeer: (beer) => {
     return fetch(`${apiRoot}/beers/${beer.id}`, {
       method: 'PATCH',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: authHeaders(),
       body: JSON.stringify(beer)
     }).then(res => res.json());
   },
@@ -193,10 +162,7 @@ const api = {
   postNewBrewery: (brewery) => {
     return fetch(`${apiRoot}/breweries`, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: authHeaders(),
       body: JSON.stringify(brewery)
     }).then(res => res.json());
   },
@@ -204,10 +170,7 @@ const api = {
   patchBrewery: (brewery) => {
     return fetch(`${apiRoot}/breweries/${brewery.id}`, {
       method: 'PATCH',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: authHeaders(),
       body: JSON.stringify(brewery)
     }).then(res => res.json());
   },
@@ -220,10 +183,7 @@ const api = {
   postNewReview: (review) => {
     return fetch(`${apiRoot}/reviews`, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: authHeaders(),
       body: JSON.stringify(review)
     }).then(res => res.json());
   }

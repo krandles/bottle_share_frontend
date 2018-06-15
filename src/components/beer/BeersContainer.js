@@ -13,12 +13,6 @@ class BeersContainer extends React.Component {
     breweryQuery: ''
   }
 
-  // componentDidMount() {
-  //   if (this.props.breweries) {
-  //     this.makeBreweriesList();
-  //   }
-  // }
-
   nameSort = beers => (beers.sort((a, b) => (a.name.localeCompare(b.name))));
 
   // TODO: add sort logic
@@ -65,11 +59,6 @@ class BeersContainer extends React.Component {
     }
   }
 
-  // makeBreweriesList = () => this.setState({
-  //   breweriesArray:
-  //     this.props.breweries.map(brewery => ({ text: brewery.name, value: brewery.id }))
-  // })
-
   render() {
     if (this.props.beers) {
       const sortedBeers = this.sortBeers(this.props.beers);
@@ -102,7 +91,8 @@ class BeersContainer extends React.Component {
 const mapStateToProps = state => ({
   beers: state.beers,
   breweries: state.breweries,
-  breweriesArray: state.breweriesArray
+  breweriesArray: state.breweriesArray,
+  reviews: state.reviews
 });
 
 BeersContainer.propTypes = {

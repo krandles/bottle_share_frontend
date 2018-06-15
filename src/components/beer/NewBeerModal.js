@@ -82,6 +82,7 @@ class NewBeerModal extends React.Component {
                 search
                 name="breweryID"
                 label="Brewery:"
+                defaultValue=""
                 options={this.props.breweriesArray}
                 onChange={(event, { value }) => { this.onInputChange('breweryID', value); }}
               />
@@ -100,6 +101,7 @@ class NewBeerModal extends React.Component {
                 name="style"
                 label="Style:"
                 options={styles}
+                defaultValue=""
                 onChange={(event, { value }) => { this.onInputChange('style', value); }}
               />
               <ReactFilestack

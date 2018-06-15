@@ -8,7 +8,7 @@ import { getBeers } from './actions/beers';
 import { getBreweries, makeBreweriesList } from './actions/breweries';
 import { getReviews } from './actions/reviews';
 import Navigation from './components/Navigation';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import LoginContainer from './components/login/LoginContainer';
 import NewEventForm from './components/events/NewEventForm';
 import EditEventForm from './components/events/EditEventForm';
@@ -97,7 +97,7 @@ class App extends Component {
             render={routerProps => <ReviewsContainer {...routerProps} />}
           />
         </Switch>
-        <Footer className="sticky-footer" />
+        {/* <Footer className="sticky-footer" /> */}
       </div>
     );
   }
