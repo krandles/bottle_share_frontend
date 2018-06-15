@@ -54,13 +54,16 @@ function rootReducer(state = initialState, action) {
         currentUser: {}
       };
     case CREATE_USER:
-      localStorage.setItem('token', action.payload.token);
-      return {
-        ...state,
-        loggedIn: true,
-        userName: action.payload.user.name,
-        userID: action.payload.user.id
-      };
+      if (action.payload) {
+        localStorage.setItem('token', action.payload.token);
+        return {
+          ...state,
+          loggedIn: true,
+          userName: action.payload.user.name,
+          userID: action.payload.user.id
+        };
+      }
+      return state;
     case FIND_USER:
       return {
         ...state,

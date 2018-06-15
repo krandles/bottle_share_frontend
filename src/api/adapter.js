@@ -41,7 +41,18 @@ const api = {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ user })
-    }).then(res => res.json());
+    }).then((res) => {
+      res.json().then(json => ({
+        status: res.status,
+        json
+      }))
+        .then(({ status, json }) => {
+          if (status !== 200) {
+            return { res: { error: true } };
+          }
+          return json;
+        });
+    });
   },
 
   findUser: (token) => {

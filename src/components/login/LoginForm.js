@@ -103,13 +103,21 @@ class LoginForm extends React.Component {
           >
             {this.state.loginError
             ?
-              <Message error header="Invalid Credentials" content="Your username or password is incorrect, please try again" />
+              <Message
+                error
+                header="Invalid Credentials"
+                content="Your username or password is incorrect, please try again"
+              />
             :
               null
             }
             {this.state.formError
             ?
-              <Message error header="Missing Fields" content="All highlighted fields must be completed" />
+              <Message
+                error
+                header="Missing Fields"
+                content="All highlighted fields must be completed"
+              />
             :
               null
             }
@@ -119,14 +127,16 @@ class LoginForm extends React.Component {
               name="email"
               onBlur={this.validateEmail}
               onChange={this.onInputChange}
+              placeholder="Email address"
               value={this.state.email}
             />
             <Form.Input
               error={this.state.passwordError}
               label="Password:"
+              name="password"
               onBlur={this.validatePassword}
               onChange={this.onInputChange}
-              name="password"
+              placeholder="Password"
               type="password"
               value={this.state.password}
             />
