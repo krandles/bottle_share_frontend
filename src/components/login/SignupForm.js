@@ -99,7 +99,6 @@ class SignupForm extends React.Component {
     };
     this.props.createUser(user)
       .then((res) => {
-        console.log(res);
         if (!res.payload) {
           this.setState({
             createUserError: true
@@ -177,7 +176,7 @@ class SignupForm extends React.Component {
               name="confirmPassword"
               value={this.state.confirmPassword}
               onChange={this.onInputChange}
-              error={this.state.confirmpasswordError || this.state.passwordMatchError}
+              error={this.state.confirmPasswordError || this.state.passwordMatchError}
             />
             <Form.Input
               label="Location:"
