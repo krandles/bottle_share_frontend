@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Form, Modal } from 'semantic-ui-react';
+import { Button, Form, Message, Modal } from 'semantic-ui-react';
 import ReactFilestack from 'filestack-react';
 import styles from './beerStyles';
 import { addBeer } from '../../actions/beers';
@@ -12,7 +12,14 @@ class NewBeerModal extends React.Component {
     breweryID: '',
     abv: '',
     style: '',
-    url: ''
+    url: '',
+    nameError: false,
+    abvError: false,
+    styleError: false,
+    urlError: false,
+    breweryError: false,
+    formError: false,
+    createBeerError: false
   }
 
   onSuccess = (result) => {
@@ -36,6 +43,39 @@ class NewBeerModal extends React.Component {
   handleClose = () => this.setState({ modalOpen: false })
 
   saveBeer = () => {
+    let error = false;
+
+    if (this.state.name === '') {
+      this.setState({ nameError: true });
+      error = true;
+    } else {
+      this.setState({ nameError: false });
+      error = false;
+    }
+
+    if (this.state.style === '') {
+      this.setState({ styleError: true });
+      error = true;
+    } else {
+      this.setState({ styleError: false });
+      error = false;
+    }
+
+    if (parseFloat(this.state.abv) < 1 || parseFloat(this.state.abv) > 50) {
+      this.setState({ abvError: true });
+      error = true;
+    } else {
+      this.setState({ abvError: false });
+      error = false;
+    }
+
+    if (error) {
+      this.setState({ formError: true });
+      return;
+    }
+
+    this.setState({ formError: false });
+
     const beer = {
       name: this.state.name,
       brewery_id: this.state.breweryID,
@@ -45,8 +85,19 @@ class NewBeerModal extends React.Component {
     };
 
     this.props.addBeer(beer)
-      .then(() => {
-        this.setState({ modalOpen: false });
+      .then((res) => {
+        if (!res.payload) {
+          this.setState({ createBeerError: true });
+        } else {
+          this.setState({
+            modalOpen: false,
+            name: '',
+            abv: '',
+            style: '',
+            breweryID: '',
+            url: ''
+          });
+        }
       });
   }
 
@@ -54,7 +105,6 @@ class NewBeerModal extends React.Component {
     const basicOptions = {
       accept: 'image/*',
       fromSources: ['local_file_system'],
-
       maxSize: 1024 * 1024,
       maxFiles: 1,
     };
@@ -68,10 +118,21 @@ class NewBeerModal extends React.Component {
       >
         <Modal.Header>Add a New Beer</Modal.Header>
         <Modal.Content>
-          <Form>
+          <Form error={this.state.createBeerError || this.state.formError}>
+            {this.state.createBeerError
+            ?
+              <Message
+                error
+                header="Beer Already Exists"
+                content="A beer with this name already exists for the selected brewery"
+              />
+            :
+            null
+            }
             <Form.Group widths="equal">
               <Form.Input
                 fluid
+                error={this.state.nameError}
                 name="name"
                 label="Name:"
                 value={this.state.name}
@@ -79,6 +140,7 @@ class NewBeerModal extends React.Component {
               />
               <Form.Select
                 fluid
+                error={this.state.breweryError}
                 search
                 name="breweryID"
                 label="Brewery:"
@@ -89,6 +151,7 @@ class NewBeerModal extends React.Component {
             </Form.Group>
             <Form.Group widths="equal">
               <Form.Input
+                error={this.state.abvError}
                 fluid
                 name="abv"
                 label="ABV:"
@@ -96,6 +159,7 @@ class NewBeerModal extends React.Component {
                 onChange={(event, { value }) => { this.onInputChange(event.target.name, value); }}
               />
               <Form.Select
+                error={this.state.styleError}
                 fluid
                 search
                 name="style"
@@ -114,7 +178,14 @@ class NewBeerModal extends React.Component {
               />
             </Form.Group>
             <Button color="red" onClick={this.handleClose}>Cancel</Button>
-            <Button color="blue" floated="right" onClick={this.saveBeer}>Save</Button>
+            <Button
+              color="blue"
+              disabled={!this.state.name || !this.state.abv || !this.state.breweryID || !this.state.style}
+              floated="right"
+              onClick={this.saveBeer}
+            >
+              Save
+            </Button>
           </Form>
         </Modal.Content>
       </Modal>

@@ -119,14 +119,16 @@ function rootReducer(state = initialState, action) {
         currentBeer: action.payload
       };
     case ADD_BEER:
-      console.log(action.payload)
-      return {
-        ...state,
-        beers: [
-          ...state.beers,
-          action.payload
-        ]
-      };
+      if (action.payload) {
+        return {
+          ...state,
+          beers: [
+            ...state.beers,
+            action.payload
+          ]
+        };
+      }
+      return state;
     case PATCH_BEER:
       beers = state.beers.filter(beer => beer.id !== action.payload.id);
       return {

@@ -44,7 +44,6 @@ class LoginForm extends React.Component {
     this.props.login(this.state.email, this.state.password)
       .then((res) => {
         if (res.payload.error) {
-          console.log(res.payload);
           this.setState({
             loginError: true
           });
