@@ -21,7 +21,6 @@ Back-end is a RESTful JSON API built with Ruby on Rails, using a PostgreSQL data
 
 ## Concerns
 
-- Css needs some work, a few things are a bit wonky since integrating the beer/brewery pages
-- Need to implement data validation, client and server-side
+- Need to implement data validation, client and server-side (currently WIP)
 - Currently all data is fetched on initial load or at login. While this works fine for the purposes of this project, it would need to be refactored as the size of the database grows.
 - Individual beer/brewery pages still need to be built out
