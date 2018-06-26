@@ -60,7 +60,7 @@ class BeersContainer extends React.Component {
   }
 
   render() {
-    if (this.props.beers) {
+    if (this.props.beers.length > 0) {
       const sortedBeers = this.sortBeers(this.props.beers);
       const nameFilteredBeers = this.nameFilter(sortedBeers, this.state.nameQuery);
       const breweryFilteredBeers = this.breweryFilter(nameFilteredBeers, this.state.breweryQuery);
