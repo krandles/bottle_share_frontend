@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimmer, Loader } from 'semantic-ui-react';
+import { Dimmer, Item, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { getBeer } from '../../actions/beers';
 
@@ -14,8 +14,13 @@ class BeerPage extends React.Component {
 
       return (
         <div className="ui text container main-section">
-          <h1>{beer.name} - {beer.brewery.name}</h1>
-          <h2>{beer.abv}% ABV {beer.style}</h2>
+          <Item>
+            {beer.img_url ? <Item.Image src={beer.img_url} /> : null}
+            <Item.Content>
+              <Item.Header>{beer.name} - {beer.brewery.name}</Item.Header>
+              <Item.Meta>{beer.abv}% ABV {beer.style}</Item.Meta>
+            </Item.Content>
+          </Item>
         </div>
       );
     }

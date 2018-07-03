@@ -11,14 +11,16 @@ const BeerCard = (props) => {
       <Image src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'} alt={beer.name} />
       <Card.Content>
         <Card.Header>
-          {beer.name}
+          <Link to={`/beers/${beer.id}`}>
+            {beer.name}
+          </Link>
           <EditBeerModal beer={beer} breweriesArray={props.breweriesArray} />
         </Card.Header>
         <Card.Meta>
           <Link to={`/breweries/${beer.brewery.id}`}>{beer.brewery.name}</Link>
         </Card.Meta>
         <Card.Description>
-          <h4>{beer.abv}% ABV <strong>{beer.style}</strong></h4>
+          {beer.abv}% ABV <strong>{beer.style}</strong>
           {beer.description}
         </Card.Description>
       </Card.Content>
