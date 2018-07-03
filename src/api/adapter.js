@@ -145,6 +145,11 @@ const api = {
       .then(res => res.json());
   },
 
+  getBeer: (id) => {
+    return fetch(`${apiRoot}/beers/${id}`)
+      .then(res => res.json());
+  },
+
   postNewBeer: (beer) => {
     return fetch(`${apiRoot}/beers`, {
       method: 'POST',

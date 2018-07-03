@@ -19,6 +19,7 @@ const initialState = {
     hosted_events: []
   },
   currentEvent: {},
+  currentBeer: {},
   users: [],
   events: [],
   breweries: [],

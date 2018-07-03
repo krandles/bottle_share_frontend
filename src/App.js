@@ -17,6 +17,7 @@ import EventListContainer from './components/events/EventListContainer';
 import EventPage from './components/events/EventPage';
 import InvitationListContainer from './components/invitations/InvitationListContainer';
 import BeersContainer from './components/beer/BeersContainer';
+import BeerPage from './components/beer/BeerPage';
 import BreweriesContainer from './components/brewery/BreweriesContainer';
 import ReviewsContainer from './components/review/ReviewsContainer';
 import './css/App.css';
@@ -84,7 +85,11 @@ class App extends Component {
           <Route
             exact
             path="/beers"
-            render={routerProps => <BeersContainer {...routerProps} />}
+            render={routerProps => <BeersContainer {...routerProps} beer={this.props.currentBeer} />}
+          />
+          <Route
+            path="/beers/:id"
+            render={routerProps => <BeerPage {...routerProps} />}
           />
           <Route
             exact
@@ -109,7 +114,8 @@ const mapStateToProps = state => ({
     userID: state.userID,
     events: state.events,
     currentEvent: state.currentEvent,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    currentBeer: state.currentBeer
   }
 });
 
