@@ -24,13 +24,13 @@ class SignupForm extends React.Component {
     createUserError: false
   }
 
-  onInputChange = (e) => {
+  handleInputChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
 
-  onFormSubmit = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     let error = false;
 
@@ -97,6 +97,7 @@ class SignupForm extends React.Component {
       zip_code: this.state.zipCode,
       location: this.state.location
     };
+
     this.props.createUser(user)
       .then((res) => {
         if (!res.payload) {
@@ -105,6 +106,7 @@ class SignupForm extends React.Component {
           });
         }
       });
+
     if (this.state.loggedIn) {
       this.setState({ modalOpen: false });
     }
@@ -135,7 +137,7 @@ class SignupForm extends React.Component {
         <Modal.Header>Sign Up</Modal.Header>
         <Modal.Content>
           <Form
-            onSubmit={(event) => { this.onFormSubmit(event); }}
+            onSubmit={(event) => { this.handleSubmit(event); }}
             error={this.state.createUserError || this.state.formError}
           >
             {this.state.createUserError
@@ -152,14 +154,14 @@ class SignupForm extends React.Component {
               label="Name:"
               name="name"
               value={this.state.name}
-              onChange={this.onInputChange}
+              onChange={this.handleInputChange}
               error={this.state.nameError}
             />
             <Form.Input
               label="Email:"
               name="email"
               value={this.state.email}
-              onChange={this.onInputChange}
+              onChange={this.handleInputChange}
               error={this.state.emailError}
             />
             <Form.Input
@@ -167,7 +169,7 @@ class SignupForm extends React.Component {
               type="password"
               name="password"
               value={this.state.password}
-              onChange={this.onInputChange}
+              onChange={this.handleInputChange}
               error={this.state.passwordError || this.state.passwordMatchError}
             />
             <Form.Input
@@ -175,21 +177,21 @@ class SignupForm extends React.Component {
               type="password"
               name="confirmPassword"
               value={this.state.confirmPassword}
-              onChange={this.onInputChange}
+              onChange={this.handleInputChange}
               error={this.state.confirmPasswordError || this.state.passwordMatchError}
             />
             <Form.Input
               label="Location:"
               name="location"
               value={this.state.location}
-              onChange={this.onInputChange}
+              onChange={this.handleInputChange}
               error={this.state.locationError}
             />
             <Form.Input
               label="ZIP Code:"
               name="zipCode"
               value={this.state.zipCode}
-              onChange={this.onInputChange}
+              onChange={this.handleInputChange}
               error={this.state.zipCodeError}
             />
             <Form.Button
