@@ -14,8 +14,8 @@ class BeerPage extends React.Component {
 
       return (
         <div className="ui text container main-section">
-          <Item>
-            {beer.img_url ? <Item.Image src={beer.img_url} /> : null}
+          <Item className="beer-item">
+            <Item.Image className="beer-image" src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'} />
             <Item.Content>
               <Item.Header>{beer.name} - {beer.brewery.name}</Item.Header>
               <Item.Meta>{beer.abv}% ABV {beer.style}</Item.Meta>

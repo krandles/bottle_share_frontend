@@ -210,3 +210,13 @@ button.no-bottom-margin {
     align-content: center!important;
   }
 }
+
+.beer-image img {
+  width: 300px;
+  height: auto;
+  margin: 5px 10px;
+}
+
+.beer-item {
+  display: flex;
+}
