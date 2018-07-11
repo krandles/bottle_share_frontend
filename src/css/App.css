@@ -220,3 +220,12 @@ button.no-bottom-margin {
 .beer-item {
   display: flex;
 }
+
+.beer-card-image-container {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}

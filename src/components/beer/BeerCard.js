@@ -8,7 +8,9 @@ const BeerCard = (props) => {
   const { beer } = props;
   return (
     <Card>
-      <Image src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'} alt={beer.name} />
+      <div className="beer-card-image-container" style={{ backgroundImage: `url(${beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'})` }} >
+        {/* <Image src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'} alt={beer.name} className="beer-card-image" /> */}
+      </div>
       <Card.Content>
         <Card.Header>
           <Link to={`/beers/${beer.id}`}>
