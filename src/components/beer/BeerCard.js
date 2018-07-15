@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Card, Image } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 import EditBeerModal from './EditBeerModal';
 
 const BeerCard = (props) => {
   const { beer } = props;
   return (
     <Card>
-      <div className="beer-card-image-container" style={{ backgroundImage: `url(${beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'})` }} >
-        {/* <Image src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'} alt={beer.name} className="beer-card-image" /> */}
-      </div>
+      <div className="beer-card-image-container" style={{ backgroundImage: `url(${beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'})` }} />
       <Card.Content>
         <Card.Header>
           <Link to={`/beers/${beer.id}`}>
