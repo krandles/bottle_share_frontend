@@ -13,6 +13,7 @@ const BeersList = (props) => {
             beer={b}
             key={b.id}
             breweriesArray={props.breweriesArray}
+            reviews={props.reviews.filter(review => review.beer.id === b.id)}
           />
         </Grid.Column>
       ))}

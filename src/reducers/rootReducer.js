@@ -1,12 +1,12 @@
 import { LOGIN, LOGOUT, CREATE_USER, FIND_USER, GET_USERS, GET_CURRENT_USER } from '../actions/users';
 import { GET_EVENTS, GET_EVENT, ADD_EVENT, PATCH_EVENT } from '../actions/events';
-import { GET_BEERS, GET_BEER, ADD_BEER, PATCH_BEER } from '../actions/beers';
+import { GET_BEERS, GET_BEER, ADD_BEER, PATCH_BEER, MAKE_BEERS_LIST } from '../actions/beers';
 import { GET_BREWERIES, GET_BREWERY, ADD_BREWERY, PATCH_BREWERY, MAKE_BREWERIES_LIST } from '../actions/breweries';
 import { GET_POSTS, ADD_POST } from '../actions/posts';
 import { GET_REVIEWS, ADD_REVIEW } from '../actions/reviews';
 import { GET_INVITATIONS, ADD_INVITATION } from '../actions/invitations';
 
-// TODO: get rid of duplicate user info in state, add new models
+// TODO: get rid of duplicate user info in state
 const initialState = {
   loggedIn: false,
   userName: '',
@@ -30,6 +30,7 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   let events = [];
   let beers = [];
+  let beersArray = [];
   let breweries = [];
   let breweriesArray = [];
   switch (action.type) {
@@ -139,6 +140,16 @@ function rootReducer(state = initialState, action) {
           action.payload
         ]
       };
+    case MAKE_BEERS_LIST:
+      beersArray = state.beers.map(beer => ({
+        key: beer.id,
+        text: beer.name,
+        value: beer.id
+      }));
+      return {
+        ...state,
+        beersArray
+      };
     case GET_BREWERIES:
       return {
         ...state,
@@ -167,7 +178,11 @@ function rootReducer(state = initialState, action) {
         ]
       };
     case MAKE_BREWERIES_LIST:
-      breweriesArray = state.breweries.map(brewery => ({ key: brewery.id, text: brewery.name, value: brewery.id }));
+      breweriesArray = state.breweries.map(brewery => ({
+        key: brewery.id,
+        text: brewery.name,
+        value: brewery.id
+      }));
       return {
         ...state,
         breweriesArray
@@ -196,13 +211,10 @@ function rootReducer(state = initialState, action) {
     case ADD_REVIEW:
       return {
         ...state,
-        currentBeer: {
-          ...state.currentBeer,
-          reviews: [
-            action.payload,
-            ...state.currentBeer.reviews
-          ]
-        }
+        reviews: [
+          action.payload,
+          ...state.reviews
+        ]
       };
     case GET_INVITATIONS:
       return {

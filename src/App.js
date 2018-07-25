@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { findUser, getCurrentUser } from './actions/users';
 import { getEvents } from './actions/events';
-import { getBeers } from './actions/beers';
+import { getBeers, makeBeersList } from './actions/beers';
 import { getBreweries, makeBreweriesList } from './actions/breweries';
 import { getReviews } from './actions/reviews';
 import Navigation from './components/Navigation';
@@ -31,7 +31,10 @@ class App extends Component {
           this.props.getEvents();
         });
     }
-    this.props.getBeers();
+    this.props.getBeers()
+      .then(() => {
+        this.props.makeBeersList();
+      });
     this.props.getBreweries()
       .then(() => {
         this.props.makeBreweriesList();
@@ -141,5 +144,6 @@ export default withRouter(connect(mapStateToProps, {
   getBeers,
   getBreweries,
   getReviews,
+  makeBeersList,
   makeBreweriesList
 })(App));

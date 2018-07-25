@@ -1,57 +1,48 @@
 import React from 'react';
-import { Button, Form, Modal } from 'semantic-ui-react'
+import { connect } from 'react-redux';
+import { Button, Form, Modal } from 'semantic-ui-react';
+import { addReview } from '../../actions/reviews';
 
-import api from '../../api/adapter'
+import api from '../../api/adapter';
 
 class NewReviewModal extends React.Component {
   state = {
     modalOpen: false,
-    userID: 1,
+    userID: this.props.userID,
     beerID: '',
     content: '',
     rating: ''
+  }
+
+  handleInputChange = (e, value) => {
+    this.setState({
+      [e.target.name]: value
+    });
   }
 
   handleOpen = () => this.setState({ modalOpen: true })
 
   handleClose = () => this.setState({ modalOpen: false })
 
-  onInputChange = (e, value) => {
-    this.setState({
-      [e.target.name]: value
-    })
-  }
-
   handleBeerChange = (value) => {
-    this.setState({beerID: value})
+    this.setState({ beerID: value });
   }
 
-  saveReview = (state) => {
+  saveReview = () => {
     const review = {
       user_id: this.state.userID,
       beer_id: this.state.beerID,
       content: this.state.content,
       rating: this.state.rating
-    }
+    };
 
-    api.postNewReview(review).then(res => {
-      this.props.addReviewToList(res)
-      this.setState({modalOpen: false})
-    })
+    this.props.addReview(review).then((res) => {
+      // this.props.addReviewToList(res);
+      this.setState({ modalOpen: false });
+    });
   }
 
-  onSuccess = (result) => {
-    this.setState({
-      url: result.filesUploaded[0].url
-    })
-  }; // works
-
-  onError = error => {
-    console.error('error', error);
-  };
-
   render() {
-
     return (
       <Modal
         trigger={<Button fluid onClick={this.handleOpen}>Add New Review</Button>}
@@ -61,18 +52,22 @@ class NewReviewModal extends React.Component {
         <Modal.Header>Add a New Review</Modal.Header>
         <Modal.Content>
           <Form>
-            <Form.Group widths='equal'>
-              <Form.Select fluid search label='Beer:' name="beerID" value={this.state.beerID} options={this.props.beersArray} onChange={(event, {value}) => {this.handleBeerChange(value)}}/>
-              <Form.Input fluid label='Your Rating:' name="rating" value={this.state.rating} onChange={(event, {value}) => {this.onInputChange(event, value)}}/>
+            <Form.Group widths="equal">
+              <Form.Select fluid search label="Beer:" name="beerID" value={this.state.beerID} options={this.props.beersArray} onChange={(event, { value }) => { this.handleBeerChange(value); }} />
+              <Form.Input fluid label="Your Rating:" name="rating" value={this.state.rating} onChange={(event, { value }) => { this.handleInputChange(event, value); }} />
             </Form.Group>
-            <Form.Input fluid label='Your Review:' name="content" value={this.state.content} onChange={(event, {value}) => {this.onInputChange(event, value)}} />
+            <Form.Input fluid label="Your Review:" name="content" value={this.state.content} onChange={(event, { value }) => { this.handleInputChange(event, value); }} />
             <Button onClick={this.saveReview}>Save</Button>
           </Form>
         </Modal.Content>
       </Modal>
-    )
+    );
   }
-
 }
 
-export default NewReviewModal
+const mapStateToProps = state => ({
+  userID: state.userID,
+  beersArray: state.beersArray
+});
+
+export default connect(mapStateToProps, { addReview })(NewReviewModal);

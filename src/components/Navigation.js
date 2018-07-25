@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Button, Icon, Menu, Popup } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import LoginForm from './login/LoginForm';
 import { logout, getCurrentUser } from '../actions/users';
 
 const Navigation = props => (
@@ -20,16 +21,14 @@ const Navigation = props => (
       Reviews
     </Menu.Item>
     {props.loggedIn ?
-      <Menu.Item name="events" as={NavLink} exact to="/events" >
-        Events
-      </Menu.Item>
-      :
-      null
-    }
-    {props.loggedIn ?
-      <Menu.Item name="invitations" as={NavLink} exact to="/invitations" >
-        Invitations
-      </Menu.Item>
+      <React.Fragment>
+        <Menu.Item name="events" as={NavLink} exact to="/events" >
+          Events
+        </Menu.Item>
+        <Menu.Item name="invitations" as={NavLink} exact to="/invitations" >
+          Invitations
+        </Menu.Item>
+      </React.Fragment>
       :
       null
     }
@@ -54,7 +53,9 @@ const Navigation = props => (
           }
         />
         :
-        null
+        <LoginForm name="login" as={NavLink} to="/login" >
+          Log In
+        </LoginForm>
       }
     </div>
   </Menu>

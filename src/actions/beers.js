@@ -4,6 +4,7 @@ export const GET_BEERS = 'GET_BEERS';
 export const GET_BEER = 'GET_BEER';
 export const ADD_BEER = 'ADD_BEER';
 export const PATCH_BEER = 'PATCH_BEER';
+export const MAKE_BEERS_LIST = 'MAKE_BEERS_LIST';
 
 
 export const getBeers = () => {
@@ -43,5 +44,11 @@ export const patchBeer = (beer) => {
         type: PATCH_BEER,
         payload: json
       }));
+  };
+};
+
+export const makeBeersList = (beers) => {
+  return (dispatch) => {
+    dispatch({ type: MAKE_BEERS_LIST });
   };
 };
