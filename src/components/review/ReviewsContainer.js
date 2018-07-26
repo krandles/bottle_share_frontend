@@ -16,7 +16,7 @@ class ReviewsContainer extends React.Component {
           addReviewToList={this.props.addReviewToList}
           loggedIn={this.props.loggedIn}
         />
-        <ReviewsList allReviews={this.props.reviews} />
+        <ReviewsList reviews={this.props.reviews} />
       </div>
     );
   }

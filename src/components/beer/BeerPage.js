@@ -1,6 +1,8 @@
 import React from 'react';
 import { Dimmer, Item, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import BreweryItem from '../brewery/BreweryItem';
+import ReviewsList from '../review/ReviewsList';
 import { getBeer } from '../../actions/beers';
 
 class BeerPage extends React.Component {
@@ -10,17 +12,20 @@ class BeerPage extends React.Component {
 
   render() {
     if (this.props.beer.brewery) {
-      const { beer } = this.props;
+      const { beer, reviews } = this.props;
 
       return (
-        <div className="ui text container main-section">
+        <div className="ui text container main-content">
           <Item className="beer-item">
-            <Item.Image className="beer-image" src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'} />
             <Item.Content>
-              <Item.Header>{beer.name} - {beer.brewery.name}</Item.Header>
-              <Item.Meta>{beer.abv}% ABV {beer.style}</Item.Meta>
+              <Item.Header className="beer-item-name">{beer.name}</Item.Header>
+              <Item.Meta className="beer-item-style">{beer.style}</Item.Meta>
+              <Item.Meta className="beer-item-abv" >{beer.abv}% ABV</Item.Meta>
+              <BreweryItem brewery={beer.brewery} />
             </Item.Content>
+            <Item.Image className="beer-image" src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'} />
           </Item>
+          <ReviewsList reviews={reviews} />
         </div>
       );
     }
@@ -35,7 +40,8 @@ class BeerPage extends React.Component {
 const mapStateToProps = state => (
   {
     userID: state.userID,
-    beer: state.currentBeer
+    beer: state.currentBeer,
+    reviews: state.reviews.filter(review => review.beer.id === state.currentBeer.id)
   }
 );
 

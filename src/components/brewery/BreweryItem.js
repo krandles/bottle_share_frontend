@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Card } from 'semantic-ui-react';
+import { Divider, Item } from 'semantic-ui-react';
 import EditBreweryModal from './EditBreweryModal';
 
-const BreweryCard = (props) => {
+const BreweryItem = (props) => {
   const { brewery } = props;
   let urlText = '';
   if (props.brewery.url) {
@@ -12,18 +12,18 @@ const BreweryCard = (props) => {
   }
 
   return (
-    <Card>
-      <Card.Content>
-        <Card.Header>
+    <React.Fragment>
+      <Item>
+        <Item.Header>
           {brewery.name}
           {props.loggedIn ? <EditBreweryModal brewery={brewery} /> : null}
-        </Card.Header>
-        <Card.Meta><Link target="_blank" to={`${brewery.url}`}>{urlText}</Link></Card.Meta>
-        <Card.Description>
+        </Item.Header>
+        <Item.Meta><Link target="_blank" to={`${brewery.url}`}>{urlText}</Link></Item.Meta>
+        <Item.Description>
           <h4>{brewery.location}</h4>
-        </Card.Description>
-      </Card.Content>
-    </Card>
+        </Item.Description>
+      </Item>
+    </React.Fragment>
   );
 };
 
@@ -31,4 +31,4 @@ const mapStateToProps = state => ({
   loggedIn: state.loggedIn
 });
 
-export default connect(mapStateToProps)(BreweryCard);
+export default connect(mapStateToProps)(BreweryItem);

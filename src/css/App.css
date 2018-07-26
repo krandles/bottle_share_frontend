@@ -103,54 +103,8 @@ div.meta {
   font-size: 14px;
 }
 
-/* div.content.invitation {
-  padding: 10% 0;
-} */
-
 .ui.items>.item>.content>.header.invitation {
   font-weight: 400;
-}
-
-.ui.inverted.vertical.footer.segment {
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  width: 100%;
-  padding: 5px 0;
-}
-
-.footer-icons-container {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-
-.footer-icons-container ul {
-  justify-content: center;
-  /* text-align: center; */
-  margin: auto;
-  padding: 0;
-}
-
-.footer-icons-container ul li {
-  display: inline-block;
-}
-
-/* .footer-icons ul {
-  display: inline;
-  align-items: center;
-  justify-content:space-around;
-  list-style-type:none;
-} */
-
-.footer-img {
-  width: 50px;
-  margin: auto;
-}
-
-.ui.footer.segment {
-  /* margin: 5em 0em 0em; */
-  padding: 5em 0em;
 }
 
 .ui.card:first-child {
@@ -171,12 +125,12 @@ div.meta {
 }
 
 .main-content {
-  width: 60%;
+  width: 75% !important;
   position: absolute;
   top: 100px;
   left: 50%;
-  margin-bottom: 100px;
-  transform: translate(-50%);
+  /* margin-bottom: 100px; */
+  transform: translateX(-50%);
 }
 
 .ui.text.container {
@@ -219,6 +173,20 @@ button.no-bottom-margin {
 
 .beer-item {
   display: flex;
+  justify-content: space-between;
+}
+
+.beer-item-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2em;
+}
+
+div.meta.beer-item-style {
+  font-size: 1.2em;
+}
+
+div.meta.beer-item-abv {
+  font-size: 1em;
 }
 
 .beer-card-image-container {
