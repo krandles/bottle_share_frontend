@@ -4,6 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { Button, Icon, Menu, Popup } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import LoginForm from './login/LoginForm';
+import SignupForm from './login/SignupForm';
 import { logout, getCurrentUser } from '../actions/users';
 
 const Navigation = props => (
@@ -53,9 +54,14 @@ const Navigation = props => (
           }
         />
         :
-        <LoginForm name="login" as={NavLink} to="/login" >
-          Log In
-        </LoginForm>
+        <React.Fragment>
+          <LoginForm name="login" element="menuItem" as={NavLink} >
+            Log In
+          </LoginForm>
+          <SignupForm name="signup" element="menuItem" as={NavLink} >
+            Sign Up
+          </SignupForm>
+        </React.Fragment>
       }
     </div>
   </Menu>

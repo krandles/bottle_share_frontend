@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, Modal, Button, Message } from 'semantic-ui-react';
+import { Form, Modal, Button, Menu, Message } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import { createUser } from '../../actions/users';
 
@@ -119,7 +119,11 @@ class SignupForm extends React.Component {
   render() {
     return !this.props.loggedIn ? (
       <Modal
-        trigger={
+        trigger={this.props.element === 'menuItem' ?
+          <Menu.Item onClick={this.handleOpen} >
+            Sign Up
+          </Menu.Item>
+          :
           <Button
             fluid
             basic

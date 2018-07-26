@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { Form, Modal, Button, Message } from 'semantic-ui-react';
+import { Form, Modal, Button, Menu, Message } from 'semantic-ui-react';
 import { login } from '../../actions/users';
 
 class LoginForm extends React.Component {
@@ -80,7 +80,11 @@ class LoginForm extends React.Component {
   render() {
     return !this.props.loggedIn ? (
       <Modal
-        trigger={
+        trigger={this.props.element === 'menuItem' ?
+          <Menu.Item onClick={this.handleOpen}>
+            Log In
+          </Menu.Item>
+          :
           <Button
             fluid
             color="blue"

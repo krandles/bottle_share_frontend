@@ -10,12 +10,10 @@ class BeerCard extends React.Component {
     if (reviews.length === 0) {
       return 'N/A';
     } else if (reviews.length === 1) {
-      console.log(reviews);
       return reviews[0].rating;
     }
     const ratings = reviews.map(review => review.rating);
     const sum = ratings.reduce((acc, el) => acc + el);
-    console.log(sum);
     return sum / ratings.length;
   };
 

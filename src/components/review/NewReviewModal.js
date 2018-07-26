@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { Button, Form, Modal } from 'semantic-ui-react';
 import { addReview } from '../../actions/reviews';
 
-import api from '../../api/adapter';
-
 class NewReviewModal extends React.Component {
   state = {
     modalOpen: false,

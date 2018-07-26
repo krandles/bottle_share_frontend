@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card } from 'semantic-ui-react';
 import EditBreweryModal from './EditBreweryModal';
@@ -9,12 +10,13 @@ const BreweryCard = (props) => {
   if (props.brewery.url) {
     urlText = props.brewery.url.split('//')[1];
   }
+
   return (
     <Card>
       <Card.Content>
         <Card.Header>
           {brewery.name}
-          <EditBreweryModal brewery={brewery} />
+          {props.loggedIn ? <EditBreweryModal brewery={brewery} /> : null}
         </Card.Header>
         <Card.Meta><Link target="_blank" to={`${brewery.url}`}>{urlText}</Link></Card.Meta>
         <Card.Description>
@@ -25,4 +27,8 @@ const BreweryCard = (props) => {
   );
 };
 
-export default BreweryCard;
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn
+});
+
+export default connect(mapStateToProps)(BreweryCard);
