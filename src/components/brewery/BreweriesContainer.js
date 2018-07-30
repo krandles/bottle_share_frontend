@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Dimmer, Divider, Loader } from 'semantic-ui-react';
+import { Dimmer, Loader } from 'semantic-ui-react';
 import BreweriesList from './BreweriesList';
 import BreweryControls from './BreweryControls';
 // import NewBreweryModal from './NewBreweryModal';

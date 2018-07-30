@@ -8,7 +8,7 @@ const BreweriesList = (props) => {
     <div className="breweries-list">
       {breweries.map((brewery, index, array) => ((index === array.length - 1) ?
         <div key={brewery.id}><BreweryItem brewery={brewery} /></div>
-        :
+      :
         <div key={brewery.id}><BreweryItem brewery={brewery} /><Divider /></div>))}
     </div>
   );

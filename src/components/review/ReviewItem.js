@@ -1,17 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card } from 'semantic-ui-react';
+import { Item } from 'semantic-ui-react';
 
-const ReviewCard = (props) => {
+const ReviewItem = (props) => {
   const { review } = props;
   return (
-    <Card fluid>
-      <Card.Content>
+    <Item>
+      <Item.Content>
         {review.brewery.name} - {review.beer.name}<br />
         Rating: {review.rating} - {review.content}
-      </Card.Content>
-    </Card>
+      </Item.Content>
+    </Item>
   );
 };
 
-export default ReviewCard;
+export default ReviewItem;

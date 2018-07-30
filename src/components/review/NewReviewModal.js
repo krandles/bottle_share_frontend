@@ -52,7 +52,7 @@ class NewReviewModal extends React.Component {
           <Form>
             <Form.Group widths="equal">
               <Form.Select fluid search label="Beer:" name="beerID" value={this.state.beerID} options={this.props.beersArray} onChange={(event, { value }) => { this.handleBeerChange(value); }} />
-              <Form.Input fluid label="Your Rating:" name="rating" value={this.state.rating} onChange={(event, { value }) => { this.handleInputChange(event, value); }} />
+              <Form.Input fluid label="Your Rating (1-5):" name="rating" value={this.state.rating} onChange={(event, { value }) => { this.handleInputChange(event, value); }} />
             </Form.Group>
             <Form.Input fluid label="Your Review:" name="content" value={this.state.content} onChange={(event, { value }) => { this.handleInputChange(event, value); }} />
             <Button onClick={this.saveReview}>Save</Button>
