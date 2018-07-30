@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Divider } from 'semantic-ui-react';
+import { Dimmer, Divider, Loader } from 'semantic-ui-react';
 import BreweriesList from './BreweriesList';
 import BreweryControls from './BreweryControls';
-import NewBreweryModal from './NewBreweryModal';
+// import NewBreweryModal from './NewBreweryModal';
 
 class BreweriesContainer extends React.Component {
   state = {
@@ -15,9 +15,9 @@ class BreweriesContainer extends React.Component {
   nameSort = breweries => (breweries.sort((a, b) => (a.name.localeCompare(b.name))));
 
   // TODO: add sort logic
-  ratingSort = beers => beers
+  ratingSort = breweries => breweries
 
-  reviewsSort = beers => beers
+  reviewsSort = breweries => breweries
 
   nameFilter = (breweries, nameQuery) => {
     if (this.state.nameQuery) {
@@ -29,7 +29,7 @@ class BreweriesContainer extends React.Component {
   locationFilter = (breweries, locationQuery) => {
     if (this.state.locationQuery) {
       return breweries.filter(brewery => (
-        brewery.name.toLowerCase().includes(locationQuery.toLowerCase())
+        brewery.location.toLowerCase().includes(locationQuery.toLowerCase())
       ));
     }
     return breweries;
@@ -59,18 +59,29 @@ class BreweriesContainer extends React.Component {
   }
 
   render() {
+    if (this.props.breweries.length > 0) {
+      const sortedBreweries = this.sortBreweries(this.props.breweries);
+      const nameFilteredBreweries = this.nameFilter(sortedBreweries, this.state.nameQuery);
+      const locationFilteredBreweries = this.locationFilter(nameFilteredBreweries, this.state.locationQuery);
+      return (
+        <div className="ui text container main-section">
+          <BreweryControls
+              handleSortChange={this.handleSortChange}
+              nameQuery={this.state.nameQuery}
+              locationQuery={this.state.locationQuery}
+              handleNameChange={this.handleNameChange}
+              handleLocationChange={this.handleLocationChange}
+              addBreweryToList={this.props.addBrewery}
+            />
+          <BreweriesList breweries={locationFilteredBreweries} />
+        </div>
+      );
+    }
+
     return (
-      <div className="ui text container main-section">
-        <BreweryControls
-            handleSortChange={this.handleSortChange}
-            nameQuery={this.state.nameQuery}
-            locationQuery={this.state.locationQuery}
-            handleNameChange={this.handleNameChange}
-            handleLocationChange={this.handleLocationChange}
-            addBreweryToList={this.props.addBrewery}
-          />
-        <BreweriesList breweries={this.props.breweries} />
-      </div>
+      <Dimmer active inverted>
+        <Loader inverted>Loading</Loader>
+      </Dimmer>
     );
   }
 }

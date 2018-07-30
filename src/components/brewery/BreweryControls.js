@@ -33,8 +33,8 @@ const BreweryControls = props => (
         <Form.Input
           fluid
           label="Filter By Location:"
-          value={props.breweryQuery}
-          onChange={props.handlelocationChange}
+          value={props.locationQuery}
+          onChange={props.handleLocationChange}
         />
         <Form.Select
           fluid

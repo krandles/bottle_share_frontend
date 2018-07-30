@@ -5,7 +5,7 @@ import BreweryItem from './BreweryItem';
 const BreweriesList = (props) => {
   const { breweries } = props;
   return (
-    <div className="ui container main-content breweries-list">
+    <div className="breweries-list">
       {breweries.map((brewery, index, array) => ((index === array.length - 1) ?
         <div key={brewery.id}><BreweryItem brewery={brewery} /></div>
         :
