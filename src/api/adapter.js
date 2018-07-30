@@ -14,7 +14,7 @@ const authHeaders = () => {
   };
 };
 
-const apiRoot = process.env.NODE_ENV === 'production' ? 'https://gentle-hamlet-89215.herokuapp.com/api/v1' : 'http://192.168.1.94:3000/api/v1';
+const apiRoot = process.env.NODE_ENV === 'production' ? 'https://gentle-hamlet-89215.herokuapp.com/api/v1' : 'http://localhost:3000/api/v1';
 
 const api = {
 
