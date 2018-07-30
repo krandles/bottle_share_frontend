@@ -21,6 +21,13 @@ body {
   color: #333;
 }
 
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 15vh auto;
+}
+
 .login-content {
   position: relative;
   top: 5vw;
@@ -197,4 +204,8 @@ div.meta.beer-item-abv {
   background-position: center;
   background-repeat: no-repeat;
   background-color: rgba(0,0,0,.1);
+}
+
+.breweries-list {
+  margin-top: 50px;
 }
