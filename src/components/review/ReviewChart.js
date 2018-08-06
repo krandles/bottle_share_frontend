@@ -3,17 +3,39 @@ import { Bar } from 'react-chartjs-2';
 
 class ReviewChart extends React.Component {
   state = {
-    
+    reviewData: [0, 0, 0, 0, 0]
   }
 
-  calculateTickStepSize = data => Math.max(data.datasets[0].data) / 4
+  // componentDidMount() {
+  //   this.calculateData(this.props.reviews);
+  // }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.reviews !== prevProps.reviews) {
+      this.calculateData(this.props.reviews);
+    }
+  }
+
+  calculateData = (reviews) => {
+    const ratings = [0, 0, 0, 0, 0];
+    for (let i = 0; i < reviews.length; i++) {
+      console.log(ratings);
+      ratings[reviews[i].rating - 1]++;
+    }
+    this.setState({
+      reviewData: ratings
+    });
+  }
+
 
   render() {
     const data = {
       labels: ['1', '2', '3', '4', '5'],
       datasets: [{
         label: '# of Reviews by Rating',
-        data: [1, 8, 3, 30, 5],
+        data: this.state.reviewData,
+        border: 'none',
+        backgroundColor: '#2986CE'
       }]
     };
 
@@ -27,7 +49,6 @@ class ReviewChart extends React.Component {
             labelString: '# of Reviews'
           },
           ticks: {
-            // stepSize: this.calculateTickStepSize(data),
             beginAtZero: true
           }
         }],
@@ -35,13 +56,16 @@ class ReviewChart extends React.Component {
           scaleLabel: {
             display: true,
             labelString: 'Rating'
+          },
+          gridLines: {
+            display: false
           }
         }]
       }
     };
 
     return (
-      <Bar data={data} options={options} width="400px" height="250px" />
+      <Bar data={data} options={options} width={400} height={250} />
     );
   }
 }
