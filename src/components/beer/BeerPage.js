@@ -4,11 +4,15 @@ import { connect } from 'react-redux';
 import BreweryItem from '../brewery/BreweryItem';
 import ReviewChart from '../review/ReviewChart';
 import ReviewsList from '../review/ReviewsList';
-import { getBeer } from '../../actions/beers';
+import { getBeer, clearCurrentBeer } from '../../actions/beers';
 
 class BeerPage extends React.Component {
   componentDidMount() {
     this.props.getBeer(this.props.match.params.id);
+  }
+
+  componentWillUnmount() {
+    this.props.clearCurrentBeer();
   }
 
   render() {
@@ -26,9 +30,11 @@ class BeerPage extends React.Component {
             </Item.Content>
             <Item.Image className="beer-image" src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'} />
           </Item>
-          <Divider hidden />
+          <Divider />
           <ReviewChart reviews={reviews} />
           <Divider hidden />
+          <h3>User Ratings &amp; Reviews</h3>
+          
           <ReviewsList reviews={reviews} />
         </div>
       );
@@ -49,5 +55,5 @@ const mapStateToProps = state => (
   }
 );
 
-export default connect(mapStateToProps, { getBeer })(BeerPage);
+export default connect(mapStateToProps, { getBeer, clearCurrentBeer })(BeerPage);
 

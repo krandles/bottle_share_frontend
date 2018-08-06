@@ -6,7 +6,7 @@ import EventItem from './EventItem';
 import NewPostForm from '../posts/NewPostForm';
 import PostList from '../posts/PostList';
 import AttendeesList from './AttendeesList';
-import { getEvent } from '../../actions/events';
+import { getEvent, clearCurrentEvent } from '../../actions/events';
 import { getAllUsers } from '../../actions/users';
 import { addInvitation } from '../../actions/invitations';
 
@@ -24,6 +24,10 @@ class EventPage extends React.Component {
       this.props.getEvent(this.props.match.params.id);
       this.props.getAllUsers();
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearCurrentEvent();
   }
 
   setDiscussion = (content) => {
@@ -218,4 +222,4 @@ const mapStateToProps = state => (
   }
 );
 
-export default connect(mapStateToProps, { getEvent, getAllUsers, addInvitation })(EventPage);
+export default connect(mapStateToProps, { getEvent, clearCurrentEvent, getAllUsers, addInvitation })(EventPage);

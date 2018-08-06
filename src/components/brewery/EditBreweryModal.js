@@ -9,7 +9,7 @@ class EditBreweryModal extends React.Component {
     breweryID: this.props.brewery.id,
     name: this.props.brewery.name,
     location: this.props.brewery.location,
-    url: this.props.brewery.url
+    url: this.props.brewery.url || ''
   }
 
   onInputChange = (e, value) => {

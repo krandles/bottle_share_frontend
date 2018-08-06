@@ -6,33 +6,33 @@ class ReviewChart extends React.Component {
     reviewData: [0, 0, 0, 0, 0]
   }
 
-  // componentDidMount() {
-  //   this.calculateData(this.props.reviews);
-  // }
+  componentDidMount() {
+    this.calculateReviewData(this.props.reviews);
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props.reviews !== prevProps.reviews) {
-      this.calculateData(this.props.reviews);
+      this.calculateReviewData(this.props.reviews);
     }
   }
 
-  calculateData = (reviews) => {
+  calculateReviewData = (reviews) => {
     const ratings = [0, 0, 0, 0, 0];
     for (let i = 0; i < reviews.length; i++) {
-      console.log(ratings);
-      ratings[reviews[i].rating - 1]++;
+      if (reviews[i].rating) {
+        ratings[reviews[i].rating - 1]++;
+      }
     }
     this.setState({
       reviewData: ratings
     });
   }
 
-
   render() {
     const data = {
       labels: ['1', '2', '3', '4', '5'],
       datasets: [{
-        label: '# of Reviews by Rating',
+        label: 'Review Count by Rating',
         data: this.state.reviewData,
         border: 'none',
         backgroundColor: '#2986CE'
@@ -64,9 +64,7 @@ class ReviewChart extends React.Component {
       }
     };
 
-    return (
-      <Bar data={data} options={options} width={400} height={250} />
-    );
+    return <Bar data={data} options={options} width={400} height={250} />;
   }
 }
 

@@ -1,6 +1,6 @@
 import { LOGIN, LOGOUT, CREATE_USER, FIND_USER, GET_USERS, GET_CURRENT_USER } from '../actions/users';
-import { GET_EVENTS, GET_EVENT, ADD_EVENT, PATCH_EVENT } from '../actions/events';
-import { GET_BEERS, GET_BEER, ADD_BEER, PATCH_BEER, MAKE_BEERS_LIST } from '../actions/beers';
+import { GET_EVENTS, GET_EVENT, ADD_EVENT, PATCH_EVENT, CLEAR_CURRENT_EVENT } from '../actions/events';
+import { GET_BEERS, GET_BEER, ADD_BEER, PATCH_BEER, MAKE_BEERS_LIST, CLEAR_CURRENT_BEER } from '../actions/beers';
 import { GET_BREWERIES, GET_BREWERY, ADD_BREWERY, PATCH_BREWERY, MAKE_BREWERIES_LIST } from '../actions/breweries';
 import { GET_POSTS, ADD_POST } from '../actions/posts';
 import { GET_REVIEWS, ADD_REVIEW } from '../actions/reviews';
@@ -110,6 +110,11 @@ function rootReducer(state = initialState, action) {
           action.payload
         ]
       };
+    case CLEAR_CURRENT_EVENT:
+      return {
+        ...state,
+        currentEvent: {}
+      };
     case GET_BEERS:
       return {
         ...state,
@@ -119,6 +124,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         currentBeer: action.payload
+      };
+    case CLEAR_CURRENT_BEER:
+      return {
+        ...state,
+        currentBeer: {}
       };
     case ADD_BEER:
       if (action.payload) {
