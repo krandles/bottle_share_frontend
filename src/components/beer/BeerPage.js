@@ -1,7 +1,8 @@
 import React from 'react';
-import { Dimmer, Item, Loader } from 'semantic-ui-react';
+import { Dimmer, Divider, Item, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import BreweryItem from '../brewery/BreweryItem';
+import ReviewChart from '../review/ReviewChart';
 import ReviewsList from '../review/ReviewsList';
 import { getBeer } from '../../actions/beers';
 
@@ -25,6 +26,9 @@ class BeerPage extends React.Component {
             </Item.Content>
             <Item.Image className="beer-image" src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'} />
           </Item>
+          <Divider hidden />
+          <ReviewChart reviews={reviews} />
+          <Divider hidden />
           <ReviewsList reviews={reviews} />
         </div>
       );
