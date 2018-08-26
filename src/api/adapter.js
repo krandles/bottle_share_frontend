@@ -121,17 +121,12 @@ const api = {
     headers: authHeaders(),
     body: JSON.stringify(beer)
   }).then((res) => {
-    res.json().then(json => ({
-      status: res.status,
-      json
-    }))
-      .then(({ status, json }) => {
-        if (status !== 200) {
-          return { res: { error: true } };
-        }
-        return json;
-      });
-  }),
+    if (res.ok) {
+      return res.json();
+    }
+    throw new Error('Something went wrong');
+  })
+    .catch(error => console.log(error)),
 
   patchBeer: beer => fetch(`${apiRoot}/beers/${beer.id}`, {
     method: 'PATCH',

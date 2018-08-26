@@ -86,6 +86,7 @@ class NewBeerModal extends React.Component {
 
     this.props.addBeer(beer)
       .then((res) => {
+        console.log(res);
         if (!res.payload) {
           this.setState({ createBeerError: true });
         } else {
