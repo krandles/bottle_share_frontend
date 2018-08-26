@@ -26,7 +26,7 @@ const BreweryItem = (props) => {
 };
 
 const mapStateToProps = state => ({
-  loggedIn: state.loggedIn
+  loggedIn: state.user.loggedIn
 });
 
 export default connect(mapStateToProps)(BreweryItem);

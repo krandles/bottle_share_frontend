@@ -172,8 +172,8 @@ class EditEventForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  organizer: state.userID,
-  currentEvent: state.currentEvent
+  organizer: state.user.userID,
+  currentEvent: state.event.currentEvent
 });
 
 

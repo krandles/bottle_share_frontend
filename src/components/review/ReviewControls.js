@@ -32,8 +32,8 @@ const ReviewControls = (props) => {
 };
 
 const mapStateToProps = state => ({
-  loggedIn: state.loggedIn,
-  beersArray: state.beersArray
+  loggedIn: state.user.loggedIn,
+  beersArray: state.beer.beersArray
 });
 
 export default connect(mapStateToProps)(ReviewControls);

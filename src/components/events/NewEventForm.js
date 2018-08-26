@@ -182,8 +182,8 @@ class NewEventForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  organizer: parseInt(state.userID, 10),
-  usersArray: state.users.map(user => ({ key: user.id, text: user.name, value: user.id }))
+  organizer: parseInt(state.user.userID, 10),
+  usersArray: state.user.users.map(user => ({ key: user.id, text: user.name, value: user.id }))
 });
 
 NewEventForm.propTypes = {

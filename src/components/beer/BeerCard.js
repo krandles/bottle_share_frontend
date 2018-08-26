@@ -57,8 +57,8 @@ BeerCard.propTypes = {
 
 const mapStateToProps = state => ({
   return: {
-    loggedIn: state.loggedIn,
-    reviews: state.reviews
+    loggedIn: state.user.loggedIn,
+    reviews: state.beer.reviews
   }
 });
 

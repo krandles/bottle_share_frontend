@@ -68,9 +68,9 @@ const Navigation = props => (
 );
 
 const mapStateToProps = state => ({
-  loggedIn: state.loggedIn,
-  userID: state.userID,
-  currentUser: state.currentUser
+  loggedIn: state.user.loggedIn,
+  userID: state.user.userID,
+  currentUser: state.user.currentUser
 });
 
 Navigation.propTypes = {

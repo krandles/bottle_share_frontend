@@ -51,10 +51,10 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  loggedIn: state.loggedIn,
-  userID: state.userID,
-  events: state.events,
-  currentUser: state.currentUser
+  loggedIn: state.user.loggedIn,
+  userID: state.user.userID,
+  events: state.event.events,
+  currentUser: state.user.currentUser
 });
 
 export default connect(mapStateToProps)(Dashboard);

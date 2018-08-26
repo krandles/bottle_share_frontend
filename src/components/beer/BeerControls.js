@@ -49,7 +49,7 @@ const BeerControls = props => (
 );
 
 const mapStateToProps = state => ({
-  loggedIn: state.loggedIn
+  loggedIn: state.user.loggedIn
 });
 
 BeerControls.propTypes = {

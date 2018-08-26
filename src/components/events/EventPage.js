@@ -214,12 +214,15 @@ class EventPage extends React.Component {
   }
 }
 
-const mapStateToProps = state => (
-  {
-    userID: state.userID,
-    currentEvent: state.currentEvent,
-    usersArray: state.users.map(user => ({ key: user.id, text: user.name, value: user.id }))
-  }
-);
+const mapStateToProps = state => ({
+  userID: state.user.userID,
+  currentEvent: state.event.currentEvent,
+  usersArray: state.user.users.map(user => ({ key: user.id, text: user.name, value: user.id }))
+});
 
-export default connect(mapStateToProps, { getEvent, clearCurrentEvent, getAllUsers, addInvitation })(EventPage);
+export default connect(mapStateToProps, {
+  getEvent,
+  clearCurrentEvent,
+  getAllUsers,
+  addInvitation
+})(EventPage);

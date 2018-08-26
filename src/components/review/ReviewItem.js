@@ -21,7 +21,7 @@ const ReviewItem = (props) => {
 };
 
 const mapStateToProps = state => (
-  { isBeerSelected: state.currentBeer }
+  { isBeerSelected: state.beer.currentBeer }
 );
 
 export default connect(mapStateToProps)(ReviewItem);

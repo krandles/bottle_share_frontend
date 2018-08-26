@@ -215,6 +215,6 @@ class SignupForm extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ loggedIn: state.loggedIn });
+const mapStateToProps = state => ({ loggedIn: state.user.loggedIn });
 
 export default connect(mapStateToProps, { createUser })(SignupForm);

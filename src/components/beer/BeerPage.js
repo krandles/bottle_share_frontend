@@ -49,9 +49,9 @@ class BeerPage extends React.Component {
 
 const mapStateToProps = state => (
   {
-    userID: state.userID,
-    beer: state.currentBeer,
-    reviews: state.reviews.filter(review => review.beer.id === state.currentBeer.id)
+    userID: state.user.userID,
+    beer: state.beer.currentBeer,
+    reviews: state.beer.reviews.filter(review => review.beer.id === state.currentBeer.id)
   }
 );
 

@@ -76,7 +76,7 @@ class NewBreweryModal extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  breweries: state.breweries
+  breweries: state.beer.breweries
 });
 
 export default connect(mapStateToProps, { addBrewery })(NewBreweryModal);

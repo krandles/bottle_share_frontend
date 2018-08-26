@@ -90,7 +90,7 @@ class ReviewsContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  reviews: state.reviews
+  reviews: state.beer.reviews
 });
 
 export default connect(mapStateToProps)(ReviewsContainer);

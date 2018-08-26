@@ -74,6 +74,6 @@ class NewPostForm extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ currentUser: state.userID });
+const mapStateToProps = state => ({ currentUser: state.user.userID });
 
 export default connect(mapStateToProps, { addPost })(NewPostForm);

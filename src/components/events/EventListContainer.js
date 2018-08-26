@@ -114,7 +114,9 @@ class EventListContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ allEvents: state.events, userID: state.userID });
-
+const mapStateToProps = state => ({
+  allEvents: state.event.events,
+  userID: state.user.userID
+});
 
 export default connect(mapStateToProps)(EventListContainer);

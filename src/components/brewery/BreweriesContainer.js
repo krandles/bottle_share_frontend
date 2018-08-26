@@ -87,8 +87,8 @@ class BreweriesContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  breweries: state.breweries,
-  loggedIn: state.loggedIn
+  breweries: state.beer.breweries,
+  loggedIn: state.user.loggedIn
 });
 
 export default connect(mapStateToProps)(BreweriesContainer);

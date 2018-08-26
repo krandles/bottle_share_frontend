@@ -113,12 +113,12 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   return: {
-    loggedIn: state.loggedIn,
-    userID: state.userID,
-    events: state.events,
-    currentEvent: state.currentEvent,
-    currentUser: state.currentUser,
-    currentBeer: state.currentBeer
+    loggedIn: state.user.loggedIn,
+    userID: state.user.userID,
+    events: state.event.events,
+    currentEvent: state.event.currentEvent,
+    currentUser: state.user.currentUser,
+    currentBeer: state.beer.currentBeer
   }
 });
 

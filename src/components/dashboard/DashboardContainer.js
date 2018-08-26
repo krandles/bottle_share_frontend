@@ -28,8 +28,8 @@ class DashboardContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  loggedIn: state.loggedIn,
-  userID: state.userID
+  loggedIn: state.user.loggedIn,
+  userID: state.user.userID
 });
 
 export default connect(mapStateToProps, {

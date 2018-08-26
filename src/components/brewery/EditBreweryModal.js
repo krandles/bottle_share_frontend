@@ -77,7 +77,7 @@ class EditBreweryModal extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    breweries: state.breweries
+    breweries: state.beer.breweries
   };
 };
 

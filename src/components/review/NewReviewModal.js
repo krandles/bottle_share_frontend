@@ -64,8 +64,8 @@ class NewReviewModal extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userID: state.userID,
-  beersArray: state.beersArray
+  userID: state.user.userID,
+  beersArray: state.beer.beersArray
 });
 
 export default connect(mapStateToProps, { addReview })(NewReviewModal);

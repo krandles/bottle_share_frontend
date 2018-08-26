@@ -93,10 +93,10 @@ class BeersContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  beers: state.beers,
-  breweries: state.breweries,
-  breweriesArray: state.breweriesArray,
-  reviews: state.reviews
+  beers: state.beer.beers,
+  breweries: state.beer.breweries,
+  breweriesArray: state.beer.breweriesArray,
+  reviews: state.beer.reviews
 });
 
 BeersContainer.propTypes = {

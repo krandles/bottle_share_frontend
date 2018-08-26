@@ -31,9 +31,9 @@ class InvitationListContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  loggedIn: state.loggedIn,
-  userID: state.userID,
-  currentUser: state.currentUser,
+  loggedIn: state.user.loggedIn,
+  userID: state.user.userID,
+  currentUser: state.user.currentUser,
 });
 
 export default connect(mapStateToProps, { getCurrentUser, findUser })(InvitationListContainer);
