@@ -47,13 +47,11 @@ class BeerPage extends React.Component {
   }
 }
 
-const mapStateToProps = state => (
-  {
-    userID: state.user.userID,
-    beer: state.beer.currentBeer,
-    reviews: state.beer.reviews.filter(review => review.beer.id === state.currentBeer.id)
-  }
-);
+const mapStateToProps = state => ({
+  userID: state.user.userID,
+  beer: state.beer.currentBeer,
+  reviews: state.beer.reviews.filter(review => review.beer.id === state.beer.currentBeer.id)
+});
 
 export default connect(mapStateToProps, { getBeer, clearCurrentBeer })(BeerPage);
 

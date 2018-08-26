@@ -33,17 +33,12 @@ const api = {
     },
     body: JSON.stringify({ user })
   }).then((res) => {
-    res.json().then(json => ({
-      status: res.status,
-      json
-    }))
-      .then(({ status, json }) => {
-        if (status !== 200) {
-          return { res: { error: true } };
-        }
-        return json;
-      });
-  }),
+    if (res.ok) {
+      return res.json();
+    }
+    throw new Error('Something went wrong');
+  })
+    .catch(error => console.log(error)),
 
   findUser: token => fetch(`${apiRoot}/current_user`, {
     method: 'POST',
