@@ -17,10 +17,10 @@ const BreweryItem = (props) => {
         <Link to={`/breweries/${brewery.id}`}>{brewery.name}</Link>
         {props.loggedIn ? <EditBreweryModal brewery={brewery} /> : null}
       </Item.Header>
-      <Item.Meta><Link target="_blank" to={`${brewery.url}`}>{urlText}</Link></Item.Meta>
       <Item.Description>
         <h4>{brewery.location}</h4>
       </Item.Description>
+      <Item.Meta><Link target="_blank" to={`${brewery.url}`}>{urlText}</Link></Item.Meta>
     </Item>
   );
 };

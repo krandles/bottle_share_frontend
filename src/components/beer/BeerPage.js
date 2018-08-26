@@ -26,6 +26,7 @@ class BeerPage extends React.Component {
               <Item.Header className="beer-item-name">{beer.name}</Item.Header>
               <Item.Meta className="beer-item-style">{beer.style}</Item.Meta>
               <Item.Meta className="beer-item-abv" >{beer.abv}% ABV</Item.Meta>
+              <Divider hidden />
               <BreweryItem brewery={beer.brewery} />
             </Item.Content>
             <Item.Image className="beer-image" src={beer.img_url ? beer.img_url : '../../../img/beer-placeholder.jpg'} />
@@ -34,7 +35,6 @@ class BeerPage extends React.Component {
           <ReviewChart reviews={reviews} />
           <Divider hidden />
           <h3>User Ratings &amp; Reviews</h3>
-          
           <ReviewsList reviews={reviews} />
         </div>
       );

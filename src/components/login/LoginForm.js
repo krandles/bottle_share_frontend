@@ -23,7 +23,6 @@ class LoginForm extends React.Component {
       error = true;
     } else {
       this.setState({ emailError: false });
-      error = false;
     }
 
     if (this.state.password === '') {
@@ -31,7 +30,6 @@ class LoginForm extends React.Component {
       error = true;
     } else {
       this.setState({ passwordError: false });
-      error = false;
     }
 
     if (error) {

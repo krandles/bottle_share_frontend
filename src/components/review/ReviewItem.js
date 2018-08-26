@@ -8,9 +8,12 @@ const ReviewItem = (props) => {
   return (
     <Item>
       <Item.Content>
-        {props.isBeerSelected ? null : `${review.brewery.name} - ${review.beer.name}`}{props.isBeerSelected ? null : <br />}
-        {review.rating ? `${review.rating} / 5` : null}{review.rating ? <br /> : null}
-        {review.content ? `Tasting notes: ${review.content}` : null}{review.content ? <br /> : null}
+        {props.isBeerSelected ? null : `${review.brewery.name} - ${review.beer.name}`}
+        {props.isBeerSelected ? null : <br />}
+        {review.rating ? `${review.rating} / 5` : null}
+        {review.rating ? <br /> : null}
+        {review.content ? `Tasting notes: ${review.content}` : null}
+        {review.content ? <br /> : null}
         Reviewed by {review.user.name} on
       </Item.Content>
     </Item>

@@ -39,7 +39,6 @@ class SignupForm extends React.Component {
       error = true;
     } else {
       this.setState({ emailError: false });
-      error = false;
     }
 
     if (this.state.password.length < 8) {
@@ -47,7 +46,6 @@ class SignupForm extends React.Component {
       error = true;
     } else {
       this.setState({ passwordError: false });
-      error = false;
     }
 
     if (this.state.confirmPassword.length < 8) {
@@ -55,7 +53,6 @@ class SignupForm extends React.Component {
       error = true;
     } else {
       this.setState({ confirmPasswordError: false });
-      error = false;
     }
 
     if (this.state.password !== this.state.confirmPassword) {
@@ -63,7 +60,6 @@ class SignupForm extends React.Component {
       error = true;
     } else {
       this.setState({ passwordMatchError: false });
-      error = false;
     }
 
     if (this.state.location === '') {
@@ -71,7 +67,6 @@ class SignupForm extends React.Component {
       error = true;
     } else {
       this.setState({ locationError: false });
-      error = false;
     }
 
     if (this.state.zipCode === '' || (parseInt(this.state.zipCode, 10) < 9999) || (parseInt(this.state.zipCode, 10) > 99999)) {
@@ -79,7 +74,6 @@ class SignupForm extends React.Component {
       error = true;
     } else {
       this.setState({ zipCodeError: false });
-      error = false;
     }
 
     if (error) {
