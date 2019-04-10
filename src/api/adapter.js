@@ -10,6 +10,8 @@ const authHeaders = () => ({
   Authorization: localStorage.getItem('token')
 });
 
+// const apiRoot = 'https://gentle-hamlet-89215.herokuapp.com/api/v1'
+
 const apiRoot = process.env.NODE_ENV === 'production'
   ? 'https://gentle-hamlet-89215.herokuapp.com/api/v1'
   : 'http://localhost:3000/api/v1';
